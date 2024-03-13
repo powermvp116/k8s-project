@@ -1,0 +1,131 @@
+$ aws configure
+AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
+AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+Default region name [None]: us-west-2
+Default output format [None]: ENTER
+
+1. 인스턴스의 보안정책을 만들 수 있다
+
+$ aws ec2 create-security-group --group-name my-sg --description "My security group"
+{
+    "GroupId": "sg-903004f8"
+}
+
+PS C:\Users\SAMSUNG> aws ec2 describe-instances
+{
+    "Reservations": [
+        {
+            "Groups": [],
+            "Instances": [
+                {
+                    "AmiLaunchIndex": 0,
+                    "ImageId": "ami-035da6a0773842f64",
+                    "InstanceId": "i-060b2af4ba3e49f5a",
+                    "InstanceType": "t2.micro",
+                    "KeyName": "powermvp116",
+                    "LaunchTime": "2023-05-17T14:59:18+00:00",
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "Placement": {
+                        "AvailabilityZone": "ap-northeast-2c",
+                        "GroupName": "",
+                        "Tenancy": "default"
+                    },
+                    "PrivateDnsName": "ip-10-250-20-108.ap-northeast-2.compute.internal",
+                    "PrivateIpAddress": "10.250.20.108",
+                    "ProductCodes": [],
+                    "PublicDnsName": "",
+                    "PublicIpAddress": "54.180.113.119",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+-- More  --
+
+2. 인스턴스를 중지 및 시작 , 종료 시킬 수도 있다
+
+aws ec2 stop-instances --instance-ids i-060b2af4ba3e49f5a
+
+aws ec2 start-instances --instance-ids i-060b2af4ba3e49f5a
+
+aws ec2 terminate-instances --instance-ids i-060b2af4ba3e49f5a
+
+3. S3 저장소에서 파일 다운로드/업로드하기
+터미널에서 간단하게 다운로드하는 방법
+로컬 디렉토리에 폴더가 생성되어 있지 않아도 다운로드 하면서 생성됨.
+폴더까지만 쓰면 하위 파일이 모두 다운로드됨.
+sync, cp를 사용하여 다운로드 가능.
+(나만 그런 건지는 모르겠지만, 폴더 전체를 내려받을 때 sync, 특정 파일 하나만 할 때 cp)
+접속 거부인 상태에서는 403 에러 발생하는 것을 유의하기.
+s3:// 쓸 때 s 대문자로 쓰면 안되요.
+
+# 세부 오브젝트 확인
+    aws s3 ls "Bucket Name"
+
+
+PS C:\Users\SAMSUNG> aws s3 sync s3://ldccbucket/ c://backup
+download: s3://ldccbucket/스크린샷 2023-03-09 111354.png to ..\..\backup\스크린샷 2023-03-09 111354.png
+download: s3://ldccbucket/스크린샷 2023-03-02 141055.png to ..\..\backup\스크린샷 2023-03-02 141055.png
+PS C:\Users\SAMSUNG>
+
+# 로컬 디렉토리에 폴더가 생성되어 있지 않아도 다운로드 하면서 자동 생성됨
+
+### Downloads
+PS C:\Users\SAMSUNG> aws s3 sync s3://ldccbucket d://backup
+download: s3://ldccbucket/스크린샷 2023-03-09 111354.png to d:\backup\스크린샷 2023-03-09 111354.png
+download: s3://ldccbucket/스크린샷 2023-03-02 141055.png to d:\backup\스크린샷 2023-03-02 141055.png
+download: s3://ldccbucket/ELB 타입.docx to d:\backup\ELB 타입.docx
+PS C:\Users\SAMSUNG>
+
+
+PS C:\Users\SAMSUNG> aws s3 cp s3://ldccbucket/s3test.txt c://backup
+download: s3://ldccbucket/s3test.txt to ..\..\backup\s3test.txt
+PS C:\Users\SAMSUNG> aws s3 cp s3://ldccbucket/s3test.txt d://backup
+download: s3://ldccbucket/s3test.txt to d:\backup\s3test.txt
+PS C:\Users\SAMSUNG>
+
+### Uploads
+
+PS C:\Users\SAMSUNG> aws s3 sync D://backup/ s3://ldccbucket/
+upload: D:\backup\서적구입비용.pdf to s3://ldccbucket/서적구입비용.pdf
+PS C:\Users\SAMSUNG>
+
+
+PS C:\Users\SAMSUNG> aws s3 sync c://s3mv/ s3://ldccbucket/
+upload: ..\..\s3mv\Apr01-1 [Session].pdf to s3://ldccbucket/Apr01-1 [Session].pdf
+PS C:\Users\SAMSUNG>
+
+
+[ec2-user@ip-10-250-1-11 tmp]$ aws s3 sync s3://ldccbucket/ //tmp
+warning: Skipping file //tmp/systemd-private-9dc3583190634844b53981589721fbfc-chronyd.service-EwVEo0. File/Directory is not readable.
+warning: Skipping file //tmp/motd.RWOdz. File/Directory is not readable.
+warning: Skipping file //tmp/motd.part4NG4u. File/Directory is not readable.
+download: s3://ldccbucket/s3test.txt to ./s3test.txt          
+download: s3://ldccbucket/vmware workstation pro 7 key.txt to ./vmware workstation pro 7 key.txt
+download: s3://ldccbucket/스크린샷 2023-03-09 111354.png to ./스크린샷 2023-03-09 111354.png
+download: s3://ldccbucket/서적구입비용.pdf to ./서적구입비용.pdf              
+download: s3://ldccbucket/스크린샷 2023-03-02 141055.png to ./스크린샷 2023-03-02 141055.png
+download: s3://ldccbucket/ELB 타입.docx to ./ELB 타입.docx          
+download: s3://ldccbucket/Apr01-1 [Session].pdf to ./Apr01-1 [Session].pdf
+
+
+[ec2-user@ip-10-250-1-11 tmp]$ aws s3 cp s3://powermvp116/s3test.txt //tmp
+download: s3://powermvp116/s3test.txt to ./s3test.txt
+[ec2-user@ip-10-250-1-11 tmp]$ 
+
+
+ec2-user@ip-10-250-1-11 tmp]$ ls -l
+total 3704
+-rw-rw-r-- 1 ec2-user ec2-user  195257 May 16 16:27 스크린샷 2023-03-02 141055.png
+-rw-rw-r-- 1 ec2-user ec2-user   23143 May 16 16:47 스크린샷 2023-03-09 111354.png
+-rw-rw-r-- 1 ec2-user ec2-user 2353450 May 20 05:24 Apr01-1 [Session].pdf
+-rw-rw-r-- 1 ec2-user ec2-user 1083850 May 20 04:39 ELB 타입.docx
+-rw------- 1 root     root           0 May 20 08:06 motd.part4NG4u
+-rw------- 1 root     root         121 May 20 08:06 motd.RWOdz
+-rw-rw-r-- 1 ec2-user ec2-user  119875 May 20 05:07 서적구입비용.pdf
+-rw-rw-r-- 1 ec2-user ec2-user       0 May 20 19:05 s3test.txt
+drwx------ 3 root     root          17 May 20 08:06 systemd-private-9dc3583190634844b53981589721fbfc-chronyd.service-EwVEo0
+-rw-rw-r-- 1 ec2-user ec2-user     166 May 20 05:01 vmware workstation pro 7 key.txt
+[ec2-user@ip-10-250-1-11 tmp]$ 
+
