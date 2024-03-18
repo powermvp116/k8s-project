@@ -1,0 +1,4 @@
+FROM node:14
+LABEL maintainer="nodejs app container <powermvp116@gmail.com>"
+COPY hello.js /hello.js
+ENTRYPOINT ["node", "hello.js"]
