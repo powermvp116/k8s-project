@@ -1,0 +1,996 @@
+docker: Error response from daemon: Conflict. The container name "/tc" is already in use by container "ca91c2ae5d58351bbbdffbee86429104bfd7f6dc51998843de4c431759b2f87d". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+root@docker:~# docker images
+REPOSITORY       TAG       IMAGE ID       CREATED        SIZE
+bitnami/tomcat   latest    5b7400355a96   8 days ago     552MB
+nginx            latest    92b11f67642b   5 weeks ago    187MB
+mysql            latest    019814493c7a   2 months ago   632MB
+tomcat           7.0       9dfd74e6bc2f   2 years ago    533MB
+root@docker:~# docker rmi bitnami/tomcat
+Error response from daemon: conflict: unable to remove repository reference "bitnami/tomcat" (must force) - container ca91c2ae5d58 is using its referenced image 5b7400355a96
+root@docker:~# docker rmi -f bitnami/tomcat
+Untagged: bitnami/tomcat:latest
+Untagged: bitnami/tomcat@sha256:ebfa5caebd5c23141364dfc09317714021c4bc70a7e1d0e3523f455b54c0c5d7
+Deleted: sha256:5b7400355a9664eab3cbad464900072bcf702f2a22a8d4d0b452de156066ba16
+root@docker:~# docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+nginx        latest    92b11f67642b   5 weeks ago    187MB
+mysql        latest    019814493c7a   2 months ago   632MB
+tomcat       7.0       9dfd74e6bc2f   2 years ago    533MB
+root@docker:~# docker ps -a
+CONTAINER ID   IMAGE          COMMAND                   CREATED              STATUS                      PORTS                                       NAMES
+ca91c2ae5d58   5b7400355a96   "/opt/bitnami/script  "   About a minute ago   Created                                                                 tc
+502ed02bbb41   mysql          "docker-entrypoint.s  "   13 minutes ago       Up 13 minutes               3306/tcp, 33060/tcp                         mc
+252807a07524   mysql          "docker-entrypoint.s  "   18 minutes ago       Exited (1) 18 minutes ago                                               my
+727bd597c83c   tomcat:7.0     "catalina.sh run"         28 minutes ago       Up 28 minutes               0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   tomcat
+root@docker:~# docker rmi -f bitnami/tomcat:9.0
+Error response from daemon: No such image: bitnami/tomcat:9.0
+root@docker:~# docker run -d --name a -p 8080:80 bitnami/tomcat:9.0
+Unable to find image 'bitnami/tomcat:9.0' locally
+9.0: Pulling from bitnami/tomcat
+8b863d6ca060: Pull complete 
+Digest: sha256:03762096fb3857e5c917aa71f566f98b981540af990e52bf2dcd1d1ebe6b5ef0
+Status: Downloaded newer image for bitnami/tomcat:9.0
+docker: Error response from daemon: Invalid container name (a), only [a-zA-Z0-9][a-zA-Z0-9_.-] are allowed.
+See 'docker run --help'.
+root@docker:~# docker ps
+CONTAINER ID   IMAGE        COMMAND                   CREATED          STATUS          PORTS                                       NAMES
+502ed02bbb41   mysql        "docker-entrypoint.s  "   14 minutes ago   Up 14 minutes   3306/tcp, 33060/tcp                         mc
+727bd597c83c   tomcat:7.0   "catalina.sh run"         29 minutes ago   Up 29 minutes   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   tomcat
+root@docker:~# docker ps
+CONTAINER ID   IMAGE        COMMAND                   CREATED          STATUS          PORTS                                       NAMES
+502ed02bbb41   mysql        "docker-entrypoint.s  "   15 minutes ago   Up 15 minutes   3306/tcp, 33060/tcp                         mc
+727bd597c83c   tomcat:7.0   "catalina.sh run"         30 minutes ago   Up 30 minutes   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   tomcat
+root@docker:~# docker exec mc mysql -u root -p
+Enter password: ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+root@docker:~# docker exec -it mc mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.3.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.03 sec)
+
+mysql> exit
+Bye
+root@docker:~# clear
+root@docker:~# docker images
+REPOSITORY       TAG       IMAGE ID       CREATED        SIZE
+bitnami/tomcat   9.0       8ab055e1f297   8 days ago     551MB
+nginx            latest    92b11f67642b   5 weeks ago    187MB
+mysql            latest    019814493c7a   2 months ago   632MB
+tomcat           7.0       9dfd74e6bc2f   2 years ago    533MB
+root@docker:~# docker rmi $(docker images -q)
+Untagged: bitnami/tomcat:9.0
+Untagged: bitnami/tomcat@sha256:03762096fb3857e5c917aa71f566f98b981540af990e52bf2dcd1d1ebe6b5ef0
+Deleted: sha256:8ab055e1f2970508e2ba110c2d58cbff74ac209d845abb0775f814001f63284d
+Deleted: sha256:d81aa19f7acc80c340cc9078cc0399b976a2fc8e12fd4e1eb43009cac971972c
+Untagged: nginx:latest
+Untagged: nginx@sha256:6db391d1c0cfb30588ba0bf72ea999404f2764febf0f1f196acd5867ac7efa7e
+Deleted: sha256:92b11f67642b62bbb98e7e49169c346b30e20cd3c1c034d31087e46924b9312e
+Deleted: sha256:d9e826dbb4b3c5770fe92638baa8c6614f210d782a5d021a123fe9fa1f92c23d
+Deleted: sha256:2a75285e888884bed4d630896c86ecd71739c6e82669e21ad7a050f33c9ac48d
+Deleted: sha256:32bfe3f040358ab8f9872a63d4ddefdc68f35d991ca10a812cbac5912ae9f97b
+Deleted: sha256:1330486eb62ea7e96f384961b77b0fc85f5d4422e761114ef3a72e7cb89751a4
+Deleted: sha256:a375372209a0f2b2c697a52cce46bc41b495bf86184ae83dd5146e20c22078eb
+Deleted: sha256:450787ca55caa59d0288de9cf36fc6b77d1b208a77eb837ec3d25b385f99cafb
+Deleted: sha256:a483da8ab3e941547542718cacd3258c6c705a63e94183c837c9bc44eb608999
+Error response from daemon: conflict: unable to delete 019814493c7a (cannot be forced) - image is being used by running container 502ed02bbb41
+Error response from daemon: conflict: unable to delete 9dfd74e6bc2f (cannot be forced) - image is being used by running container 727bd597c83c
+root@docker:~# docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+mysql        latest    019814493c7a   2 months ago   632MB
+tomcat       7.0       9dfd74e6bc2f   2 years ago    533MB
+root@docker:~# docker rm stop $(docker ps -a -q)
+ca91c2ae5d58
+252807a07524
+Error response from daemon: No such container: stop
+Error response from daemon: cannot remove container "/mc": container is running: stop the container before removing or force remove
+Error response from daemon: cannot remove container "/tomcat": container is running: stop the container before removing or force remove
+root@docker:~# docker rm -f  $(docker ps -a -q)
+502ed02bbb41
+727bd597c83c
+root@docker:~# docker rmi $(docker images -q)
+Untagged: mysql:latest
+Untagged: mysql@sha256:9d1c923e5f66a89607285ee2641f8a53430a1ccd5e4a62b35eb8a48b74b9ff48
+Deleted: sha256:019814493c7ab16a057af0399b1288a1208b75ba852b915541840095c0fedfd0
+Deleted: sha256:2a66a556bad7c58bbaf826c55cc3354a47dc8b68409c58429f9eaaf9b36de271
+Deleted: sha256:6239c774197fa3717e92ad1a8da1b4701f905db4bc45d1d1f1409b8d96b64595
+Deleted: sha256:85114563ca1330272d408b81d20399eeec9ea2ddbc0ddacc37f972c115ae1fda
+Deleted: sha256:2cb936a23222090d81c8c1c0d94fcf1d5d761d050fd1dfa2bc0213f8adbe9236
+Deleted: sha256:17f0a5c233a212c5dd1b9005e71144a2cd1b125d25020eed5c41a5181f98a456
+Deleted: sha256:3b4e435387b4c388b1e7d2eb20c8bec41d0b3c54d30311fb27f8332ab321f9e1
+Deleted: sha256:8787be40457a8e20bcadd90b9af3a4343120df8fb893ea455a769de68acf83da
+Deleted: sha256:d3d7006381e094f467d049de0a8737e64ef1bf5a6268a9fa4a7d5d87032f28d6
+Deleted: sha256:9bf9b56cfbd1604a40cfbde1651a4b63f4a250c7ecc23d05a8ece899c8240b2e
+Deleted: sha256:18a3ada103a9229bc00b549b66ae7caa0bc0eb47e785859d8b1346a254a871d1
+Untagged: tomcat:7.0
+Untagged: tomcat@sha256:f7d37d248d0eacec1e5995736234c9c22155626fcb27ea3ead13b9db24e698f7
+Deleted: sha256:9dfd74e6bc2f5a477649be71bec187dce1c04cccecaca286d5e6604e9f8d2afc
+Deleted: sha256:2ec8c1ae4fd07c390fefdcfb7680d4afe0d326a18640a2fda90ab1f4cbd4a5e1
+Deleted: sha256:f5950a20ed664a5a74574f86ee909104a4eaed0c78459535c900e2f63587ac60
+Deleted: sha256:1d6efac5b25f9ae782fbcff44a262d70119a372db7c60e08c6bfd234ad2568df
+Deleted: sha256:06316d19361ae1279f6b980155dee8f9dd42673dbf7b2f0f3ac4137465fd74ec
+Deleted: sha256:bacb0f14f06305a9b509c6d14a1d32ae5fa862a2c72cf64f66e58e8d3a6248ee
+Deleted: sha256:6b3b9060e6d4d0009f38adb7fa37077d33966dbf632f795f4dd997f5abdae64d
+Deleted: sha256:33d9996f6196b7459c2fff2af3c499c293df089085845401bec2ebda281b86d8
+Deleted: sha256:2e17f8770b4ad4ce56357edc8dea7329f376803e703201f45141d044634c20e3
+Deleted: sha256:4311d44226850ccb1c676c541d5a8cbfaa8a8fbbcbce7470f63f73de3b095452
+Deleted: sha256:4e006334a6fdea37622f72b21eb75fe1484fc4f20ce8b8526187d6f7bd90a6fe
+root@docker:~# docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+root@docker:~# clear
+root@docker:~# docker run -d ubuntu:focal
+Unable to find image 'ubuntu:focal' locally
+focal: Pulling from library/ubuntu
+17d0386c2fff: Pull complete 
+Digest: sha256:80ef4a44043dec4490506e6cc4289eeda2d106a70148b74b5ae91ee670e9c35d
+Status: Downloaded newer image for ubuntu:focal
+21784e3bbe08a5d8d9fb65d2d94c630f910fe8c7cda43f30a3c0abfad512da2a
+root@docker:~# docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+ubuntu       focal     3cff1c6ff37e   5 weeks ago   72.8MB
+root@docker:~# docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+root@docker:~# docker ps -a
+CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS                      PORTS     NAMES
+21784e3bbe08   ubuntu:focal   "/bin/bash"   24 seconds ago   Exited (0) 24 seconds ago             sharp_raman
+root@docker:~# docker run -d -it --name ubuntu1 ubuntu:focal
+86ac2dcc812b0152cdd3537279c6a80f70391345690f13b5fb0976fc28011677
+root@docker:~# docker ps
+CONTAINER ID   IMAGE          COMMAND       CREATED         STATUS         PORTS     NAMES
+86ac2dcc812b   ubuntu:focal   "/bin/bash"   6 seconds ago   Up 5 seconds             ubuntu1
+root@docker:~# docker run -d  --name ubuntu2 ubuntu:focal /bin/bash
+e7745d117f32a7ae521ef6ee3b50783ab629cee8ef4420774a6095d43ec400fa
+root@docker:~# docker ps
+CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS          PORTS     NAMES
+86ac2dcc812b   ubuntu:focal   "/bin/bash"   50 seconds ago   Up 49 seconds             ubuntu1
+root@docker:~# docker ps -a
+CONTAINER ID   IMAGE          COMMAND       CREATED              STATUS                      PORTS     NAMES
+e7745d117f32   ubuntu:focal   "/bin/bash"   14 seconds ago       Exited (0) 13 seconds ago             ubuntu2
+86ac2dcc812b   ubuntu:focal   "/bin/bash"   About a minute ago   Up 59 seconds                         ubuntu1
+21784e3bbe08   ubuntu:focal   "/bin/bash"   3 minutes ago        Exited (0) 3 minutes ago              sharp_raman
+root@docker:~# docker run -d  -it --name ubuntu3 ubuntu:focal bash
+2d536c5bac712aee2bcb80ecf3626f3b02b3c3fa8d8e2c20d073fd842ab80a2a
+root@docker:~# docker ps
+CONTAINER ID   IMAGE          COMMAND       CREATED              STATUS              PORTS     NAMES
+2d536c5bac71   ubuntu:focal   "bash"        6 seconds ago        Up 5 seconds                  ubuntu3
+86ac2dcc812b   ubuntu:focal   "/bin/bash"   About a minute ago   Up About a minute             ubuntu1
+root@docker:~# exit
+ α׾ƿ 
+guru@docker:~$ docker ps
+permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.45/containers/json": dial unix /var/run/docker.sock: connect: permission denied
+guru@docker:~$ su -
+  ȣ: 
+root@docker:~# 
+root@docker:~# 
+root@docker:~# docker ps
+CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS          PORTS     NAMES
+2d536c5bac71   ubuntu:focal   "bash"        42 seconds ago   Up 41 seconds             ubuntu3
+86ac2dcc812b   ubuntu:focal   "/bin/bash"   2 minutes ago    Up 2 minutes              ubuntu1
+root@docker:~# docker exec -it ubuntu3 /bin/bash
+root@2d536c5bac71:/# ls
+bin   dev  home  lib32  libx32  mnt  proc  run   srv  tmp  var
+boot  etc  lib   lib64  media   opt  root  sbin  sys  usr
+root@2d536c5bac71:/# exit
+exit
+root@docker:~# docker rmi $(docker images -q)
+Error response from daemon: conflict: unable to delete 3cff1c6ff37e (cannot be forced) - image is being used by running container 86ac2dcc812b
+root@docker:~# docker stop $(docker ps -a -q)
+2d536c5bac71
+e7745d117f32
+86ac2dcc812b
+21784e3bbe08
+root@docker:~# docker rmi $(docker images -q)
+Error response from daemon: conflict: unable to delete 3cff1c6ff37e (must be forced) - image is being used by stopped container 86ac2dcc812b
+root@docker:~# docker rmi -f $(docker images -q)
+Untagged: ubuntu:focal
+Untagged: ubuntu@sha256:80ef4a44043dec4490506e6cc4289eeda2d106a70148b74b5ae91ee670e9c35d
+Deleted: sha256:3cff1c6ff37e0101a08119d0743ba95c7f505d00298f5a169129e4e9086cde9e
+root@docker:~# dokcer images
+
+  ɾ  'dokcer'   (  ) ã           ϴ .        ɾ    õ  Ͻðڽ  ϱ :
+
+  snap dockerdocker     ɾ  ' (24.0.5)'
+  deb dockerdocker.io     ɾ  ' (24.0.5-0ubuntu1~20.04.1)'
+
+'snap info <snapname>'      ߰         Ȯ   Ͻʽÿ .
+
+root@docker:~# docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+root@docker:~# clear
+root@docker:~# docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+root@docker:~# docker run -it --name ubunt1 ubuntu:focal
+Unable to find image 'ubuntu:focal' locally
+focal: Pulling from library/ubuntu
+17d0386c2fff: Already exists 
+Digest: sha256:80ef4a44043dec4490506e6cc4289eeda2d106a70148b74b5ae91ee670e9c35d
+Status: Downloaded newer image for ubuntu:focal
+root@63b89010ef2a:/# ls
+bin   dev  home  lib32  libx32  mnt  proc  run   srv  tmp  var
+boot  etc  lib   lib64  media   opt  root  sbin  sys  usr
+root@63b89010ef2a:/# root@docker:~# docker ps
+CONTAINER ID   IMAGE          COMMAND       CREATED         STATUS         PORTS     NAMES
+63b89010ef2a   ubuntu:focal   "/bin/bash"   2 minutes ago   Up 2 minutes             ubunt1
+root@docker:~# ls
+snap
+root@docker:~# 
+root@docker:~# 
+root@docker:~# docker ps
+CONTAINER ID   IMAGE          COMMAND       CREATED         STATUS         PORTS     NAMES
+63b89010ef2a   ubuntu:focal   "/bin/bash"   3 minutes ago   Up 3 minutes             ubunt1
+root@docker:~# clear
+root@docker:~# ls
+snap
+root@docker:~# exit
+ α׾ƿ 
+guru@docker:~$ ls
+dockerfolder  index.html         ٿ ε             ȭ                         ø 
+guru@docker:~$ sudo mv ./dockerfolder/ /root
+[sudo] guru   ȣ: 
+guru@docker:~$ sudo mv ./dockerfolder/ /root
+mv: './dockerfolder/'                 :  ׷       ̳     ͸         ϴ 
+guru@docker:~$ ls
+index.html         ٿ ε             ȭ                         ø 
+guru@docker:~$ sudo mv ./index.html/ /root
+mv: './index.html/'                 :    ͸     ƴմϴ 
+guru@docker:~$ sudo mv .index.html /root
+mv: '.index.html'                 :  ׷       ̳     ͸         ϴ 
+guru@docker:~$ sudo mv ./index.html /root
+guru@docker:~$ su -
+  ȣ: 
+su:          
+guru@docker:~$ ^C
+guru@docker:~$ su -
+  ȣ: 
+root@docker:~# ls
+dockerfolder  index.html  snap
+root@docker:~# clear
+root@docker:~# ls
+dockerfolder  index.html  snap
+root@docker:~# exit
+ α׾ƿ 
+guru@docker:~$ sudo^[[2~^C./dockerfolder/ /root
+guru@docker:~$ sudo mv ./dockerfolder/ /^Cot
+guru@docker:~$ su -
+  ȣ: 
+root@docker:~# ls
+dockerfolder  index.html  snap
+root@docker:~# cd dockerfolder/
+root@docker:~/dockerfolder# ls
+Dockerfile  info.js
+root@docker:~/dockerfolder# vi Dockerfile 
+root@docker:~/dockerfolder# docker build -t webserver:v1.0 .
+[+] Building 186.9s (8/8) FINISHED                                                   docker:default
+ => [internal] load build definition from Dockerfile                                           0.0s
+ => => transferring dockerfile: 169B                                                           0.0s
+ => [internal] load metadata for docker.io/library/node:14                                     2.7s
+ => [auth] library/node:pull token for registry-1.docker.io                                    0.0s
+ => [internal] load .dockerignore                                                              0.0s
+ => => transferring context: 2B                                                                0.0s
+ => [internal] load build context                                                              0.0s
+ => => transferring context: 803B                                                              0.0s
+ => [1/2] FROM docker.io/library/node:14@sha256:a158d3b9b4e3fa813fa6c8c590b8f0a860e015ad4e5  183.7s
+ => => resolve docker.io/library/node:14@sha256:a158d3b9b4e3fa813fa6c8c590b8f0a860e015ad4e59b  0.0s
+ => => sha256:2cafa3fbb0b6529ee4726b4f599ec27ee557ea3dea7019182323b3779959927 2.21kB / 2.21kB  0.0s
+ => => sha256:2ff1d7c41c74a25258bfa6f0b8adb0a727f84518f55f65ca845ebc747976 50.45MB / 50.45MB  74.2s
+ => => sha256:a158d3b9b4e3fa813fa6c8c590b8f0a860e015ad4e59bbce5744d2f6fd8461aa 776B / 776B     0.0s
+ => => sha256:1d12470fa662a2a5cb50378dcdc8ea228c1735747db410bbefb8e2d9144b545 7.51kB / 7.51kB  0.0s
+ => => sha256:b253aeafeaa7e0671bb60008df01de101a38a045ff7bc656e3b0fbfc7c05cca 7.86MB / 7.86MB  7.3s
+ => => sha256:3d2201bd995cccf12851a50820de03d34a17011dcbb9ac9fdf3a50c952cb 10.00MB / 10.00MB  12.4s
+ => => sha256:1de76e268b103d05fa8960e0f77951ff54b912b63429c34f5d6adfd09f5f 51.88MB / 51.88MB  89.9s
+ => => sha256:d9a8df5894511ce28a05e2925a75e8a4acbd0634c39ad734fdfba8e23 191.85MB / 191.85MB  172.4s
+ => => extracting sha256:2ff1d7c41c74a25258bfa6f0b8adb0a727f84518f55f65ca845ebc747976c408      2.2s
+ => => sha256:6f51ee005deac0d99898e41b8ce60ebf250ebe1a31a0b03f613aec6bbc9b83 4.19kB / 4.19kB  75.9s
+ => => sha256:5f32ed3c3f278edda4fc571c880b5277355a29ae8f52b52cdf865f05837 35.24MB / 35.24MB  103.3s
+ => => extracting sha256:b253aeafeaa7e0671bb60008df01de101a38a045ff7bc656e3b0fbfc7c05cca5      0.3s
+ => => extracting sha256:3d2201bd995cccf12851a50820de03d34a17011dcbb9ac9fdf3a50c952cbb131      0.3s
+ => => sha256:0c8cc2f24a4dcb64e602e086fc9446b0a541e8acd9ad72d2e90df3ba22f158 2.29MB / 2.29MB  94.2s
+ => => extracting sha256:1de76e268b103d05fa8960e0f77951ff54b912b63429c34f5d6adfd09f5f9ee2      2.6s
+ => => sha256:0d27a8e861329007574c6766fba946d48e20d2c8e964e873de352603f22c4ceb 450B / 450B    94.5s
+ => => extracting sha256:d9a8df5894511ce28a05e2925a75e8a4acbd0634c39ad734fdfba8e23d1b1569      8.7s
+ => => extracting sha256:6f51ee005deac0d99898e41b8ce60ebf250ebe1a31a0b03f613aec6bbc9b83d8      0.0s
+ => => extracting sha256:5f32ed3c3f278edda4fc571c880b5277355a29ae8f52b52cdf865f058378a590      2.0s
+ => => extracting sha256:0c8cc2f24a4dcb64e602e086fc9446b0a541e8acd9ad72d2e90df3ba22f158b3      0.1s
+ => => extracting sha256:0d27a8e861329007574c6766fba946d48e20d2c8e964e873de352603f22c4ceb      0.0s
+ => [2/2] COPY info.js /info.js                                                                0.3s
+ => exporting to image                                                                         0.0s
+ => => exporting layers                                                                        0.0s
+ => => writing image sha256:f630ae0fa3d4e9e69d4e41638de539525ea3b5ac40ff49ee7ea102e2b73e8c0c   0.0s
+ => => naming to docker.io/library/webserver:v1.0                                              0.0s
+root@docker:~/dockerfolder# docker images
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+webserver    v1.0      f630ae0fa3d4   14 seconds ago   912MB
+ubuntu       focal     3cff1c6ff37e   5 weeks ago      72.8MB
+root@docker:~/dockerfolder# docker run -d --name web -p 80:80 webserver:v1.0
+3e0111f4d126fd38e277fd632bd703b6bca635ee3b3dd7cd14942497c2cadc20
+root@docker:~/dockerfolder# docker ps
+CONTAINER ID   IMAGE            COMMAND          CREATED          STATUS          PORTS                               NAMES
+3e0111f4d126   webserver:v1.0   "node info.js"   5 seconds ago    Up 4 seconds    0.0.0.0:80->80/tcp, :::80->80/tcp   web
+63b89010ef2a   ubuntu:focal     "/bin/bash"      39 minutes ago   Up 39 minutes                                       ubunt1
+root@docker:~/dockerfolder# docker run -d --name web2 -p 8080:80 webserver:v1.0
+1e4fc3338629e15da8753464c99e4270aa026f93cc009dc4ff67676eba0279c3
+root@docker:~/dockerfolder# docker ps
+CONTAINER ID   IMAGE            COMMAND          CREATED          STATUS          PORTS                                   NAMES
+1e4fc3338629   webserver:v1.0   "node info.js"   4 seconds ago    Up 3 seconds    0.0.0.0:8080->80/tcp, :::8080->80/tcp   web2
+3e0111f4d126   webserver:v1.0   "node info.js"   43 seconds ago   Up 42 seconds   0.0.0.0:80->80/tcp, :::80->80/tcp       web
+63b89010ef2a   ubuntu:focal     "/bin/bash"      40 minutes ago   Up 40 minutes                                           ubunt1
+root@docker:~/dockerfolder# clear
+root@docker:~/dockerfolder# docker rmi $(docker images -q)
+Error response from daemon: conflict: unable to delete f630ae0fa3d4 (cannot be forced) - image is being used by running container 3e0111f4d126
+Error response from daemon: conflict: unable to delete 3cff1c6ff37e (cannot be forced) - image is being used by running container 63b89010ef2a
+root@docker:~/dockerfolder# docker rm -f $(docker ps -a -q)
+1e4fc3338629
+3e0111f4d126
+63b89010ef2a
+2d536c5bac71
+e7745d117f32
+86ac2dcc812b
+21784e3bbe08
+root@docker:~/dockerfolder# docker rmi $(docker images -q)
+Untagged: webserver:v1.0
+Deleted: sha256:f630ae0fa3d4e9e69d4e41638de539525ea3b5ac40ff49ee7ea102e2b73e8c0c
+Untagged: ubuntu:focal
+Untagged: ubuntu@sha256:80ef4a44043dec4490506e6cc4289eeda2d106a70148b74b5ae91ee670e9c35d
+Deleted: sha256:3cff1c6ff37e0101a08119d0743ba95c7f505d00298f5a169129e4e9086cde9e
+Deleted: sha256:5faf9c0a9efe4675ecd21a4ec417d51077d5e75da9e673161a94e7d6cd43f92c
+root@docker:~/dockerfolder# docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+root@docker:~/dockerfolder# docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+root@docker:~/dockerfolder# clear
+root@docker:~/dockerfolder# cd ..
+root@docker:~# ls
+dockerfolder  index.html  snap
+root@docker:~# mkdir dockerfile
+root@docker:~# ls
+dockerfile  dockerfolder  index.html  snap
+root@docker:~# cp ./index.html /dockerfile
+root@docker:~# cd dockerf
+-bash: cd: dockerf:  ׷       ̳     ͸         ϴ 
+root@docker:~# cd dockerfile
+root@docker:~/dockerfile# ls
+root@docker:~/dockerfile# cd ..
+root@docker:~# ls
+dockerfile  dockerfolder  index.html  snap
+root@docker:~# cd dockerfile
+root@docker:~/dockerfile# ls
+root@docker:~/dockerfile# mv ./index.html ./
+mv: './index.html'                 :  ׷       ̳     ͸         ϴ 
+root@docker:~/dockerfile# mv ./index.html /
+mv: './index.html'                 :  ׷       ̳     ͸         ϴ 
+root@docker:~/dockerfile# mv ../index.html /
+root@docker:~/dockerfile# ls
+root@docker:~/dockerfile# mv ../index.html ./
+mv: '../index.html'                 :  ׷       ̳     ͸         ϴ 
+root@docker:~/dockerfile# cd ..
+root@docker:~# mv ./index.html ../dockerfile
+mv: './index.html'                 :  ׷       ̳     ͸         ϴ 
+root@docker:~# mv ./index.html ../dockerfile
+mv: './index.html'                 :  ׷       ̳     ͸         ϴ 
+root@docker:~# ls
+dockerfile  dockerfolder  snap
+root@docker:~# ls
+dockerfile  dockerfolder  snap
+root@docker:~# cd dockerfile
+root@docker:~/dockerfile# ls
+root@docker:~/dockerfile# cd ~
+root@docker:~# ls
+dockerfile  dockerfolder  snap
+root@docker:~# cd /
+root@docker:/# ls
+bin    dev         home        lib32   lost+found  opt   run   srv       tmp
+boot   dockerfile  index.html  lib64   media       proc  sbin  swapfile  usr
+cdrom  etc         lib         libx32  mnt         root  snap  sys       var
+root@docker:/# mv ./index.html ~/foldefile
+root@docker:/# cd folderfile
+-bash: cd: folderfile:  ׷       ̳     ͸         ϴ 
+root@docker:/# ls
+bin   cdrom  dockerfile  home  lib32  libx32      media  opt   root  sbin  srv       sys  usr
+boot  dev    etc         lib   lib64  lost+found  mnt    proc  run   snap  swapfile  tmp  var
+root@docker:/# cd ~
+root@docker:~# cd dockerfile
+root@docker:~/dockerfile# ls
+root@docker:~/dockerfile# ls
+root@docker:~/dockerfile# -ls
+
+  ɾ  '-ls'   (  ) ã           ϴ .        ɾ    õ  Ͻðڽ  ϱ :
+
+  deb hlshfsutils     ɾ  ' (3.2.6-14)'
+  deb jlssleuthkit     ɾ  ' (4.6.7-1build1)'
+  deb olsspeech-tools     ɾ  ' (1:2.5.0-8build1)'
+  deb i-lsintegrit     ɾ  ' (4.1-1.1)'
+  deb lscoreutils     ɾ  ' (8.30-3ubuntu2)'
+  deb flssleuthkit     ɾ  ' (4.6.7-1build1)'
+  deb blsbacula-sd     ɾ  ' (9.4.2-2ubuntu5)'
+  deb alsatool     ɾ  ' (0.39.0-10)'
+  deb ilssleuthkit     ɾ  ' (4.6.7-1build1)'
+
+Try: apt install <deb name>
+
+root@docker:~/dockerfile# ls
+root@docker:~/dockerfile# cd ..
+root@docker:~# ls
+dockerfile  dockerfolder  foldefile  snap
+root@docker:~# 
+root@docker:~# 
+root@docker:~# 
+root@docker:~# exit
+ α׾ƿ 
+guru@docker:~$ ls
+index.html         ٿ ε             ȭ                         ø 
+guru@docker:~$ sudo mv ./index.html /root/folderfile
+[sudo] guru   ȣ: 
+guru@docker:~$ su -
+  ȣ: 
+root@docker:~# ls
+dockerfile  dockerfolder  foldefile  folderfile  snap
+root@docker:~# cd dockerfile
+root@docker:~/dockerfile# ls
+root@docker:~/dockerfile# exit
+ α׾ƿ 
+guru@docker:~$ ls
+index.html         ٿ ε             ȭ                         ø 
+guru@docker:~$ sudo mv ./index.html /root/dockerfile
+guru@docker:~$ su -
+  ȣ: 
+root@docker:~# 
+root@docker:~# 
+root@docker:~# cd dockerfile
+root@docker:~/dockerfile# ls
+index.html
+root@docker:~/dockerfile# vi dockerfile
+root@docker:~/dockerfile# cat dockerfile 
+FROM ubuntu:18.04
+LABEL maintance="ychkim@lotte.net"
+#install apache
+RUN apt-get update \
+    && apt-get install -y apache2
+COPY index.html /var/www/html/index.html
+EXPOSE 80
+CMD ["/usr/sbin/apache2ctl","-D","FOREGROUND"]
+root@docker:~/dockerfile# docker build -t apache:v1.0 .
+[+] Building 25.5s (9/9) FINISHED                                                    docker:default
+ => [internal] load build definition from dockerfile                                           0.0s
+ => => transferring dockerfile: 261B                                                           0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:18.04                                2.5s
+ => [auth] library/ubuntu:pull token for registry-1.docker.io                                  0.0s
+ => [internal] load .dockerignore                                                              0.0s
+ => => transferring context: 2B                                                                0.0s
+ => [1/3] FROM docker.io/library/ubuntu:18.04@sha256:152dc042452c496007f07ca9127571cb9c29697f  3.6s
+ => => resolve docker.io/library/ubuntu:18.04@sha256:152dc042452c496007f07ca9127571cb9c29697f  0.0s
+ => => sha256:152dc042452c496007f07ca9127571cb9c29697f42acbfad72324b2bb2e43c9 1.33kB / 1.33kB  0.0s
+ => => sha256:dca176c9663a7ba4c1f0e710986f5a25e672842963d95b960191e2d9f7185ebe 424B / 424B     0.0s
+ => => sha256:f9a80a55f492e823bf5d51f1bd5f87ea3eed1cb31788686aa99a2fb61a27af6 2.30kB / 2.30kB  0.0s
+ => => sha256:7c457f213c7634afb95a0fb2410a74b7b5bc0ba527033362c240c7a11bef4 25.69MB / 25.69MB  2.3s
+ => => extracting sha256:7c457f213c7634afb95a0fb2410a74b7b5bc0ba527033362c240c7a11bef4331      1.1s
+ => [internal] load build context                                                              0.0s
+ => => transferring context: 412B                                                              0.0s
+ => [2/3] RUN apt-get update     && apt-get install -y apache2                                18.5s
+ => [3/3] COPY index.html /var/www/html/index.html                                             0.1s 
+ => exporting to image                                                                         0.7s 
+ => => exporting layers                                                                        0.7s 
+ => => writing image sha256:6bc4c96548f609f4fe8879140fc27d19be43edf6c95278ce0c42a586263c27f6   0.0s 
+ => => naming to docker.io/library/apache:v1.0                                                 0.0s 
+root@docker:~/dockerfile# docker images
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+apache       v1.0      6bc4c96548f6   12 seconds ago   205MB
+root@docker:~/dockerfile# docker run -d --name web -p 80:80 apache:v1.0
+9c7d718b4ddefdbacc2670f3992da86134b7426d3743d321b2f8fe614f7360bf
+root@docker:~/dockerfile# docker ps
+CONTAINER ID   IMAGE         COMMAND                   CREATED         STATUS         PORTS                               NAMES
+9c7d718b4dde   apache:v1.0   "/usr/sbin/apache2ct  "   6 seconds ago   Up 5 seconds   0.0.0.0:80->80/tcp, :::80->80/tcp   web
+root@docker:~/dockerfile# docker inspect web
+[
+    {
+        "Id": "9c7d718b4ddefdbacc2670f3992da86134b7426d3743d321b2f8fe614f7360bf",
+        "Created": "2024-03-23T07:57:21.761110773Z",
+        "Path": "/usr/sbin/apache2ctl",
+        "Args": [
+            "-D",
+            "FOREGROUND"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 20903,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2024-03-23T07:57:21.981099608Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:6bc4c96548f609f4fe8879140fc27d19be43edf6c95278ce0c42a586263c27f6",
+        "ResolvConfPath": "/var/lib/docker/containers/9c7d718b4ddefdbacc2670f3992da86134b7426d3743d321b2f8fe614f7360bf/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/9c7d718b4ddefdbacc2670f3992da86134b7426d3743d321b2f8fe614f7360bf/hostname",
+        "HostsPath": "/var/lib/docker/containers/9c7d718b4ddefdbacc2670f3992da86134b7426d3743d321b2f8fe614f7360bf/hosts",
+        "LogPath": "/var/lib/docker/containers/9c7d718b4ddefdbacc2670f3992da86134b7426d3743d321b2f8fe614f7360bf/9c7d718b4ddefdbacc2670f3992da86134b7426d3743d321b2f8fe614f7360bf-json.log",
+        "Name": "/web",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "docker-default",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {
+                "80/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "80"
+                    }
+                ]
+            },
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                26,
+                100
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "host",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": [],
+            "BlkioDeviceWriteBps": [],
+            "BlkioDeviceReadIOps": [],
+            "BlkioDeviceWriteIOps": [],
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": [],
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware",
+                "/sys/devices/virtual/powercap"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/41e01c20b72ee1cfcee3c837933d2dce62af3b168b9ab6a331f695be8e56a525-init/diff:/var/lib/docker/overlay2/kcurgr8xis6t529idg5t56ujv/diff:/var/lib/docker/overlay2/r89ub0gb0wcc7e6c50hda51fw/diff:/var/lib/docker/overlay2/8b70fa0459c3e871739a301c654309795ee7c82094f647e96f2ebe615b13b49f/diff",
+                "MergedDir": "/var/lib/docker/overlay2/41e01c20b72ee1cfcee3c837933d2dce62af3b168b9ab6a331f695be8e56a525/merged",
+                "UpperDir": "/var/lib/docker/overlay2/41e01c20b72ee1cfcee3c837933d2dce62af3b168b9ab6a331f695be8e56a525/diff",
+                "WorkDir": "/var/lib/docker/overlay2/41e01c20b72ee1cfcee3c837933d2dce62af3b168b9ab6a331f695be8e56a525/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "9c7d718b4dde",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "80/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "/usr/sbin/apache2ctl",
+                "-D",
+                "FOREGROUND"
+            ],
+            "Image": "apache:v1.0",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {
+                "maintance": "ychkim@lotte.net",
+                "org.opencontainers.image.ref.name": "ubuntu",
+                "org.opencontainers.image.version": "18.04"
+            }
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "49fd8e4eafa6aba3a1e3a9468e848cbe51c7aea7cbb051cf2968a7682b9ed564",
+            "SandboxKey": "/var/run/docker/netns/49fd8e4eafa6",
+            "Ports": {
+                "80/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "80"
+                    },
+                    {
+                        "HostIp": "::",
+                        "HostPort": "80"
+                    }
+                ]
+            },
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "753ae60b9a0b02520b03010fddd27085406a54d829db5f1384ee5d35fbc31b6e",
+            "Gateway": "172.17.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.17.0.2",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "MacAddress": "02:42:ac:11:00:02",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "MacAddress": "02:42:ac:11:00:02",
+                    "NetworkID": "7832f1b97fa0a0b0acb413e80ffc00bcea1d2897c6782865793f11b5e90f7614",
+                    "EndpointID": "753ae60b9a0b02520b03010fddd27085406a54d829db5f1384ee5d35fbc31b6e",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DriverOpts": null,
+                    "DNSNames": null
+                }
+            }
+        }
+    }
+]
+root@docker:~/dockerfile# curl 172.17.0.2
+<html>
+<head> 
+<title>Docker Container Build Success !!!</title> 
+<style>
+body {margin-top: 40px; background-color: #333;}
+</style> 
+</head>
+<body>
+<div style=color:white;text-align:center>
+<h1>Docker Container Build Success !!!</h1>
+<h2>Congratulations!</h2>
+<p><em>Your application is now running on a Docker container .</em></p>
+</p> </div>
+</body>
+</html>root@docker:~/dockerfile# history
+    1  vim /etc/hostname
+    2  vi /etc/hostname
+    3  apt-get update
+    4  apt-get install -y openssh-server curl tree
+    5  reboot
+    6  vi /etc/hostname
+    7  apt-get install -y vim
+    8  vi /etc/hostname
+    9  hostname
+   10  vim /etc/hosts
+   11  reboot
+   12  clear
+   13  ifconfig
+   14  apt install net-tools
+   15  clear
+   16  ifconfig
+   17  clear
+   18  sudo apt-get update
+   19  sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+   20  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+   21  apt-key fingerprint
+   22  add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+   23  grep docker /etc/apt/sources.list
+   24  apt-get update
+   25  apt-get install -y docker-ce
+   26  clear
+   27  systemctl status docker
+   28  docker version
+   29  clear'
+   30  clear
+   31  docker login
+   32  clear
+   33  docker search nginx:1.14
+   34  docker search nginx
+   35  clear
+   36  docker pull nginx
+   37  docker images
+   38  cd /var/lib/docker
+   39  ls
+   40  cd overlay2/
+   41  ls
+   42  cd ~
+   43  clear
+   44  docker images
+   45  docker run -d --name webserver -p 80:80 nginx
+   46  docker ps
+   47  curl localhsot:80
+   48  curl localhsot
+   49  curl localhost
+   50  clear
+   51  docker ps
+   52  docker inspect 6df
+   53  curl 172.17.0.2
+   54  clear
+   55  docker ps
+   56  docker exec -it webserver /bin/bash
+   57  docker ps -a -q
+   58  docker run -d -p 8080:80 nginx
+   59  docker ps
+   60  docker rename frosty_mirzakhani webserver1
+   61  docker ps
+   62  clear
+   63  docker run -d --name tc -p 8080:8080 consol/tomcat-7.0
+   64  docker ps
+   65  docker rm $(docker ps -a -q)
+   66  docker stop $(docker ps -a -q)
+   67  docker ps
+   68  docker images
+   69  clear
+   70  docker run -d --name tc -p 8080:8080 consol/tomcat-7.0
+   71  docker rm $(docker ps -a -q)
+   72  docker ps
+   73  docker run -d --name tc -p 8080:8080 consol/tomcat-7.0
+   74  docker run -d --name tc -p 8080:8080 consol/tomcat-8.0
+   75  docker run -d --name tc -p 8080:8080 consol/tomcat-6.0
+   76  docker run -d --name  -p 8080:8080 consol/tomcat-7.0
+   77  docker login
+   78  docker run -d --name tomcat -p 8080:8080 consol/tomat-7.0
+   79  docker run -d --name tomcat -p 8080:8080 tomat-7.0
+   80  docker run -d --name tomcat -p 8080:8080 tomat
+   81  docker run -d --name tomcat -p 8080:8080 tomcat:7.0
+   82  docker ps
+   83  docker inspect tomcat
+   84  docker pull consol/tomcat-7.0
+   85  clear
+   86  docker run -d --name my -e MYSQL_ROOT_PASWORD=P@ssword mysql
+   87  docker images
+   88  docker ps
+   89  docker exec -it my mysql -u root -p
+   90  docker ps
+   91  docker images
+   92  docker rmi mysql
+   93  docker rmi -f mysql
+   94  docker images
+   95  clear
+   96  docker run -d --name my -e MYSQL_ROOT_PASSWORD=P@ssword mysql
+   97  docker ps
+   98  docker exec -it my mysql -u root -p
+   99  docker 
+  100  docker run -d --name mc -e MYSQL_ROOT_PASSWORD=P@ssword mysql
+  101  docker ps
+  102  docker run -d --name ttt -p 8080:80 consol/tomcat:7.0
+  103  docker run -d --name ttt -p 8080:80 consol/tomcat-7.0
+  104  docker run -d --name ttt -p 8080:80 consol/tomcat-7.057
+  105  docker run -d --name ttt -p 8080:80 consol/tomcat-5.0
+  106  docker run -d --name ttt -p 8080:80 consol/tomcat-6.0
+  107  docker search consol/tomcat
+  108  docker run -d --name ttt -p 8080:80 consol/tomcat 4.1.40
+  109  docker login
+  110  docker run -d --name a -p 8080:80 consol/Tomcat-4.1.40
+  111  docker run -d --name a -p 8080:80 consol/tomcat-4.1.40
+  112  docker run -d --name a -p 8080:80 consol/tomcat-4.1
+  113  docker pull consol/tomcat-4.1
+  114  clear
+  115  docker images
+  116  docker ps
+  117  docker run -d --name tc -p 8080:80 bitnami/tomcat
+  118  docker ps
+  119  docker ps -a
+  120  docker ps
+  121  docker ps -a
+  122  docker run -d --name tc -p 8080:80 bitnami/tomcat /bin/bash
+  123  docker images
+  124  docker rmi bitnami/tomcat
+  125  docker rmi -f bitnami/tomcat
+  126  docker images
+  127  docker ps -a
+  128  docker rmi -f bitnami/tomcat:9.0
+  129  docker run -d --name a -p 8080:80 bitnami/tomcat:9.0
+  130  docker ps
+  131  docker exec mc mysql -u root -p
+  132  docker exec -it mc mysql -u root -p
+  133  clear
+  134  docker images
+  135  docker rmi $(docker images -q)
+  136  docker images
+  137  docker rm stop $(docker ps -a -q)
+  138  docker rm -f  $(docker ps -a -q)
+  139  docker rmi $(docker images -q)
+  140  docker images
+  141  clear
+  142  docker run -d ubuntu:focal
+  143  docker images
+  144  docker ps
+  145  docker ps -a
+  146  docker run -d -it --name ubuntu1 ubuntu:focal
+  147  docker ps
+  148  docker run -d  --name ubuntu2 ubuntu:focal /bin/bash
+  149  docker ps
+  150  docker ps -a
+  151  docker run -d  -it --name ubuntu3 ubuntu:focal bash
+  152  docker ps
+  153  exit
+  154  docker ps
+  155  docker exec -it ubuntu3 /bin/bash
+  156  docker rmi $(docker images -q)
+  157  docker stop $(docker ps -a -q)
+  158  docker rmi $(docker images -q)
+  159  docker rmi -f $(docker images -q)
+  160  dokcer images
+  161  docker images
+  162  clear
+  163  docker ps
+  164  docker run -it --name ubunt1 ubuntu:focal
+  165  docker ps
+  166  ls
+  167  docker ps
+  168  clear
+  169  ls
+  170  exit
+  171  ls
+  172  clear
+  173  ls
+  174  exit
+  175  ls
+  176  cd dockerfolder/
+  177  ls
+  178  vi Dockerfile 
+  179  docker build -t webserver:v1.0 .
+  180  docker images
+  181  docker run -d --name web -p 80:80 webserver:v1.0
+  182  docker ps
+  183  docker run -d --name web2 -p 8080:80 webserver:v1.0
+  184  docker ps
+  185  clear
+  186  docker rmi $(docker images -q)
+  187  docker rm -f $(docker ps -a -q)
+  188  docker rmi $(docker images -q)
+  189  docker images
+  190  docker ps
+  191  clear
+  192  cd ..
+  193  ls
+  194  mkdir dockerfile
+  195  ls
+  196  cp ./index.html /dockerfile
+  197  cd dockerf
+  198  cd dockerfile
+  199  ls
+  200  cd ..
+  201  ls
+  202  cd dockerfile
+  203  ls
+  204  mv ./index.html ./
+  205  mv ./index.html /
+  206  mv ../index.html /
+  207  l
+  208  mv ../index.html ./
+  209  cd ..
+  210  mv ./index.html ../dockerfile
+  211  ls
+  212  cd dockerfile
+  213  ls
+  214  cd ~
+  215  ls
+  216  cd /
+  217  ls
+  218  mv ./index.html ~/foldefile
+  219  cd folderfile
+  220  ls
+  221  cd ~
+  222  cd dockerfile
+  223  ls
+  224  -ls
+  225  ls
+  226  cd ..
+  227  ls
+  228  exit
+  229  ls
+  230  cd dockerfile
+  231  ls
+  232  exit
+  233  cd dockerfile
+  234  ls
+  235  vi dockerfile
+  236  cat dockerfile 
+  237  docker build -t apache:v1.0 .
+  238  docker images
+  239  docker run -d --name web -p 80:80 apache:v1.0
+  240  docker ps
+  241  docker inspect web
+  242  curl 172.17.0.2
+  243  history
+root@docker:~/dockerfile# cat dockerfile 
+FROM ubuntu:18.04
+LABEL maintance="ychkim@lotte.net"
+#install apache
+RUN apt-get update \
+    && apt-get install -y apache2
+COPY index.html /var/www/html/index.html
+EXPOSE 80
+CMD ["/usr/sbin/apache2ctl","-D","FOREGROUND"]
+root@docker:~/dockerfile# 
