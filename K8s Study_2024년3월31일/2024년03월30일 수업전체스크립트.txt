@@ -1,0 +1,974 @@
+                    "NetworkID": "fae103a4c7359e4db41853f026c672b9c14263422e3ec04a0fd6917bf1edb04f",
+                    "EndpointID": "4fcc79e500574f1570d0f38e1fcac63c9abec90b65d2677f66a221e592201d69",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:11:00:02",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
+root@k8s-master:~# curl 172.17.0.2
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+root@k8s-master:~# clear
+root@k8s-master:~# docker ps
+CONTAINER ID   IMAGE        COMMAND                   CREATED         STATUS         PORTS                               NAMES
+014f1a108ad0   nginx:1.14   "nginx -g 'daemon of  "   3 minutes ago   Up 3 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp   web
+root@k8s-master:~# docker exec -it web /bin/bash
+root@014f1a108ad0:/# cd /usr/share/nginx/html
+root@014f1a108ad0:/usr/share/nginx/html# ls
+50x.html  index.html
+root@014f1a108ad0:/usr/share/nginx/html# echo "I am HomePage" > index.html
+root@014f1a108ad0:/usr/share/nginx/html# cat index.html 
+I am HomePage
+root@014f1a108ad0:/usr/share/nginx/html# docker images
+bash: docker: command not found
+root@014f1a108ad0:/usr/share/nginx/html# exit
+exit
+root@k8s-master:~# docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+nginx        1.14      295c7be07902   5 years ago   109MB
+root@k8s-master:~# docker ps
+CONTAINER ID   IMAGE        COMMAND                   CREATED         STATUS         PORTS                               NAMES
+014f1a108ad0   nginx:1.14   "nginx -g 'daemon of  "   9 minutes ago   Up 9 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp   web
+root@k8s-master:~# docker rmi nginx:1.14
+Error response from daemon: conflict: unable to remove repository reference "nginx:1.14" (must force) - container 014f1a108ad0 is using its referenced image 295c7be07902
+root@k8s-master:~# docker rm -f web
+web
+root@k8s-master:~# docker rmi nginx:1.14
+Untagged: nginx:1.14
+Untagged: nginx@sha256:f7988fb6c02e0ce69257d9bd9cf37ae20a60f1df7563c3a2a6abe24160306b8d
+Deleted: sha256:295c7be079025306c4f1d65997fcf7adb411c88f139ad1d34b537164aa060369
+Deleted: sha256:19606512dfe192788a55d7c1efb9ec02041b4e318587632f755c5112f927e0e3
+Deleted: sha256:0b83495b3ad3db8663870c3babeba503a35740537a5e25acdf61ce6a8bdad06f
+Deleted: sha256:5dacd731af1b0386ead06c8b1feff9f65d9e0bdfec032d2cd0bc03690698feda
+root@k8s-master:~# docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+root@k8s-master:~# clear
+root@k8s-master:~# history
+    1  vim /etc/hostname
+    2  vi /etc/hostname
+    3  apt-get update
+    4  apt-get install -y openssh-server curl tree
+    5  reboot
+    6  vi /etc/hostname
+    7  apt-get install -y vim
+    8  vi /etc/hostname
+    9  hostname
+   10  vim /etc/hosts
+   11  reboot
+   12  celar
+   13  clear
+   14  ip addr
+   15  hostname
+   16  vi /etc/hostname
+   17  hostname
+   18  vi /etc/hosts
+   19  reboot
+   20  ping 10.100.0.106
+   21  ping 10.100.0.107
+   22  clear
+   23  exit
+   24  clear
+   25  kubectl get nodes
+   26  kubectl get pods -n kube-system
+   27  clear
+   28  kubectl get pods -A
+   29  kubectl get pods,rs
+   30  kubectl get all
+   31  clear
+   32  kubectl get pods --all-namespaces 
+   33  kubectl get pods -n kube-system
+   34  clear
+   35  kubectl get pods --all
+   36  kubectl get pods -A
+   37  kubectl delete pods nginx-webserver-77d4d69fc-296d8
+   38  kubectl get pods -A
+   39  kubectl delete pods nginx-webserver-77d4d69fc-hv7rx 
+   40  kubectl get pods -A
+   41  kubectl get all
+   42  kubectl delete replicaset nginx-webserver-77d4d69fc
+   43  kubectl get all
+   44  kubectl delete deployment nginx-webserver
+   45  kubectl get all
+   46  kubectl delete deploy app
+   47  kubectl get all
+   48  kubectl delete pods app-67b8996b5-kssxf
+   49  kubectl get all
+   50  clear
+   51  kubectl get pods -A
+   52  docker run -d --name web -p 80:80 nginx:1.14
+   53  docker ps
+   54  docker inspacec web
+   55  docker inspact web
+   56  docker inspect web
+   57  curl 172.17.0.2
+   58  clear
+   59  docker ps
+   60  docker exec -it web /bin/bash
+   61  docker images
+   62  docker ps
+   63  docker rmi nginx:1.14
+   64  docker rm -f web
+   65  docker rmi nginx:1.14
+   66  docker images
+   67  clear
+   68  history
+root@k8s-master:~# clear
+root@k8s-master:~# kubectl get nodes 
+NAME          STATUS   ROLES           AGE    VERSION
+k8s-master    Ready    control-plane   103d   v1.28.2
+k8s-worker1   Ready    <none>          103d   v1.28.2
+k8s-worker2   Ready    <none>          103d   v1.28.2
+root@k8s-master:~# kubectl get nodes -o wide
+NAME          STATUS   ROLES           AGE    VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+k8s-master    Ready    control-plane   103d   v1.28.2   10.100.0.105   <none>        Ubuntu 20.04.6 LTS   5.15.0-79-generic   containerd://1.6.26
+k8s-worker1   Ready    <none>          103d   v1.28.2   10.100.0.106   <none>        Ubuntu 20.04.6 LTS   5.15.0-79-generic   containerd://1.6.26
+k8s-worker2   Ready    <none>          103d   v1.28.2   10.100.0.107   <none>        Ubuntu 20.04.6 LTS   5.15.0-79-generic   containerd://1.6.26
+root@k8s-master:~# kubectl describe node k8s-worker1
+Name:               k8s-worker1
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=k8s-worker1
+                    kubernetes.io/os=linux
+Annotations:        kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Sun, 17 Dec 2023 15:46:19 +0900
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  k8s-worker1
+  AcquireTime:     <unset>
+  RenewTime:       Sat, 30 Mar 2024 13:54:14 +0900
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Sat, 30 Mar 2024 11:34:25 +0900   Sat, 30 Mar 2024 11:34:25 +0900   WeaveIsUp                    Weave pod has set this
+  MemoryPressure       False   Sat, 30 Mar 2024 13:50:14 +0900   Sat, 30 Mar 2024 12:23:22 +0900   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Sat, 30 Mar 2024 13:50:14 +0900   Sat, 30 Mar 2024 12:23:22 +0900   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Sat, 30 Mar 2024 13:50:14 +0900   Sat, 30 Mar 2024 12:23:22 +0900   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Sat, 30 Mar 2024 13:50:14 +0900   Sat, 30 Mar 2024 12:23:22 +0900   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  10.100.0.106
+  Hostname:    k8s-worker1
+Capacity:
+  cpu:                2
+  ephemeral-storage:  25107716Ki
+  hugepages-2Mi:      0
+  memory:             2011008Ki
+  pods:               110
+Allocatable:
+  cpu:                2
+  ephemeral-storage:  23139271028
+  hugepages-2Mi:      0
+  memory:             1908608Ki
+  pods:               110
+System Info:
+  Machine ID:                 2b51f4cfc5a14f97a3bf811bac975781
+  System UUID:                34813030-6ea8-4740-b7f3-ad391e85fc46
+  Boot ID:                    9ac6540e-ff71-4c3d-becd-55115f7c0039
+  Kernel Version:             5.15.0-79-generic
+  OS Image:                   Ubuntu 20.04.6 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.26
+  Kubelet Version:            v1.28.2
+  Kube-Proxy Version:         v1.28.2
+Non-terminated Pods:          (2 in total)
+  Namespace                   Name                CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                ------------  ----------  ---------------  -------------  ---
+  kube-system                 kube-proxy-rwj4q    0 (0%)        0 (0%)      0 (0%)           0 (0%)         103d
+  kube-system                 weave-net-wmjrs     100m (5%)     0 (0%)      0 (0%)           0 (0%)         103d
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests   Limits
+  --------           --------   ------
+  cpu                100m (5%)  0 (0%)
+  memory             0 (0%)     0 (0%)
+  ephemeral-storage  0 (0%)     0 (0%)
+  hugepages-2Mi      0 (0%)     0 (0%)
+Events:              <none>
+root@k8s-master:~# kubectl describe node k8s-worker2
+Name:               k8s-worker2
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=k8s-worker2
+                    kubernetes.io/os=linux
+Annotations:        kubeadm.alpha.kubernetes.io/cri-socket: unix:///var/run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Sun, 17 Dec 2023 15:48:04 +0900
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  k8s-worker2
+  AcquireTime:     <unset>
+  RenewTime:       Sat, 30 Mar 2024 13:56:09 +0900
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Sat, 30 Mar 2024 11:36:27 +0900   Sat, 30 Mar 2024 11:36:27 +0900   WeaveIsUp                    Weave pod has set this
+  MemoryPressure       False   Sat, 30 Mar 2024 13:55:15 +0900   Sat, 30 Mar 2024 12:23:22 +0900   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Sat, 30 Mar 2024 13:55:15 +0900   Sat, 30 Mar 2024 12:23:22 +0900   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Sat, 30 Mar 2024 13:55:15 +0900   Sat, 30 Mar 2024 12:23:22 +0900   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Sat, 30 Mar 2024 13:55:15 +0900   Sat, 30 Mar 2024 12:23:22 +0900   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  10.100.0.107
+  Hostname:    k8s-worker2
+Capacity:
+  cpu:                2
+  ephemeral-storage:  25107716Ki
+  hugepages-2Mi:      0
+  memory:             2011008Ki
+  pods:               110
+Allocatable:
+  cpu:                2
+  ephemeral-storage:  23139271028
+  hugepages-2Mi:      0
+  memory:             1908608Ki
+  pods:               110
+System Info:
+  Machine ID:                 2b51f4cfc5a14f97a3bf811bac975781
+  System UUID:                c8b469f3-6c23-1446-bf8c-0b8c5329e2db
+  Boot ID:                    984a289e-b2cf-4130-8c7f-1433cb3f7fbb
+  Kernel Version:             5.15.0-79-generic
+  OS Image:                   Ubuntu 20.04.6 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://1.6.26
+  Kubelet Version:            v1.28.2
+  Kube-Proxy Version:         v1.28.2
+Non-terminated Pods:          (2 in total)
+  Namespace                   Name                CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                ------------  ----------  ---------------  -------------  ---
+  kube-system                 kube-proxy-pxlqc    0 (0%)        0 (0%)      0 (0%)           0 (0%)         103d
+  kube-system                 weave-net-6mbfj     100m (5%)     0 (0%)      0 (0%)           0 (0%)         103d
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests   Limits
+  --------           --------   ------
+  cpu                100m (5%)  0 (0%)
+  memory             0 (0%)     0 (0%)
+  ephemeral-storage  0 (0%)     0 (0%)
+  hugepages-2Mi      0 (0%)     0 (0%)
+Events:              <none>
+root@k8s-master:~# clear
+root@k8s-master:~# kubectl run web --image=nginx:1.14 --port 80
+pod/web created
+root@k8s-master:~# kubectl get pods
+NAME   READY   STATUS    RESTARTS   AGE
+web    1/1     Running   0          14s
+root@k8s-master:~# kubectl get pods -o wide
+NAME   READY   STATUS    RESTARTS   AGE   IP          NODE          NOMINATED NODE   READINESS GATES
+web    1/1     Running   0          42s   10.38.0.1   k8s-worker2   <none>           <none>
+root@k8s-master:~# curl 10.38.0.1:80
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+root@k8s-master:~# kubectl describe po web
+Name:             web
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             k8s-worker2/10.100.0.107
+Start Time:       Sat, 30 Mar 2024 14:01:01 +0900
+Labels:           run=web
+Annotations:      <none>
+Status:           Running
+IP:               10.38.0.1
+IPs:
+  IP:  10.38.0.1
+Containers:
+  web:
+    Container ID:   containerd://82d4ca4caa3bd37ec54506f1305a048d9ae96ca2790d9a7b85a6eac6847e9557
+    Image:          nginx:1.14
+    Image ID:       docker.io/library/nginx@sha256:f7988fb6c02e0ce69257d9bd9cf37ae20a60f1df7563c3a2a6abe24160306b8d
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Sat, 30 Mar 2024 14:01:03 +0900
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-hm4gc (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-hm4gc:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  2m7s  default-scheduler  Successfully assigned default/web to k8s-worker2
+  Normal  Pulled     2m6s  kubelet            Container image "nginx:1.14" already present on machine
+  Normal  Created    2m6s  kubelet            Created container web
+  Normal  Started    2m6s  kubelet            Started container web
+root@k8s-master:~# kubectl get pods web -o wide
+NAME   READY   STATUS    RESTARTS   AGE     IP          NODE          NOMINATED NODE   READINESS GATES
+web    1/1     Running   0          4m38s   10.38.0.1   k8s-worker2   <none>           <none>
+root@k8s-master:~# kubectl run web2 --image=nginx:1.14 --port 80
+pod/web2 created
+root@k8s-master:~# kubectl get pods web2 -o wide
+NAME   READY   STATUS              RESTARTS   AGE   IP       NODE          NOMINATED NODE   READINESS GATES
+web2   0/1     ContainerCreating   0          10s   <none>   k8s-worker1   <none>           <none>
+root@k8s-master:~# clear
+root@k8s-master:~# docker login
+Log in with your Docker ID or email address to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com/ to create one.
+You can log in with your password or a Personal Access Token (PAT). Using a limited-scope PAT grants better security and is required for organizations using SSO. Learn more at https://docs.docker.com/go/access-tokens/
+
+Username: powermvp
+Password: 
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+root@k8s-master:~# clear
+root@k8s-master:~# kubectl run webserber --images=nginx --port 80
+error: unknown flag: --images
+See 'kubectl run --help' for usage.
+root@k8s-master:~# kubectl run webserver --images=nginx --port 80
+error: unknown flag: --images
+See 'kubectl run --help' for usage.
+root@k8s-master:~# kubectl run webserver --image=nginx --port 80
+pod/webserver created
+root@k8s-master:~# kubectl get pods
+NAME        READY   STATUS              RESTARTS   AGE
+web         1/1     Running             0          28m
+web2        1/1     Running             0          22m
+webserver   0/1     ContainerCreating   0          10s
+root@k8s-master:~# kubectl get pods
+NAME        READY   STATUS              RESTARTS   AGE
+web         1/1     Running             0          28m
+web2        1/1     Running             0          22m
+webserver   0/1     ContainerCreating   0          14s
+root@k8s-master:~# kubectl get pods
+NAME        READY   STATUS    RESTARTS   AGE
+web         1/1     Running   0          28m
+web2        1/1     Running   0          23m
+webserver   1/1     Running   0          29s
+root@k8s-master:~# clear
+root@k8s-master:~# kubectl get pods web
+web        web2       webserver  
+root@k8s-master:~# kubectl get pods webserver
+NAME        READY   STATUS    RESTARTS   AGE
+webserver   1/1     Running   0          62s
+root@k8s-master:~# kubectl get pods webserver -n default
+NAME        READY   STATUS    RESTARTS   AGE
+webserver   1/1     Running   0          69s
+root@k8s-master:~# kubectl get pods --all-namespaces 
+NAMESPACE     NAME                                 READY   STATUS    RESTARTS        AGE
+default       web                                  1/1     Running   0               33m
+default       web2                                 1/1     Running   0               27m
+default       webserver                            1/1     Running   0               5m7s
+kube-system   coredns-5dd5756b68-6t454             1/1     Running   2 (3h12m ago)   103d
+kube-system   coredns-5dd5756b68-ps8dm             1/1     Running   2 (3h12m ago)   103d
+kube-system   etcd-k8s-master                      1/1     Running   2 (3h12m ago)   103d
+kube-system   kube-apiserver-k8s-master            1/1     Running   2 (3h12m ago)   103d
+kube-system   kube-controller-manager-k8s-master   1/1     Running   7 (144m ago)    103d
+kube-system   kube-proxy-nkvk7                     1/1     Running   2 (3h12m ago)   103d
+kube-system   kube-proxy-pxlqc                     1/1     Running   2 (178m ago)    103d
+kube-system   kube-proxy-rwj4q                     1/1     Running   2 (3h ago)      103d
+kube-system   kube-scheduler-k8s-master            1/1     Running   8 (143m ago)    103d
+kube-system   weave-net-6mbfj                      2/2     Running   5 (178m ago)    103d
+kube-system   weave-net-gwcsk                      2/2     Running   5 (3h12m ago)   103d
+kube-system   weave-net-wmjrs                      2/2     Running   4 (3h ago)      103d
+root@k8s-master:~# clear
+root@k8s-master:~# kubectl create namespace dev
+namespace/dev created
+root@k8s-master:~# kubectl create namespace stg
+namespace/stg created
+root@k8s-master:~# kubectl create namespace prd
+namespace/prd created
+root@k8s-master:~# kubectl run web4 -n dev --image=nginx:1.14 
+pod/web4 created
+root@k8s-master:~# kubectl get pods
+NAME        READY   STATUS    RESTARTS   AGE
+web         1/1     Running   0          35m
+web2        1/1     Running   0          29m
+webserver   1/1     Running   0          6m51s
+root@k8s-master:~# kubectl get pods -n dev
+NAME   READY   STATUS    RESTARTS   AGE
+web4   1/1     Running   0          21s
+root@k8s-master:~# clear
+root@k8s-master:~# kubectl create deploy web5 --image=nginx:1.15
+deployment.apps/web5 created
+root@k8s-master:~# kubectl get pods
+NAME                    READY   STATUS    RESTARTS   AGE
+web                     1/1     Running   0          37m
+web2                    1/1     Running   0          31m
+web5-5788dc8d5f-txpvq   1/1     Running   0          7s
+webserver               1/1     Running   0          8m45s
+root@k8s-master:~# kubectl delete pods web
+pod "web" deleted
+root@k8s-master:~# kubectl get pods
+NAME                    READY   STATUS    RESTARTS   AGE
+web2                    1/1     Running   0          34m
+web5-5788dc8d5f-txpvq   1/1     Running   0          3m4s
+webserver               1/1     Running   0          11m
+root@k8s-master:~# kubectl delete pods web5-5788dc8d5f-txpvq 
+pod "web5-5788dc8d5f-txpvq" deleted
+root@k8s-master:~# kubectl get pods
+NAME                    READY   STATUS    RESTARTS   AGE
+web2                    1/1     Running   0          34m
+web5-5788dc8d5f-fhss6   1/1     Running   0          7s
+webserver               1/1     Running   0          12m
+root@k8s-master:~# clear
+root@k8s-master:~# kubectl get pods -o wide
+NAME                    READY   STATUS    RESTARTS   AGE    IP          NODE          NOMINATED NODE   READINESS GATES
+web2                    1/1     Running   0          36m    10.40.0.0   k8s-worker1   <none>           <none>
+web5-5788dc8d5f-fhss6   1/1     Running   0          118s   10.40.0.3   k8s-worker1   <none>           <none>
+webserver               1/1     Running   0          14m    10.38.0.2   k8s-worker2   <none>           <none>
+root@k8s-master:~# kubectl scale deployment web5 --replicas=5
+deployment.apps/web5 scaled
+root@k8s-master:~# kubectl get pods
+NAME                    READY   STATUS    RESTARTS   AGE
+web2                    1/1     Running   0          38m
+web5-5788dc8d5f-5tdmg   1/1     Running   0          6s
+web5-5788dc8d5f-fhss6   1/1     Running   0          3m11s
+web5-5788dc8d5f-msgpw   1/1     Running   0          6s
+web5-5788dc8d5f-xwjht   1/1     Running   0          6s
+web5-5788dc8d5f-zs8zk   1/1     Running   0          6s
+webserver               1/1     Running   0          15m
+root@k8s-master:~# kubectl scale deployment web5 --replicas=2
+deployment.apps/web5 scaled
+root@k8s-master:~# kubectl get pods
+NAME                    READY   STATUS    RESTARTS   AGE
+web2                    1/1     Running   0          40m
+web5-5788dc8d5f-fhss6   1/1     Running   0          5m12s
+web5-5788dc8d5f-zs8zk   1/1     Running   0          2m7s
+webserver               1/1     Running   0          17m
+root@k8s-master:~# clear
+root@k8s-master:~# kubectl get pods
+NAME                    READY   STATUS    RESTARTS   AGE
+web2                    1/1     Running   0          42m
+web5-5788dc8d5f-fhss6   1/1     Running   0          8m7s
+web5-5788dc8d5f-zs8zk   1/1     Running   0          5m2s
+webserver               1/1     Running   0          20m
+root@k8s-master:~# kubectl scale deployment web5 --replicas=4
+deployment.apps/web5 scaled
+root@k8s-master:~# kubectl delete pods web5-5788dc8d5f-fhss6
+pod "web5-5788dc8d5f-fhss6" deleted
+root@k8s-master:~# kubectl delete pods webserver               1/1     Running   0          22m     10.38.0.2   k8s-worker2   <none>           <none>
+-bash:     ġ        ū '<'   ó              
+root@k8s-master:~# kubectl delete pods webserver
+pod "webserver" deleted
+root@k8s-master:~# clear
+root@k8s-master:~# kubectl delete pods web5-5788dc8d5f-m6856 
+pod "web5-5788dc8d5f-m6856" deleted
+root@k8s-master:~# kubectl get deployments.apps web5
+NAME   READY   UP-TO-DATE   AVAILABLE   AGE
+web5   4/4     4            4           20m
+root@k8s-master:~# kubectl get pods |grep -i web5
+web5-5788dc8d5f-499t9   1/1     Running   0          7m25s
+web5-5788dc8d5f-4q2ch   1/1     Running   0          5m14s
+web5-5788dc8d5f-khvlt   1/1     Running   0          6m59s
+web5-5788dc8d5f-zs8zk   1/1     Running   0          14m
+root@k8s-master:~# kubectl get all
+NAME                        READY   STATUS    RESTARTS   AGE
+pod/web2                    1/1     Running   0          53m
+pod/web5-5788dc8d5f-499t9   1/1     Running   0          8m39s
+pod/web5-5788dc8d5f-4q2ch   1/1     Running   0          6m28s
+pod/web5-5788dc8d5f-khvlt   1/1     Running   0          8m13s
+pod/web5-5788dc8d5f-zs8zk   1/1     Running   0          15m
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   103d
+
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/web5   4/4     4            4           22m
+
+NAME                              DESIRED   CURRENT   READY   AGE
+replicaset.apps/web5-5788dc8d5f   4         4         4       22m
+root@k8s-master:~# clear
+root@k8s-master:~# kubectl exec -it web5-5788dc8d5f-4q2ch -- /bin/bash
+root@web5-5788dc8d5f-4q2ch:/# ls
+bin  boot  dev	etc  home  lib	lib64  media  mnt  opt	proc  root  run  sbin  srv  sys  tmp  usr  var
+root@web5-5788dc8d5f-4q2ch:/# cd /usr/share/nginx/html
+root@web5-5788dc8d5f-4q2ch:/usr/share/nginx/html# ls
+50x.html  index.html
+root@web5-5788dc8d5f-4q2ch:/usr/share/nginx/html# cat index.html 
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+root@web5-5788dc8d5f-4q2ch:/usr/share/nginx/html# echo "web#1 > index.html
+> ^C
+root@web5-5788dc8d5f-4q2ch:/usr/share/nginx/html# cat index.html 
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+root@web5-5788dc8d5f-4q2ch:/usr/share/nginx/html# echo "web#1" > index.html
+root@web5-5788dc8d5f-4q2ch:/usr/share/nginx/html# cat index.html 
+web#1
+root@web5-5788dc8d5f-4q2ch:/usr/share/nginx/html# exit
+exit
+root@k8s-master:~# kubectl exec -it web5-5788dc8d5f-499t9 -- /bin/bash
+root@web5-5788dc8d5f-499t9:/# cd /usr/share/nginx/html
+root@web5-5788dc8d5f-499t9:/usr/share/nginx/html# echo "web#2" > index.html 
+root@web5-5788dc8d5f-499t9:/usr/share/nginx/html# exit
+exit
+root@k8s-master:~# kubectl exec -it web5-5788dc8d5f-khvlt -- /bin/bash
+root@web5-5788dc8d5f-khvlt:/# cd /usr/share/nginx/html
+root@web5-5788dc8d5f-khvlt:/usr/share/nginx/html# echo "web#3" > index.html 
+root@web5-5788dc8d5f-khvlt:/usr/share/nginx/html# exit
+exit
+root@k8s-master:~# kubectl exec -it web5-5788dc8d5f-zs8zk  -- /bin/bash
+root@web5-5788dc8d5f-zs8zk:/# kubectl exec -it web5-5788dc8d5f-zs8zk  -- /bin/bash
+bash: kubectl: command not found
+root@web5-5788dc8d5f-zs8zk:/# cd /usr/share/nginx/html                            
+root@web5-5788dc8d5f-zs8zk:/usr/share/nginx/html# echo "web#4" > index.html 
+root@web5-5788dc8d5f-zs8zk:/usr/share/nginx/html# exit
+exit
+root@k8s-master:~# curl 10.40.0.3
+web#3
+root@k8s-master:~# curl 10.40.0.4
+web#4
+root@k8s-master:~# curl 10.40.0.2
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+root@k8s-master:~# curl 10.38.0.2
+web#1
+root@k8s-master:~# kubectl expose deployment web5 --type=ClusterIP --port=80 --target-port=80 --name=web5-svcservice/web5-svc exposed
+root@k8s-master:~# kubectl get svc
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP   103d
+web5-svc     ClusterIP   10.104.223.18   <none>        80/TCP    24s
+root@k8s-master:~# clear
+root@k8s-master:~# kubectl get pods,deploy,svc
+NAME                        READY   STATUS    RESTARTS   AGE
+pod/web2                    1/1     Running   0          75m
+pod/web5-5788dc8d5f-499t9   1/1     Running   0          31m
+pod/web5-5788dc8d5f-4q2ch   1/1     Running   0          28m
+pod/web5-5788dc8d5f-khvlt   1/1     Running   0          30m
+pod/web5-5788dc8d5f-zs8zk   1/1     Running   0          37m
+
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/web5   4/4     4            4           44m
+
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP   103d
+service/web5-svc     ClusterIP   10.104.223.18   <none>        80/TCP    69s
+root@k8s-master:~# kubectl describe svc web5-svc 
+Name:              web5-svc
+Namespace:         default
+Labels:            app=web5
+Annotations:       <none>
+Selector:          app=web5
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                10.104.223.18
+IPs:               10.104.223.18
+Port:              <unset>  80/TCP
+TargetPort:        80/TCP
+Endpoints:         10.38.0.1:80,10.38.0.2:80,10.40.0.3:80 + 1 more...
+Session Affinity:  None
+Events:            <none>
+root@k8s-master:~# curl 10.104.223.18
+web#3
+root@k8s-master:~# curl 10.104.223.18
+web#2
+root@k8s-master:~# curl 10.104.223.18
+web#1
+root@k8s-master:~# curl 10.104.223.18
+web#1
+root@k8s-master:~# curl 10.104.223.18
+web#3
+root@k8s-master:~# curl 10.104.223.18
+web#3
+root@k8s-master:~# curl 10.104.223.18
+web#4
+root@k8s-master:~# clear
+root@k8s-master:~# exit
+ α׾ƿ 
+guru@k8s-master:~$ ls
+k8slab         ٿ ε             ȭ                         ø 
+guru@k8s-master:~$ sudo mv ./k8slab/ /root
+[sudo] guru   ȣ: 
+guru@k8s-master:~$ ls
+       ٿ ε             ȭ                         ø 
+guru@k8s-master:~$ su -
+  ȣ: 
+root@k8s-master:~# ls
+install-docker.sh  k8slab  snap  token.txt
+root@k8s-master:~# cd k8slab/
+root@k8s-master:~/k8slab# ls
+pod-busybox.yaml  pod-liveness.yaml  pod-nginx.yaml         pod-redis.yaml
+pod-label.yaml    pod-multi.yaml     pod-nodeselector.yaml  testpod.yaml
+root@k8s-master:~/k8slab# clear
+root@k8s-master:~/k8slab# ls
+pod-busybox.yaml  pod-liveness.yaml  pod-nginx.yaml         pod-redis.yaml
+pod-label.yaml    pod-multi.yaml     pod-nodeselector.yaml  testpod.yaml
+root@k8s-master:~/k8slab# vi pod-nginx.yaml 
+root@k8s-master:~/k8slab# kubectl apply -f pod-nginx.yaml 
+pod/nginx-pod created
+root@k8s-master:~/k8slab# vi pod-nginx.yaml 
+root@k8s-master:~/k8slab# cp pod-nginx.yaml pod-nginx2.yaml 
+root@k8s-master:~/k8slab# ls
+pod-busybox.yaml  pod-liveness.yaml  pod-nginx.yaml   pod-nodeselector.yaml  testpod.yaml
+pod-label.yaml    pod-multi.yaml     pod-nginx2.yaml  pod-redis.yaml
+root@k8s-master:~/k8slab# vi pod-nginx2.yaml 
+root@k8s-master:~/k8slab# kubectl apply -f pod-nginx2.yaml 
+error: error parsing pod-nginx2.yaml: error converting YAML to JSON: yaml: line 7: mapping values are not allowed in this context
+root@k8s-master:~/k8slab# vi pod-nginx2.yaml 
+root@k8s-master:~/k8slab# kubectl apply -f pod-nginx2.yaml 
+error: error parsing pod-nginx2.yaml: error converting YAML to JSON: yaml: line 7: mapping values are not allowed in this context
+root@k8s-master:~/k8slab# vi pod-nginx2.yaml 
+root@k8s-master:~/k8slab# kubectl apply -f pod-nginx2.yaml 
+pod/nginx-web created
+root@k8s-master:~/k8slab# vi pod-nginx2.yaml 
+root@k8s-master:~/k8slab# cleae
+
+  ɾ  'cleae'   (  ) ã           ϴ .        ɾ    õ  Ͻðڽ  ϱ :
+
+  deb clearncurses-bin     ɾ  ' (6.2-0ubuntu2.1)'
+
+Try: apt install <deb name>
+
+root@k8s-master:~/k8slab# clear
+root@k8s-master:~/k8slab# kubectl run nginx-web2 --image=nginx:1.15 --port 80 --dry-run=client
+pod/nginx-web2 created (dry run)
+root@k8s-master:~/k8slab# kubectl run nginx-web2 --image=nginx:1.15 --port 80 --dry-run=client -o yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx-web2
+  name: nginx-web2
+spec:
+  containers:
+  - image: nginx:1.15
+    name: nginx-web2
+    ports:
+    - containerPort: 80
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+root@k8s-master:~/k8slab# kubectl run nginx-web2 --image=nginx:1.15 --port 80 --dry-run=client -o yaml > nginx-web2.yaml
+root@k8s-master:~/k8slab# ls
+nginx-web2.yaml   pod-label.yaml     pod-multi.yaml  pod-nginx2.yaml        pod-redis.yaml
+pod-busybox.yaml  pod-liveness.yaml  pod-nginx.yaml  pod-nodeselector.yaml  testpod.yaml
+root@k8s-master:~/k8slab# vi nginx-web2.yaml 
+root@k8s-master:~/k8slab# kubectl apply -f nginx-web2.yaml 
+pod/nginx-web2 created
+root@k8s-master:~/k8slab# clear
+root@k8s-master:~/k8slab# kubectl run redis --image=redis123 --port 8080
+pod/redis created
+root@k8s-master:~/k8slab# kubectl describe pods redis
+Name:             redis
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             k8s-worker2/10.100.0.107
+Start Time:       Sat, 30 Mar 2024 16:26:14 +0900
+Labels:           run=redis
+Annotations:      <none>
+Status:           Pending
+IP:               10.38.0.5
+IPs:
+  IP:  10.38.0.5
+Containers:
+  redis:
+    Container ID:   
+    Image:          redis123
+    Image ID:       
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       ErrImagePull
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-fcgh5 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             False 
+  ContainersReady   False 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-fcgh5:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                From               Message
+  ----     ------     ----               ----               -------
+  Normal   Scheduled  34s                default-scheduler  Successfully assigned default/redis to k8s-worker2
+  Normal   Pulling    16s (x2 over 33s)  kubelet            Pulling image "redis123"
+  Warning  Failed     14s (x2 over 32s)  kubelet            Failed to pull image "redis123": failed to pull and unpack image "docker.io/library/redis123:latest": failed to resolve reference "docker.io/library/redis123:latest": pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
+  Warning  Failed     14s (x2 over 32s)  kubelet            Error: ErrImagePull
+  Normal   BackOff    4s (x2 over 31s)   kubelet            Back-off pulling image "redis123"
+  Warning  Failed     4s (x2 over 31s)   kubelet            Error: ImagePullBackOff
+root@k8s-master:~/k8slab# kubectl get pods redis -o yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2024-03-30T07:26:14Z"
+  labels:
+    run: redis
+  name: redis
+  namespace: default
+  resourceVersion: "35885"
+  uid: 4fc4913c-0f0e-4ec8-a72f-0d6e8e631213
+spec:
+  containers:
+  - image: redis123
+    imagePullPolicy: Always
+    name: redis
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-fcgh5
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: k8s-worker2
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-fcgh5
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-03-30T07:26:14Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-03-30T07:26:14Z"
+    message: 'containers with unready status: [redis]'
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-03-30T07:26:14Z"
+    message: 'containers with unready status: [redis]'
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-03-30T07:26:14Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - image: redis123
+    imageID: ""
+    lastState: {}
+    name: redis
+    ready: false
+    restartCount: 0
+    started: false
+    state:
+      waiting:
+        message: Back-off pulling image "redis123"
+        reason: ImagePullBackOff
+  hostIP: 10.100.0.107
+  phase: Pending
+  podIP: 10.38.0.5
+  podIPs:
+  - ip: 10.38.0.5
+  qosClass: BestEffort
+  startTime: "2024-03-30T07:26:14Z"
+root@k8s-master:~/k8slab# kubectl get pods redis -o yaml > redis.yaml
+root@k8s-master:~/k8slab# vi redis.yaml 
+root@k8s-master:~/k8slab# kubectl apply -f redis.yaml 
+Warning: resource pods/redis is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+pod/redis configured
+root@k8s-master:~/k8slab# ls
+nginx-web2.yaml   pod-liveness.yaml  pod-nginx2.yaml        redis.yaml
+pod-busybox.yaml  pod-multi.yaml     pod-nodeselector.yaml  testpod.yaml
+pod-label.yaml    pod-nginx.yaml     pod-redis.yaml
+root@k8s-master:~/k8slab# clear
+root@k8s-master:~/k8slab# ls
+nginx-web2.yaml   pod-liveness.yaml  pod-nginx2.yaml        redis.yaml
+pod-busybox.yaml  pod-multi.yaml     pod-nodeselector.yaml  testpod.yaml
+pod-label.yaml    pod-nginx.yaml     pod-redis.yaml
+root@k8s-master:~/k8slab# kubectl edit pods redis
+Edit cancelled, no changes made.
+root@k8s-master:~/k8slab# kubectl create deployment tomcat --image=nginx:1.15 --replicas=3
+deployment.apps/tomcat created
+root@k8s-master:~/k8slab# kubectl edit deployment tomcat 
+deployment.apps/tomcat edited
+root@k8s-master:~/k8slab# 
