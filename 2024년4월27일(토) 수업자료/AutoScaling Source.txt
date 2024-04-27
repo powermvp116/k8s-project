@@ -1,0 +1,18 @@
+[성공버전]
+#!/bin/bash
+
+yum install httpd -y
+service httpd start
+chkconfig httpd on
+
+aws s3 cp s3://ldcd-as-test/index.html /var/www/html --region ap-northeast-2
+
+
+
+[성공버전]
+#!/bin/bash
+
+INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id) # 자신의 인스턴스 ID 문자값을 변수에 저장
+yum  install httpd -y # 아파치 서버 설치
+echo ""$INSTANCE_ID"" >> /var/www/html/index.html # #INSTANCE_ID 변수값을 html에 이어쓰기
+service httpd start # 아파치 시작
