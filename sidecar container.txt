@@ -1,0 +1,16 @@
+## sidecar container
+apiVersion: v1
+kind: Pod
+metadata:
+  name: eshop-cart-app
+spec:
+  containers:
+  - image: busybox
+    name: cart-app
+    command: ['/bin/sh', '-c', 'i=1; while :;do  echo -e "$i: Price: $((RANDOM % 10000 + 1))" >> /var/log/cart-app.log; i=$((i+1)); sleep 2; done']
+    volumeMounts:
+    - name: varlog
+      mountPath: /var/log
+  volumes:
+  - emptyDir: {}
+    name: varlog
