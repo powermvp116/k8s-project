@@ -1,0 +1,1038 @@
+service/kubernetes          ClusterIP   10.96.0.1       <none>        443/TCP        125d
+service/resolver-service    ClusterIP   10.109.94.34    <none>        80/TCP         10s
+ubuntu@console:~$ clear
+ubuntu@console:~$ kubectl run test-nslookup --image=busybox:1.28 --it --restart=Never --rm -- nslookup resolver-service
+error: unknown flag: --it
+See 'kubectl run --help' for usage.
+ubuntu@console:~$ kubectl run test-nslookup --image=busybox:1.28 -it --restart=Never --rm -- nslookup resolver-service
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      resolver-service
+Address 1: 10.109.94.34 resolver-service.default.svc.cluster.local
+pod "test-nslookup" deleted
+ubuntu@console:~$ kubectl run test-nslookup --image=busybox:1.28 -it --restart=Never --rm -- nslookup 10.109.94.34
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      10.109.94.34
+Address 1: 10.109.94.34 resolver-service.default.svc.cluster.local
+pod "test-nslookup" deleted
+ubuntu@console:~$ kubectl run test-nslookup --image=busybox:1.28 -it --restart=Never --rm -- nslookup 10.109.94.34 > /var/CKA2023/nginx.svc
+ubuntu@console:~$ cat /var/CKA2023/nginx.svc
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      10.109.94.34
+Address 1: 10.109.94.34 resolver-service.default.svc.cluster.local
+pod "test-nslookup" deleted
+ubuntu@console:~$ kubectl run test-nslookup --image=busybox:1.28 --it --restart=Never --rm -- nslookup  10-36-0-16.default.pod.cluster.local
+error: unknown flag: --it
+See 'kubectl run --help' for usage.
+ubuntu@console:~$ kubectl run test-nslookup --image=busybox:1.28 -it --restart=Never --rm -- nslookup  10-36-0-16.default.pod.cluster.local
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      10-36-0-16.default.pod.cluster.local
+Address 1: 10.36.0.16
+pod "test-nslookup" deleted
+ubuntu@console:~$ kubectl run test-nslookup --image=busybox:1.28 -it --restart=Never --rm -- nslookup  10-36-0-16.default.pod.cluster.local > /var/CKA2023/nginx.pod
+ubuntu@console:~$ cat /var/CKA2023/nginx.pod
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      10-36-0-16.default.pod.cluster.local
+Address 1: 10.36.0.16
+pod "test-nslookup" deleted
+ubuntu@console:~$ history
+    1  sudo -i
+    2  sudo -i
+    3  nmcli dev status
+    4  sudo -i
+    5  hostname
+    6  history 
+    7  sudo -i
+    8  etcdctl version
+    9  ls
+   10  vi /etc/hosts
+   11  sudo vi /etc/hosts
+   12  hostname
+   13  date
+   14  localectl --help
+   15  localectl status
+   16  localectl list-locales | grep -i kr
+   17  localectl list-locales
+   18  locale
+   19  sudo apt install language-pack-ko
+   20  sudo vi /etc/default/locale
+   21  sudo localectl set-locale LANG=ko_KR.utf8
+   22  sudo vi /etc/default/locale
+   23  localectl status
+   24  date
+   25  cat /etc/default/locale
+   26  sudo timedatectl --help
+   27  sudo timedatectl status
+   28  date
+   29  sudo timedatectl status
+   30  sudo timedatectl set-timezone 'Asia/Seoul'
+   31  date
+   32  cal
+   33  nmtui
+   34  date
+   35  exit
+   36  sudo localectl set-locale LANG=C.UTF-8
+   37  locale
+   38  cat /etc/default/locale 
+   39  sudo reboot
+   40  sudo -i
+   41  exit
+   42  source <(kubectl completion bash)
+   43  echo "source <(kubectl completion bash)" >> ~/.bashrc
+   44  sudo -i
+   45  ssh-keygen -t rsa
+   46  ssh-copy-id k8s-master
+   47  ssh-copy-id hk8s-master
+   48  ssh-copy-id k8s-worker1
+   49  ssh-copy-id hk8s-worker1
+   50  ssh-copy-id hk8s-worker2
+   51  ssh-copy-id hk8s-master
+   52  ssh-copy-id k8s-master
+   53  ssh-copy-id k8s-worker1
+   54  ssh-copy-id k8s-worker2
+   55  ssh-copy-id k8s-worker1
+   56  ssh-copy-id k8s-worker2
+   57  ls
+   58  cat .ssh/known_hosts
+   59  ssh k8s-master
+   60  ssh hk8s-master
+   61  ssh k8s-worker1
+   62  ssh k8s-worker2
+   63  ssh hk8s-worker1
+   64  ssh hk8s-worker2
+   65  ssh-copy-id root@k8s-master
+   66  ssh-copy-id root@hk8s-master
+   67  mkdir .kube
+   68  cd .kube
+   69  scp root@k8s-master:/etc/kubernetes/admin.conf ~/.kube/config1
+   70  scp root@hk8s-master:/etc/kubernetes/admin.conf ~/.kube/config2
+   71  vi config1
+   72  kubectl --kubeconfig=config1 config use-context k8s
+   73  kubectl --kubeconfig=config1 config current-context
+   74  kubectl --kubeconfig=config1 get nodes
+   75  kubectl --kubeconfig=config2 get nodes
+   76  sudo snap install yq
+   77  cat config2 | yq e '.clusters[0].cluster.certificate-authority-data' - | base64 -d > hca.crt
+   78  cat config2 | yq e '.users[0].user.client-certificate-data' - | base64 -d > hadmin.pub
+   79  cat config2 | yq e '.users[0].user.client-key-data' - | base64 -d > hadmin.key
+   80  kubectl config --embed-certs=true --kubeconfig=config1 set-cluster hk8s-cluster --server=https://10.0.2.20:6443 --certificate-authority=./hca.crt  
+   81  kubectl config --embed-certs=true --kubeconfig=config1 set-credentials hk8s-admin --client-certificate=./hadmin.pub --client-key=./hadmin.key
+   82  kubectl config --kubeconfig=config1 set-context hk8s --cluster=hk8s-cluster --user=hk8s-admin
+   83  kubectl --kubeconfig=config1 config get-contexts
+   84  kubectl --kubeconfig=config1 get node
+   85  kubectl --kubeconfig=config1 config use-context hk8s
+   86  kubectl --kubeconfig=config1 get node
+   87  cp config1 ~/.kube/config
+   88  cd
+   89  kubectl config get-contexts
+   90  kubectl config use-context k8s
+   91  kubectl get nodes 
+   92  kubectl config use-context hk8s
+   93  kubectl get nodes 
+   94  sudo -i
+   95  kubectl get nodes
+   96  kubectl config current-context 
+   97  kubectl config use-context k8s
+   98  kubectl get nodes
+   99  exit
+  100  kubectl get nodes
+  101  sudo init 0
+  102  kubectl get deployments,pod,svc -A
+  103  kubectl get deployments,pod,svc 
+  104  kubectl get pod -A
+  105  kubectl get deployments.apps -A
+  106  kubectl get svc -A
+  107  kubectl get pod -A
+  108  kubectl config use-context hk8s
+  109  cat <<EOF | kubectl apply -f -
+  110  ---
+  111  ## namespcae customera
+  112  apiVersion: v1
+  113  kind: Namespace
+  114  metadata:
+  115    name: customera
+  116    labels:
+  117      partition: customera
+  118  ---
+  119  ## namespcae customera
+  120  apiVersion: v1
+  121  kind: Namespace
+  122  metadata:
+  123    name: customerb
+  124    labels:
+  125      partition: customerb
+  126  ---
+  127  apiVersion: v1
+  128  kind: Namespace
+  129  metadata:
+  130    name: migops
+  131    labels:
+  132      team: migops
+  133  ---
+  134  apiVersion: v1
+  135  kind: Namespace
+  136  metadata:
+  137    name: devops
+  138    labels:
+  139      team: devops
+  140  ---
+  141  apiVersion: v1
+  142  kind: Namespace
+  143  metadata:
+  144    name: presales
+  145    labels:
+  146      team: presales
+  147  ---
+  148  # NetworkPolicy
+  149  kind: Pod
+  150  apiVersion: v1
+  151  metadata:
+  152    name: web
+  153    namespace: migops
+  154    labels:
+  155      app: webwas
+  156      tier: frontend
+  157  spec:
+  158    containers:
+  159    - name: web
+  160      image: smlinux/cent-mysql:v1
+  161      command: ["/bin/bash"]
+  162      args: ["-c", "while true; do echo hello; sleep 10;done"]
+  163  ---
+  164  kind: Pod
+  165  apiVersion: v1
+  166  metadata:
+  167    name: was
+  168    namespace: migops
+  169    labels:
+  170      app: webwas
+  171      tier: application
+  172  spec:
+  173    containers:
+  174    - name: was
+  175      image: smlinux/cent-mysql:v1
+  176      command: ["/bin/bash"]
+  177      args: ["-c", "while true; do echo hello; sleep 10;done"]
+  178  ---
+  179  kind: Pod
+  180  apiVersion: v1
+  181  metadata:
+  182    name: db
+  183    namespace: migops
+  184    labels:
+  185      app: webwas
+  186      tier: database
+  187  spec:
+  188    containers:
+  189      - name: db
+  190        image: mysql:5.7
+  191        env:
+  192        - name: MYSQL_ROOT_PASSWORD
+  193          value: pass
+  194  ---
+  195  ## init container
+  196  apiVersion: v1
+  197  kind: Pod
+  198  metadata:
+  199    name: web
+  200  spec:
+  201    containers:
+  202    - name: nginx
+  203      image: nginx
+  204      command: ['sh', '-c', 'if [ ! -e "/opt/test" ];then exit;fi;']
+  205      volumeMounts:
+  206      - name: workdir
+  207        mountPath: /opt
+  208    volumes:
+  209    - name: workdir
+  210      emptyDir: {}
+  211  ---
+  212  ## log exam
+  213  apiVersion: v1
+  214  kind: Pod
+  215  metadata:
+  216    name: custom-app
+  217    namespace: default
+  218  spec:
+  219    containers:
+  220    - name: app
+  221      image: busybox
+  222      command: ['/bin/sh', '-c', 'while :;do echo -e "find files\nerror: file not found\nToday: $(date)\nHostname: $(hostname)"; sleep 60; done']
+  223  ---
+  224  ## sidecar exam
+  225  apiVersion: v1
+  226  kind: Pod
+  227  metadata:
+  228    name: cka-webserver
+  229    namespace: default
+  230  spec:
+  231    containers:
+  232    - image: nginx:1.14
+  233      name: webserver
+  234      volumeMounts:
+  235      - mountPath: /var/log/nginx
+  236        name: log
+  237    volumes:
+  238    - name: log
+  239      emptyDir: {}
+  240  ---
+  241  ## cpu load :
+  242  apiVersion: v1
+  243  kind: Pod
+  244  metadata:
+  245    labels:
+  246      name: overloaded-cpu
+  247    name: campus-01
+  248  spec:
+  249    containers:
+  250    - name: campus
+  251      image: smlinux/vish-stress
+  252      resources:
+  253        limits:
+  254          cpu: "0.4"
+  255          memory: "300Mi"
+  256        requests:
+  257          cpu: "0.4"
+  258          memory: "250Mi"
+  259      args:
+  260      - -cpus
+  261      - "1"
+  262      - -mem-total
+  263      - "150Mi"
+  264      - -mem-alloc-size
+  265      - "100Mi"
+  266      - -mem-alloc-sleep
+  267      - "1s"
+  268  ---
+  269  apiVersion: v1
+  270  kind: Pod
+  271  metadata:
+  272    labels:
+  273      name: overloaded-cpu
+  274    name: fast-01
+  275  spec:
+  276    containers:
+  277    - name: fast
+  278      image: smlinux/vish-stress
+  279      resources:
+  280        limits:
+  281          cpu: "0.2"
+  282          memory: "300Mi"
+  283        requests:
+  284          cpu: "0.2"
+  285          memory: "250Mi"
+  286      args:
+  287      - -cpus
+  288      - "1"
+  289      - -mem-total
+  290      - "250Mi"
+  291      - -mem-alloc-size
+  292      - "100Mi"
+  293      - -mem-alloc-sleep
+  294      - "1s"
+  295  ---
+  296  #multi-container
+  297  apiVersion: v1
+  298  kind: Pod
+  299  metadata:
+  300    name: busybox-sleep
+  301  spec:
+  302    containers:
+  303    - name: busybox
+  304      image: busybox
+  305      command: ["/bin/sh"]
+  306      args: ["-c", "while true; do sleep 1000; done"]
+  307  ---
+  308  EOF
+  309  kubectl get nodes
+  310  kubectl get deployments.apps -A
+  311  kubectl get pod -A
+  312  kubectl get svc -A
+  313  kubectl get deployments.apps -A
+  314  kubectl get pod -A
+  315  kubectl config use-context k8s
+  316  kubectl get pv 
+  317  cat <<EOF | kubectl apply -f -
+  318  apiVersion: v1
+  319  kind: PersistentVolume
+  320  metadata:
+  321    name: pv3
+  322  spec:
+  323    capacity:
+  324      storage: 1Gi
+  325    accessModes:
+  326    - ReadWriteOnce
+  327    persistentVolumeReclaimPolicy: Recycle
+  328    storageClassName: csi-hostpath-sc
+  329    hostPath:
+  330      path: /data/pv1
+  331  ---
+  332  EOF
+  333  kubectl get pv 
+  334  kubectl config use-context hk8s
+  335  kubectl get pod -n customera 
+  336  kubectl config use-context hk8s
+  337  cat <<EOF | kubectl apply -f -
+  338  apiVersion: v1
+  339  kind: Pod
+  340  metadata:
+  341    name: custom-app
+  342    namespace: customera
+  343  spec:
+  344    containers:
+  345    - name: app
+  346      image: busybox
+  347      command: ['/bin/sh', '-c', 'while :;do echo -e "find files\nerror: file not found\nToday: $(date)\nHostname: $(hostname)"; sleep 60; done']
+  348  EOF
+  349  kubectl get pod -A
+  350  kubectl config use-context hk8s
+  351  kubectl get deployments.apps 
+  352  kubectl get deployments.apps -A
+  353  kubectl get pods -A
+  354  exit
+  355  ssh k8s-master
+  356  kubectl config use-context k8s
+  357  kubectl config current-context 
+  358  cat <<EOF | kubectl apply -f -
+  359  ---
+  360  apiVersion: v1
+  361  kind: Namespace
+  362  metadata:
+  363    name: migops
+  364    labels:
+  365      team: migops
+  366  ---
+  367  apiVersion: v1
+  368  kind: Namespace
+  369  metadata:
+  370    name: devops
+  371    labels:
+  372      team: devops
+  373  ---
+  374  apiVersion: v1
+  375  kind: Namespace
+  376  metadata:
+  377    name: presales
+  378    labels:
+  379      team: presales
+  380  ---
+  381  ## namespcae customera
+  382  apiVersion: v1
+  383  kind: Namespace
+  384  metadata:
+  385    name: customera
+  386    labels:
+  387      partition: customera
+  388  ---
+  389  ## namespcae customera
+  390  apiVersion: v1
+  391  kind: Namespace
+  392  metadata:
+  393    name: customerb
+  394    labels:
+  395      partition: customerb
+  396  ---
+  397  ## namespcae app-team1
+  398  apiVersion: v1
+  399  kind: Namespace
+  400  metadata:
+  401    name: app-team1
+  402  ---
+  403  ## deploy and service-port ߰  ؼ  
+  404  ## k8s
+  405  apiVersion: apps/v1
+  406  kind: Deployment
+  407  metadata:
+  408    name: front-end
+  409  spec:
+  410    selector:
+  411      matchLabels:
+  412        run: nginx
+  413    replicas: 2
+  414    template:
+  415      metadata:
+  416        labels:
+  417          run: nginx
+  418      spec:
+  419        containers:
+  420        - name: http
+  421          image: nginx
+  422  ---
+  423  ## storage class        PV      غ 
+  424  ##      : pvc     - pod     Ʈ - pvc size Ȯ  
+  425  apiVersion: v1
+  426  kind: PersistentVolume
+  427  metadata:
+  428    name: pv1
+  429  spec:
+  430    capacity:
+  431      storage: 1Gi
+  432    accessModes:
+  433    - ReadWriteMany
+  434    - ReadOnlyMany
+  435    persistentVolumeReclaimPolicy: Recycle
+  436    storageClassName: app-hostpath-sc
+  437    hostPath:
+  438      path: /data/storage
+  439  ---
+  440  apiVersion: v1
+  441  kind: PersistentVolume
+  442  metadata:
+  443    name: pv2
+  444  spec:
+  445    capacity:
+  446      storage: 1Gi
+  447    accessModes:
+  448    - ReadWriteMany
+  449    - ReadOnlyMany
+  450    persistentVolumeReclaimPolicy: Recycle
+  451    storageClassName: app-data-sc
+  452    hostPath:
+  453      path: /data/volume
+  454  ---
+  455  ## sidecar container
+  456  apiVersion: v1
+  457  kind: Pod
+  458  metadata:
+  459    name: eshop-cart-app
+  460  spec:
+  461    containers:
+  462    - image: busybox
+  463      name: cart-app
+  464      command: ['/bin/sh', '-c', 'i=1; while :;do  echo -e "$i: Price: $((RANDOM % 10000 + 1))" >> /var/log/cart-app.log; i=$((i+1)); sleep 2; done']
+  465      volumeMounts:
+  466      - name: varlog
+  467        mountPath: /var/log
+  468    volumes:
+  469    - emptyDir: {}
+  470      name: varlog
+  471  ---
+  472  ## rolling update
+  473  ## k8s
+  474  ## replicas      5     Ȯ  
+  475  apiVersion: apps/v1
+  476  kind: Deployment
+  477  metadata:
+  478    name: eshop-order
+  479    namespace: devops
+  480  spec:
+  481    replicas: 2
+  482    selector:
+  483      matchLabels:
+  484        name: order
+  485    template:
+  486      metadata:
+  487        name: order
+  488        labels:
+  489          name: order
+  490      spec:
+  491        containers:
+  492        - name: nginx-container
+  493          image: nginx:1.14
+  494  ---
+  495  # NetworkPolicy
+  496  kind: Pod
+  497  apiVersion: v1
+  498  metadata:
+  499    name: web
+  500    namespace: migops
+  501    labels:
+  502      app: webwas
+  503      tier: frontend
+  504  spec:
+  505    containers:
+  506    - name: web
+  507      image: smlinux/cent-mysql:v1
+  508      command: ["/bin/bash"]
+  509      args: ["-c", "while true; do echo hello; sleep 10;done"]
+  510  ---
+  511  kind: Pod
+  512  apiVersion: v1
+  513  metadata:
+  514    name: was
+  515    namespace: migops
+  516    labels:
+  517      app: webwas
+  518      tier: application
+  519  spec:
+  520    containers:
+  521    - name: was
+  522      image: smlinux/cent-mysql:v1
+  523      command: ["/bin/bash"]
+  524      args: ["-c", "while true; do echo hello; sleep 10;done"]
+  525  ---
+  526  kind: Pod
+  527  apiVersion: v1
+  528  metadata:
+  529    name: db
+  530    namespace: migops
+  531    labels:
+  532      app: webwas
+  533      tier: database
+  534  spec:
+  535    containers:
+  536      - name: db
+  537        image: mysql:5.7
+  538        env:
+  539        - name: MYSQL_ROOT_PASSWORD
+  540          value: pass
+  541  ---
+  542  ## init container
+  543  apiVersion: v1
+  544  kind: Pod
+  545  metadata:
+  546    name: web
+  547  spec:
+  548    containers:
+  549    - name: nginx
+  550      image: nginx
+  551      command: ['sh', '-c', 'if [ ! -e "/opt/test" ];then exit;fi;']
+  552      volumeMounts:
+  553      - name: workdir
+  554        mountPath: /opt
+  555    volumes:
+  556    - name: workdir
+  557      emptyDir: {}
+  558  ---
+  559  ## log exam
+  560  apiVersion: v1
+  561  kind: Pod
+  562  metadata:
+  563    name: custom-app
+  564    namespace: default
+  565  spec:
+  566    containers:
+  567    - name: app
+  568      image: busybox
+  569      command: ['/bin/sh', '-c', 'while :;do echo -e "find files\nerror: file not found\nToday: $(date)\nHostname: $(hostname)"; sleep 60; done']
+  570  ---
+  571  ## sidecar exam
+  572  apiVersion: v1
+  573  kind: Pod
+  574  metadata:
+  575    name: cka-webserver
+  576    namespace: default
+  577  spec:
+  578    containers:
+  579    - image: nginx:1.14
+  580      name: webserver
+  581      volumeMounts:
+  582      - mountPath: /var/log/nginx
+  583        name: log
+  584    volumes:
+  585    - name: log
+  586      emptyDir: {}
+  587  ---
+  588  ## cpu load :
+  589  apiVersion: v1
+  590  kind: Pod
+  591  metadata:
+  592    labels:
+  593      name: overloaded-cpu
+  594    name: campus-01
+  595  spec:
+  596    containers:
+  597    - name: campus
+  598      image: smlinux/vish-stress
+  599      resources:
+  600        limits:
+  601          cpu: "0.4"
+  602          memory: "300Mi"
+  603        requests:
+  604          cpu: "0.4"
+  605          memory: "250Mi"
+  606      args:
+  607      - -cpus
+  608      - "1"
+  609      - -mem-total
+  610      - "150Mi"
+  611      - -mem-alloc-size
+  612      - "100Mi"
+  613      - -mem-alloc-sleep
+  614      - "1s"
+  615  ---
+  616  apiVersion: v1
+  617  kind: Pod
+  618  metadata:
+  619    labels:
+  620      name: overloaded-cpu
+  621    name: fast-01
+  622  spec:
+  623    containers:
+  624    - name: fast
+  625      image: smlinux/vish-stress
+  626      resources:
+  627        limits:
+  628          cpu: "0.2"
+  629          memory: "300Mi"
+  630        requests:
+  631          cpu: "0.2"
+  632          memory: "250Mi"
+  633      args:
+  634      - -cpus
+  635      - "1"
+  636      - -mem-total
+  637      - "250Mi"
+  638      - -mem-alloc-size
+  639      - "100Mi"
+  640      - -mem-alloc-sleep
+  641      - "1s"
+  642  ---
+  643  #multi-container
+  644  apiVersion: v1
+  645  kind: Pod
+  646  metadata:
+  647    name: busybox-sleep
+  648  spec:
+  649    containers:
+  650    - name: busybox
+  651      image: busybox
+  652      command: ["/bin/sh"]
+  653      args: ["-c", "while true; do sleep 1000; done"]
+  654  EOF
+  655  wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.7.0/deploy/static/provider/baremetal/deploy.yaml
+  656  vi deploy.yaml
+  657  kubectl apply -f deploy.yaml
+  658  kubectl get svc -n ingress-nginx 
+  659  cat <<END > ingress-application.yaml 
+  660  apiVersion: apps/v1
+  661  kind: Deployment
+  662  metadata:
+  663    namespace: ingress-nginx
+  664    name: nginx
+  665  spec:
+  666    replicas: 1
+  667    selector:
+  668      matchLabels:
+  669        name: nginx
+  670    template:
+  671      metadata:
+  672        labels:
+  673          name: nginx
+  674      spec:
+  675        containers:
+  676        - image: nginx
+  677          name: nginx
+  678          ports:
+  679          - containerPort: 80
+  680  ---
+  681  apiVersion: v1
+  682  kind: Service
+  683  metadata:
+  684    namespace: ingress-nginx
+  685    name: nginx
+  686  spec:
+  687    ports:
+  688    - port: 80
+  689      protocol: TCP
+  690      targetPort: 80
+  691    selector:
+  692      name: nginx
+  693  ---
+  694  apiVersion: apps/v1
+  695  kind: Deployment
+  696  metadata:
+  697    namespace: ingress-nginx
+  698    name: appjs
+  699  spec:
+  700    replicas: 3
+  701    selector:
+  702      matchLabels:
+  703        name: appjs
+  704    template:
+  705      metadata:
+  706        labels:
+  707          name: appjs
+  708      spec:
+  709        containers:
+  710        - image: smlinux/appjs
+  711          name: appjs
+  712          ports:
+  713          - containerPort: 80
+  714  ---
+  715  apiVersion: v1
+  716  kind: Service
+  717  metadata:
+  718    namespace: ingress-nginx
+  719    name: appjs-service
+  720  spec:
+  721    ports:
+  722    - port: 80
+  723      targetPort: 80
+  724    selector:
+  725      name: appjs
+  726  END
+  727  kubectl apply -f ingress-application.yaml
+  728  etcdctl  version
+  729  ssh k8s-master
+  730  wget  https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+  731  vi components.yaml
+  732  kubectl apply -f components.yaml
+  733  kubectl get namespaces 
+  734  kubectl get nodes
+  735  kubectl get namespaces 
+  736  kubectl get nodes
+  737  kubectl get namespaces 
+  738  kubectl get nodes 
+  739  exit
+  740  kubectl config use-context hk8s
+  741  clear
+  742  ssh hk8s-worker1
+  743  clear
+  744  ssh hk8s-workrer1
+  745  ssh hk8s-worker1
+  746  clear
+  747  kubectl config use-context k8s
+  748  kubectl get nodes
+  749  kubectl get pods -A
+  750  kubectl config use-context hk8s
+  751  kubectl get nodes
+  752  kubectl get pods -A
+  753  clear
+  754  kubectl get pods -A
+  755  kubectl get nodes
+  756  clear
+  757  kubectl config use-context hk8s
+  758  kubectl run nginx-static-pod --image=nginx --port 80 --dry-run=client -o yaml > nginx-static-pod.yaml
+  759  vi nginx-static-pod.yaml 
+  760  kubectl get pods
+  761  kubectl get pods -o wide
+  762  clear
+  763  kubectl run nginx-static-pod --image=nginx --port 80 -o yaml --dry-run=client > nginx-static-pod.yaml
+  764  ls
+  765  vi nginx-static-pod.yaml 
+  766  kubectl get pods
+  767  ls
+  768  vi nginx-static-pod.yaml 
+  769  kubectl get pods -o wide
+  770  clear
+  771  sudo -i
+  772  ssh hk8s-master
+  773  kubectl config use-context k8s
+  774  kubectl get pods
+  775  vi sidecar.yaml
+  776  clear
+  777  kubectl get pods eshop-cart-app -o yaml > sidecar.yaml
+  778  vi sidecar.yaml 
+  779  kubectl delete pods eshop-cart-app 
+  780  kubectl delete pods eshop-cart-app --force
+  781  kubectl get pods
+  782  kubectl apply -f sidecar.yaml 
+  783  kubectl get pods
+  784  vi sidecar.yaml 
+  785  clear
+  786  kubectl create deployment webserver --image=nginx:1.14 --replicas=2 
+  787  kubectl get pod | grep -i webserver
+  788  kubectl get deployments.apps 
+  789  kubectl get deployments.apps --show-labels
+  790  kubectl get deployments webserver -o yaml > webserver.yaml
+  791  vi webserver.yaml 
+  792  kubectl delete deployments.apps webserver 
+  793  kubectl apply -f webserver.yaml 
+  794  kubectl get pods | grep -i webserver
+  795  kubectl scale deployment webserver --replicas=3
+  796  kubectl get pods | grep -i webserver
+  797  kubectl get deployments.apps webserver 
+  798  vi webserver.yaml '
+  799  vi webserver.yaml 
+  800  kubectl delete deployments.apps webserver 
+  801  clear
+  802  kubectl create deployment webserver --image=nginx:1.14 --replicas=2 --dry-run=client -o yaml > webserver1.yaml
+  803  vi webserver.yaml 
+  804  vi webserver1.yaml 
+  805  kubectl get deployments.apps 
+  806  kubectl apply -f webserver1.yaml
+  807  kubectl get pods | grep -i webserver
+  808  kubectl scale deployment webserver --replicas=3
+  809  kubectl get pods | grep -i webserver
+  810  vi webserver1.yaml 
+  811  kubectl describe pods webserver-6fb74d54f6-chjlr
+  812  clear
+  813  kubectl set image deploy webserver webserver=nginx:1.15
+  814  kubectl get pods |grep -i webserver
+  815  kubectl describe pods webserver-6fb74d54f6-7zd5b
+  816  kubectl get pods
+  817  kubectl describe pods webserver-5bb549499c-wmc5w
+  818  vi webserver1.yaml 
+  819  clear
+  820  kubectl config use-context k8s
+  821  kubectl create deployment eshop-payment --image=nginx:1.16 --replicas=3 --dry-run=client > eshop-payment.yaml
+  822  kubectl create deployment eshop-payment --image=nginx:1.16 --replicas=3 --dry-run=client -o yaml > eshop-payment.yaml
+  823  vi eshop-payment.yaml 
+  824  kubectl apply -f eshop-payment.yaml --record
+  825  kubectl get pods |grep -i eshop-payment
+  826  kubectl get pods
+  827  clear
+  828  kubectl get deployments.apps eshop-payment 
+  829  kubectl get deployments eshop-payment --show-labels
+  830  vi eshop-payment.yaml 
+  831  kubectl delete deployments.apps eshop-payment 
+  832  kubectl apply -f eshop-payment.yaml --record
+  833  kubectl get deployments eshop-payment --show-labels
+  834  cat eshop-payment.yaml 
+  835  clear
+  836  kubectl set image deploy eshop-payment nginx=1.17 --record
+  837  kubectl get pods |grep -i eshop-payment
+  838  kubectl describe pods eshop-payment-bfd69c669-m7sqs 
+  839  kubectl get pods 
+  840  kubectl describe pods eshop-payment-bfd69c669-9wg7w
+  841  kubectl set image deploy eshop-payment nginx=nginx:1.17 --record
+  842  kubectl get pods |grep -i eshop-payment
+  843  kubectl describe pods eshop-payment-bfd69c669-9wg7w 
+  844  kubectl get pods
+  845  kubectl describe pods eshop-payment-bfd69c669-m7sqs
+  846  kubectl get pods
+  847  kubectl describe pods eshop-payment-7d64bbc868-9jg6z
+  848  clear
+  849  kubectl get deployments.apps 
+  850  kubectl rollout history deployment eshop-payment 
+  851  kubectl rollout undo deployment eshop-payment 
+  852  kubectl get pods
+  853  kubectl describe pods eshop-payment-7d64bbc868-98llb  
+  854  kubectl get pods
+  855  kubectl get deployments.apps 
+  856  kubectl get pods
+  857  kubectl get pods
+  858  kubectl rollout history deployment eshop-payment 
+  859  kubectl get pods
+  860  clear
+  861  kubectl delete deployments.apps eshop-payment 
+  862  kubectl create deployment eshop-payment --image=nginx:1.16 --replicas=3
+  863  kubectl get deployments.apps eshop-payment -o yaml > eshop-payment-new.yaml
+  864  vi eshop-payment-new.yaml 
+  865  kubectl delete deployments.apps eshop-payment 
+  866  kubectl apply -f eshop-payment-new.yaml --record
+  867  kubectl get pods
+  868  kubectl describe pods eshop-payment-bfd69c669-bcpdt
+  869  clear
+  870  kubectl set image deploy eshop-payment nginx=nginx:1.17 --record
+  871  kubectl get pods
+  872  kubectl describe pods eshop-payment-7d64bbc868-c9wv5
+  873  clear
+  874  kubectl rollout history deployment eshop-payment 
+  875  kubectl rollout undo deployment eshop-payment 
+  876  kubectl get pods
+  877  kubectl describe pods eshop-payment-bfd69c669-jnx29 
+  878  kubectl get pods |grep -i eshop-payment
+  879  history 
+  880  kubectl delete deployments.apps eshop-payment 
+  881  clear
+  882  kubectl create deployment eshop-payment --image=nginx:1.16 -o yaml --dry-run=client > eshop.yaml
+  883  kubectl get deployments.apps 
+  884  vi eshop.yaml 
+  885  kubectl apply -f eshop.yaml --record
+  886  kubectl scale deployment eshop-payment --replicas=2
+  887  kubectl scale deployment eshop-payment --replicas=3
+  888  kubectl get pods
+  889  kubectl describe pods eshop-payment-bfd69c669-2kz9g
+  890  clear
+  891  kubectl set image deploy eshop-payment nginx=nginx:1.17 --record
+  892  kubectl get pods
+  893  kubectl describe pods   1/1     Running        0               5s
+  894  kubectl describe pods eshop-payment-7d64bbc868-f799z 
+  895  clear
+  896  kubectl rollout history deployment eshop-payment 
+  897  kubectl rollout undo deployment eshop-payment 
+  898  kubectl get pods
+  899  kubectl describe pods eshop-payment-bfd69c669-dcwn9
+  900  kubectl rollout history deployment eshop-payment 
+  901  history 
+  902  clear
+  903  kubectl config use-context hk8s
+  904  kubectl get nodes
+  905  kubectl get nodes |grep -i ready
+  906  kubectl get nodes |grep -i -w ready
+  907  kubectl get nodes |grep -i -w ready|wc-l
+  908  kubectl get nodes |grep -i -w ready| wc -l
+  909  kubectl get nodes |grep -i -w ready| wc -l > /var/CKA2023/notaint_ready_node
+  910  cat /var/CKA2023/notaint_ready_node
+  911  kubectl describe nodes hk8s-master|grep -i noschedule
+  912  kubectl describe nodes hk8s-master|grep -i taints
+  913  kubectl describe nodes hk8s-worker1|grep -i taints
+  914  kubectl describe nodes hk8s-worker1|grep -i noschedule
+  915  kubectl describe nodes hk8s-worker2|grep -i taints
+  916  kubectl describe nodes hk8s-worker2|grep -i noschedule
+  917  clear
+  918  kubectl describe nodes hk8s-master|grep -i taints
+  919  kubectl describe nodes hk8s-master|grep -i noschedule
+  920  echo 1 > /var/CKA2023/notaint_ready_node
+  921  cat /var/CKA2023/notaint_ready_node
+  922  history 
+  923  kubectl get pods
+  924  clear
+  925  kubectl get namespaces devops --show-labels
+  926  kubectl get pods -n devops --show-labels
+  927  kubectl get namespaces migops --show-labels
+  928  kubectl get networkpolicies -n devops 
+  929  clear
+  930  kubectl config use-context hk8s
+  931  kubeclt run poc --image=nginx --labels=app=poc
+  932  kubectl run poc --image=nginx --labels=app=poc --port=80 
+  933  kubectl get pods poc -o wide
+  934  kubectl get namespaces 
+  935  kubectl create namespace ing-internal
+  936  kubectl config use-context k8s
+  937  kubectl get namespaces 
+  938  kubectl create namespace ing-internal
+  939  clear
+  940  vi tests3.yaml
+  941  kubectl apply -f test3.yaml
+  942  vi tests3.yaml
+  943  kubectl apply -f tests3.yaml 
+  944  vi tests3.yaml
+  945  kubectl apply -f tests3.yaml 
+  946  kubectl get ingress -n ingress-nginx app-ingress
+  947  vi tests3.yaml
+  948  vi nginx.yaml 
+  949  kubectl get svc -n ingress-nginx 
+  950  clear
+  951  cat /etc/resolv.conf  
+  952  clear
+  953  kubectl config use-context k8s
+  954  kubectl run resolver --images=nginx --dry-run=client -o yaml > resolver.yaml
+  955  kubectl run resolver --image=nginx --dry-run=client -o yaml > resolver.yaml
+  956  vi resolver.yaml 
+  957  kubectl apply -f resolver.yaml 
+  958  kubectl get pods resolver 
+  959  kubectl get pods -o wide resolver 
+  960  kubectl expose pod resolver --name=resolver-service --port=80
+  961  kubectl expose pod resolver --name resolver-service --port=80
+  962  kubectl get sv
+  963  kubectl get svc
+  964  kubectl expose pod resolver --name=resolver-service --port=80
+  965  clear
+  966  kubectl config use-context k8s
+  967  kubectl get pods
+  968  kubectl get pods resolver 
+  969  clear
+  970  kubectl expose pods resolver --name=resolver-service --port=80
+  971  kubectl config use-context hk8s
+  972  kubectl config use-context k8s
+  973  kubectl delete pods resolver 
+  974  kubectl run resolver --image=nginx --port=80
+  975  kubectl get pods resolver 
+  976  kubectl get pods resolver -o wide
+  977  kubectl expose pods resolver -name=resolver-service --port=80
+  978  kubectl expose pods resolver --name=resolver-service --port=80
+  979  kubectl get pods,svc
+  980  clear
+  981  kubectl run test-nslookup --image=busybox:1.28 --it --restart=Never --rm -- nslookup resolver-service
+  982  kubectl run test-nslookup --image=busybox:1.28 -it --restart=Never --rm -- nslookup resolver-service
+  983  kubectl run test-nslookup --image=busybox:1.28 -it --restart=Never --rm -- nslookup 10.109.94.34
+  984  kubectl run test-nslookup --image=busybox:1.28 -it --restart=Never --rm -- nslookup 10.109.94.34 > /var/CKA2023/nginx.svc
+  985  cat /var/CKA2023/nginx.svc
+  986  kubectl run test-nslookup --image=busybox:1.28 --it --restart=Never --rm -- nslookup  10-36-0-16.default.pod.cluster.local
+  987  kubectl run test-nslookup --image=busybox:1.28 -it --restart=Never --rm -- nslookup  10-36-0-16.default.pod.cluster.local
+  988  kubectl run test-nslookup --image=busybox:1.28 -it --restart=Never --rm -- nslookup  10-36-0-16.default.pod.cluster.local > /var/CKA2023/nginx.pod
+  989  cat /var/CKA2023/nginx.pod
+  990  history
+ubuntu@console:~$ 
