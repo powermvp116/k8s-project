@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    command: ['sh', '-c', 'if [ ! -e "/opt/test" ];then exit;fi;']
+    volumeMounts:
+    - name: workdir
+      mountPath: /opt
+  volumes:
+  - name: workdir
+    emptyDir: {}
