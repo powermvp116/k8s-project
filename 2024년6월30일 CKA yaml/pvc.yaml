@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pv-volume
+spec:
+  storageClassName: app-hostpath-sc
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Mi
