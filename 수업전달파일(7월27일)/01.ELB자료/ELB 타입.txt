@@ -1,0 +1,5 @@
+ELB 타입
+인터넷 접속 여부에 따라 Internet Facing, Internal 타입으로 구분
+
+Internet Facing ELB : 인터넷 연결 가능, Public/Private IP 사용 가능, 인터넷/VPC내부 접속 가능
+Internel ELB : 인터넷 연결불가, Private IP만 사용, VPC내부 접속 가능
