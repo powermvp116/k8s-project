@@ -1,0 +1,33 @@
+FROM alpine:latest as builder
+
+RUN apk update && \
+    apk add --no-cache openjdk8 curl tar
+
+ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
+ENV CATALINA_HOME /usr/local/tomcat
+ENV TOMCAT_VERSION 9.0.91
+
+RUN curl -O https://dlcdn.apache.org/tomcat/tomcat-9/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
+    mkdir -p $CATALINA_HOME && \
+    tar -xvf apache-tomcat-${TOMCAT_VERSION}.tar.gz -C $CATALINA_HOME --strip-components=1 && \
+    rm apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
+    rm -rf $CATALINA_HOME/webapps/* && \
+    mkdir -p $CATALINA_HOME/webapps/ROOT
+
+COPY ./index.jsp $CATALINA_HOME/webapps/ROOT/
+COPY ./loginAction.jsp $CATALINA_HOME/webapps/ROOT/
+
+FROM alpine:latest
+
+RUN apk add --no-cache openjdk8-jre-base && \
+    rm -rf /var/cache/apk/*
+
+ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
+ENV CATALINA_HOME /usr/local/tomcat
+ENV PATH $JAVA_HOME/bin:$CATALINA_HOME/bin:$PATH
+
+COPY --from=builder $CATALINA_HOME $CATALINA_HOME
+
+EXPOSE 8080
+
+CMD ["catalina.sh", "run"]
