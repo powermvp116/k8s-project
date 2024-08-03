@@ -1,0 +1,68 @@
+## 경량화 진행후 Dockerfile
+
+FROM alpine:latest as builder
+
+RUN apk update && \
+    apk add --no-cache openjdk8 curl tar
+
+ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
+ENV CATALINA_HOME /usr/local/tomcat
+ENV TOMCAT_VERSION 9.0.91
+
+RUN curl -O https://dlcdn.apache.org/tomcat/tomcat-9/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
+    mkdir -p $CATALINA_HOME && \
+    tar -xvf apache-tomcat-${TOMCAT_VERSION}.tar.gz -C $CATALINA_HOME --strip-components=1 && \
+    rm apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
+    rm -rf $CATALINA_HOME/webapps/* && \
+    mkdir -p $CATALINA_HOME/webapps/ROOT
+
+
+COPY login.jsp $CATALINA_HOME/webapps/ROOT/
+COPY loginAction.jsp $CATALINA_HOME/webapps/ROOT/
+COPY index.jsp $CATALINA_HOME/webapps/ROOT/
+COPY join.jsp $CATALINA_HOME/webapps/ROOT/
+COPY joinAction.jsp $CATALINA_HOME/webapps/ROOT/
+COPY mysql-connector-j-8.4.0.jar $CATALINA_HOME/lib/
+
+FROM alpine:latest
+
+RUN apk add --no-cache openjdk8-jre-base && \
+    rm -rf /var/cache/apk/*
+
+ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
+ENV CATALINA_HOME /usr/local/tomcat
+ENV PATH $JAVA_HOME/bin:$CATALINA_HOME/bin:$PATH
+
+COPY --from=builder $CATALINA_HOME $CATALINA_HOME
+
+EXPOSE 8080
+
+CMD ["catalina.sh", "run"]
+
+=======================================================================================================
+
+## 경량화 진행전 Dockerfile
+
+FROM openjdk:17-jdk-buster
+  
+ENV TOMCAT_VERSION 9.0.50
+
+# Tomcat 설치
+RUN apt-get update && apt-get install -y vim && \
+    mkdir -p /opt/tomcat && \
+    wget -O tomcat.tar.gz https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.50/bin/apache-tomcat-9.0.50.tar.gz && \
+    tar xvfz tomcat.tar.gz -C /opt/tomcat --strip-components=1
+
+
+# vintageBlue.war 파일을 컨테이너 내의 특정 경로로 복사합니다.
+COPY VintageBlue.war /opt/tomcat/webapps/
+
+# Tomcat 사용자와 그룹을 생성합니다 (보안을 강화하기 위해 권장됨)
+RUN /bin/bash -c 'groupadd -r tomcat && useradd -g tomcat -d /opt/tomcat -s /bin/bash tomcat && \
+    chown -R tomcat:tomcat /opt/tomcat && chmod -R 750 /opt/tomcat'
+
+USER tomcat
+WORKDIR /opt/tomcat/bin
+
+EXPOSE 8080
+CMD ["./catalina.sh", "run"]
