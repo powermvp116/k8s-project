@@ -1,0 +1,949 @@
+Scanning processes...                                                                                                 
+Scanning linux images...                                                                                              
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Hit:1 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:2 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu jammy-updates InRelease                      
+Hit:3 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu jammy-backports InRelease                    
+Get:4 https://download.docker.com/linux/ubuntu jammy InRelease [48.8 kB]                               
+Hit:5 http://security.ubuntu.com/ubuntu jammy-security InRelease                                       
+Get:6 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages [36.9 kB]
+Fetched 85.8 kB in 1s (103 kB/s)   
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  docker-buildx-plugin docker-ce-rootless-extras docker-compose-plugin libltdl7 libslirp0 pigz slirp4netns
+Suggested packages:
+  aufs-tools cgroupfs-mount | cgroup-lite
+The following NEW packages will be installed:
+  containerd.io docker-buildx-plugin docker-ce docker-ce-cli docker-ce-rootless-extras docker-compose-plugin
+  libltdl7 libslirp0 pigz slirp4netns
+0 upgraded, 10 newly installed, 0 to remove and 30 not upgraded.
+Need to get 122 MB of archives.
+After this operation, 437 MB of additional disk space will be used.
+Get:1 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 pigz amd64 2.6-1 [63.6 kB]
+Get:2 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 libltdl7 amd64 2.4.6-15build2 [39.6 kB]
+Get:3 https://download.docker.com/linux/ubuntu jammy/stable amd64 containerd.io amd64 1.7.19-1 [30.5 MB]
+Get:4 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 libslirp0 amd64 4.6.1-1build1 [61.5 kB]
+Get:5 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 slirp4netns amd64 1.0.1-2 [28.2 kB]
+Get:6 https://download.docker.com/linux/ubuntu jammy/stable amd64 docker-buildx-plugin amd64 0.16.1-1~ubuntu.22.04~jammy [29.9 MB]
+Get:7 https://download.docker.com/linux/ubuntu jammy/stable amd64 docker-ce-cli amd64 5:27.1.1-1~ubuntu.22.04~jammy [14.6 MB]
+Get:8 https://download.docker.com/linux/ubuntu jammy/stable amd64 docker-ce amd64 5:27.1.1-1~ubuntu.22.04~jammy [25.2 MB]
+Get:9 https://download.docker.com/linux/ubuntu jammy/stable amd64 docker-ce-rootless-extras amd64 5:27.1.1-1~ubuntu.22.04~jammy [9318 kB]
+Get:10 https://download.docker.com/linux/ubuntu jammy/stable amd64 docker-compose-plugin amd64 2.29.1-1~ubuntu.22.04~jammy [12.5 MB]
+Fetched 122 MB in 3s (45.9 MB/s)             
+Selecting previously unselected package pigz.
+(Reading database ... 65342 files and directories currently installed.)
+Preparing to unpack .../0-pigz_2.6-1_amd64.deb ...
+Unpacking pigz (2.6-1) ...
+Selecting previously unselected package containerd.io.
+Preparing to unpack .../1-containerd.io_1.7.19-1_amd64.deb ...
+Unpacking containerd.io (1.7.19-1) ...
+Selecting previously unselected package docker-buildx-plugin.
+Preparing to unpack .../2-docker-buildx-plugin_0.16.1-1~ubuntu.22.04~jammy_amd64.deb ...
+Unpacking docker-buildx-plugin (0.16.1-1~ubuntu.22.04~jammy) ...
+Selecting previously unselected package docker-ce-cli.
+Preparing to unpack .../3-docker-ce-cli_5%3a27.1.1-1~ubuntu.22.04~jammy_amd64.deb ...
+Unpacking docker-ce-cli (5:27.1.1-1~ubuntu.22.04~jammy) ...
+Selecting previously unselected package docker-ce.
+Preparing to unpack .../4-docker-ce_5%3a27.1.1-1~ubuntu.22.04~jammy_amd64.deb ...
+Unpacking docker-ce (5:27.1.1-1~ubuntu.22.04~jammy) ...
+Selecting previously unselected package docker-ce-rootless-extras.
+Preparing to unpack .../5-docker-ce-rootless-extras_5%3a27.1.1-1~ubuntu.22.04~jammy_amd64.deb ...
+Unpacking docker-ce-rootless-extras (5:27.1.1-1~ubuntu.22.04~jammy) ...
+Selecting previously unselected package docker-compose-plugin.
+Preparing to unpack .../6-docker-compose-plugin_2.29.1-1~ubuntu.22.04~jammy_amd64.deb ...
+Unpacking docker-compose-plugin (2.29.1-1~ubuntu.22.04~jammy) ...
+Selecting previously unselected package libltdl7:amd64.
+Preparing to unpack .../7-libltdl7_2.4.6-15build2_amd64.deb ...
+Unpacking libltdl7:amd64 (2.4.6-15build2) ...
+Selecting previously unselected package libslirp0:amd64.
+Preparing to unpack .../8-libslirp0_4.6.1-1build1_amd64.deb ...
+Unpacking libslirp0:amd64 (4.6.1-1build1) ...
+Selecting previously unselected package slirp4netns.
+Preparing to unpack .../9-slirp4netns_1.0.1-2_amd64.deb ...
+Unpacking slirp4netns (1.0.1-2) ...
+Setting up docker-buildx-plugin (0.16.1-1~ubuntu.22.04~jammy) ...
+Setting up containerd.io (1.7.19-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service    /lib/systemd/system/containerd.service.
+Setting up docker-compose-plugin (2.29.1-1~ubuntu.22.04~jammy) ...
+Setting up libltdl7:amd64 (2.4.6-15build2) ...
+Setting up docker-ce-cli (5:27.1.1-1~ubuntu.22.04~jammy) ...
+Setting up libslirp0:amd64 (4.6.1-1build1) ...
+Setting up pigz (2.6-1) ...
+Setting up docker-ce-rootless-extras (5:27.1.1-1~ubuntu.22.04~jammy) ...
+Setting up slirp4netns (1.0.1-2) ...
+Setting up docker-ce (5:27.1.1-1~ubuntu.22.04~jammy) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/docker.service    /lib/systemd/system/docker.service.
+Created symlink /etc/systemd/system/sockets.target.wants/docker.socket    /lib/systemd/system/docker.socket.
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.8) ...
+Scanning processes...                                                                                                 
+Scanning linux images...                                                                                              
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+root@ip-10-250-1-114:~# clear
+root@ip-10-250-1-114:~# exit
+logout
+ubuntu@ip-10-250-1-114:~$ sudo -i
+root@ip-10-250-1-114:~# exit
+logout
+ubuntu@ip-10-250-1-114:~$ sudo -s
+root@ip-10-250-1-114:/home/ubuntu# exit
+exit
+ubuntu@ip-10-250-1-114:~$ sudo -i
+root@ip-10-250-1-114:~# systemctl status docker
+   docker.service - Docker Application Container Engine
+     Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sat 2024-08-10 05:25:21 UTC; 1min 24s ago
+TriggeredBy:    docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 2869 (dockerd)
+      Tasks: 7
+     Memory: 75.6M
+        CPU: 376ms
+     CGroup: /system.slice/docker.service
+                 2869 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+Aug 10 05:25:20 ip-10-250-1-114 systemd[1]: Starting Docker Application Container Engine...
+Aug 10 05:25:20 ip-10-250-1-114 dockerd[2869]: time="2024-08-10T05:25:20.688400522Z" level=info msg="Starting up"
+Aug 10 05:25:20 ip-10-250-1-114 dockerd[2869]: time="2024-08-10T05:25:20.690848240Z" level=info msg="detected 127.0.0>
+Aug 10 05:25:20 ip-10-250-1-114 dockerd[2869]: time="2024-08-10T05:25:20.959046596Z" level=info msg="Loading containe>
+Aug 10 05:25:21 ip-10-250-1-114 dockerd[2869]: time="2024-08-10T05:25:21.581239756Z" level=info msg="Loading containe>
+Aug 10 05:25:21 ip-10-250-1-114 dockerd[2869]: time="2024-08-10T05:25:21.639755145Z" level=info msg="Docker daemon" c>
+Aug 10 05:25:21 ip-10-250-1-114 dockerd[2869]: time="2024-08-10T05:25:21.640278135Z" level=info msg="Daemon has compl>
+Aug 10 05:25:21 ip-10-250-1-114 dockerd[2869]: time="2024-08-10T05:25:21.712832016Z" level=info msg="API listen on /r>
+Aug 10 05:25:21 ip-10-250-1-114 systemd[1]: Started Docker Application Container Engine.
+lines 1-21/21 (END)
+
+root@ip-10-250-1-114:~# 
+root@ip-10-250-1-114:~# 
+root@ip-10-250-1-114:~# clear
+root@ip-10-250-1-114:~# exit
+logout
+ubuntu@ip-10-250-1-114:~$ ls
+dockerfile-folder
+ubuntu@ip-10-250-1-114:~$ sudo mv ./dockerfile-folder/ /root
+ubuntu@ip-10-250-1-114:~$ sudo -i
+root@ip-10-250-1-114:~# ls
+aws  awscliv2.zip  bin  dockerfile-folder  install-docker.sh  kubectl  snap
+root@ip-10-250-1-114:~# cd dockerfile-folder/
+root@ip-10-250-1-114:~/dockerfile-folder# ls
+dockerfile  index.html
+root@ip-10-250-1-114:~/dockerfile-folder# vi dockerfile 
+root@ip-10-250-1-114:~/dockerfile-folder# docker build -t eks-nginx:v1.0 .
+[+] Building 4.4s (7/7) FINISHED                                                                       docker:default
+ => [internal] load build definition from dockerfile                                                             0.1s
+ => => transferring dockerfile: 216B                                                                             0.0s
+ => WARN: MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)            0.1s
+ => [internal] load metadata for docker.io/library/nginx:1.14-alpine                                             2.4s
+ => [internal] load .dockerignore                                                                                0.0s
+ => => transferring context: 2B                                                                                  0.0s
+ => [internal] load build context                                                                                0.1s
+ => => transferring context: 414B                                                                                0.0s
+ => [1/2] FROM docker.io/library/nginx:1.14-alpine@sha256:485b610fefec7ff6c463ced9623314a04ed67e3945b9c08d7e53a  1.3s
+ => => resolve docker.io/library/nginx:1.14-alpine@sha256:485b610fefec7ff6c463ced9623314a04ed67e3945b9c08d7e53a  0.1s
+ => => sha256:a3a0c4126587884f8d3090efca87f5af075d7e7ac8308cffc09a5a082d5f4760 1.15kB / 1.15kB                   0.0s
+ => => sha256:8a2fb25a19f5dc1528b7a3fabe8b3145ff57fe10e4f1edac6c718a3cf4aa4b73 8.40kB / 8.40kB                   0.0s
+ => => sha256:bdf0201b3a056acc4d6062cc88cd8a4ad5979983bfb640f15a145e09ed985f92 2.76MB / 2.76MB                   0.3s
+ => => sha256:3d0a573c81ed8e5446fb5452e82741fa814846c1118c3da13b90963ad8fcdf52 4.21MB / 4.21MB                   0.6s
+ => => sha256:8129faeb2eb65d1bfb53796a8912ffed02a4561756c6ba69c94411fa1dfbaf1a 494B / 494B                       0.6s
+ => => sha256:485b610fefec7ff6c463ced9623314a04ed67e3945b9c08d7e53a47f6d108dc7 2.04kB / 2.04kB                   0.0s
+ => => extracting sha256:bdf0201b3a056acc4d6062cc88cd8a4ad5979983bfb640f15a145e09ed985f92                        0.2s
+ => => sha256:3dc99f571daf389aed6ca12c817635c5ba32eaf47020b5c7a72b494bf3c9b213 629B / 629B                       0.6s
+ => => extracting sha256:3d0a573c81ed8e5446fb5452e82741fa814846c1118c3da13b90963ad8fcdf52                        0.3s
+ => => extracting sha256:8129faeb2eb65d1bfb53796a8912ffed02a4561756c6ba69c94411fa1dfbaf1a                        0.0s
+ => => extracting sha256:3dc99f571daf389aed6ca12c817635c5ba32eaf47020b5c7a72b494bf3c9b213                        0.0s
+ => [2/2] COPY ./index.html /usr/share/nginx/html/index.html                                                     0.3s
+ => exporting to image                                                                                           0.1s
+ => => exporting layers                                                                                          0.0s
+ => => writing image sha256:3161ca90551e20711c0ad2f4d07fda3ff9619a89d7d286dc4eda2868f2cfef94                     0.0s
+ => => naming to docker.io/library/eks-nginx:v1.0                                                                0.0s
+
+ 1 warning found (use docker --debug to expand):
+ - MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)
+root@ip-10-250-1-114:~/dockerfile-folder# clear
+root@ip-10-250-1-114:~/dockerfile-folder# docker images
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+eks-nginx    v1.0      3161ca90551e   14 seconds ago   16MB
+root@ip-10-250-1-114:~/dockerfile-folder# docker run -d --name nginx-container -p 8000:80 3161ca90551e 
+93c6cf8560499e8b526b0e21d413af417c4e71e22d8b603d6f99ff05cc582bc2
+root@ip-10-250-1-114:~/dockerfile-folder# docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                                   NAMES
+93c6cf856049   3161ca90551e   "nginx -g 'daemon of  "   7 seconds ago   Up 6 seconds   0.0.0.0:8000->80/tcp, :::8000->80/tcp   nginx-container
+root@ip-10-250-1-114:~/dockerfile-folder# curl 10.250.1.114
+curl: (7) Failed to connect to 10.250.1.114 port 80 after 0 ms: Connection refused
+root@ip-10-250-1-114:~/dockerfile-folder# curl 10.250.1.114:8000
+<html>
+<head> 
+<title>Amazon EKS Connected Success !!!</title> 
+<style>
+body {margin-top: 40px; background-color: #333;}
+</style> 
+</head>
+<body>
+<div style=color:white;text-align:center>
+<h1>Amazon EKS Connected Success !!!</h1>
+<h2>Congratulations!</h2>
+<p><em>Your application is now running on a container in Amazon EKS.</em></p>
+</p> </div>
+</body>
+</html>root@ip-10-250-1-114:~/dockerfile-folder# curl 10.250.1.114:8000
+<html>
+<head> 
+<title>Amazon EKS Connected Success !!!</title> 
+<style>
+body {margin-top: 40px; background-color: #333;}
+</style> 
+</head>
+<body>
+<div style=color:white;text-align:center>
+<h1>Amazon EKS Connected Success !!!</h1>
+<h2>Congratulations!</h2>
+<p><em>Your application is now running on a container in Amazon EKS.</em></p>
+</p> </div>
+</body>
+</html>root@ip-10-250-1-114:~/dockerfile-folder# docker images
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+eks-nginx    v1.0      3161ca90551e   12 minutes ago   16MB
+root@ip-10-250-1-114:~/dockerfile-folder# clear
+root@ip-10-250-1-114:~/dockerfile-folder# aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credential-stores
+
+Login Succeeded
+root@ip-10-250-1-114:~/dockerfile-folder# docker tag eks-nginx:v1.0 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v1.0
+root@ip-10-250-1-114:~/dockerfile-folder# docker push 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v1.0The push refers to repository [884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx]
+71e3ac6fc056: Pushed 
+076c58d2644f: Pushed 
+b2cbae4b8c15: Pushed 
+5ac9a5170bf2: Pushed 
+a464c54f93a9: Pushed 
+v1.0: digest: sha256:08e6a45eb298666f7cac5aeecf53dcf5ce2a3f2f61fb4a08de07e601b214029d size: 1360
+root@ip-10-250-1-114:~/dockerfile-folder# docker build -t eks-nginx:v2.0 .
+[+] Building 1.6s (7/7) FINISHED                                                                       docker:default
+ => [internal] load build definition from dockerfile                                                             0.0s
+ => => transferring dockerfile: 216B                                                                             0.0s
+ => WARN: MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)            0.0s
+ => [internal] load metadata for docker.io/library/nginx:1.14-alpine                                             1.4s
+ => [internal] load .dockerignore                                                                                0.0s
+ => => transferring context: 2B                                                                                  0.0s
+ => [internal] load build context                                                                                0.0s
+ => => transferring context: 32B                                                                                 0.0s
+ => [1/2] FROM docker.io/library/nginx:1.14-alpine@sha256:485b610fefec7ff6c463ced9623314a04ed67e3945b9c08d7e53a  0.0s
+ => CACHED [2/2] COPY ./index.html /usr/share/nginx/html/index.html                                              0.0s
+ => exporting to image                                                                                           0.0s
+ => => exporting layers                                                                                          0.0s
+ => => writing image sha256:3161ca90551e20711c0ad2f4d07fda3ff9619a89d7d286dc4eda2868f2cfef94                     0.0s
+ => => naming to docker.io/library/eks-nginx:v2.0                                                                0.0s
+
+ 1 warning found (use docker --debug to expand):
+ - MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)
+root@ip-10-250-1-114:~/dockerfile-folder# aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credential-stores
+
+Login Succeeded
+root@ip-10-250-1-114:~/dockerfile-folder# docker tag eks-nginx:v2.0 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0
+root@ip-10-250-1-114:~/dockerfile-folder# docker push 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0The push refers to repository [884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx]
+71e3ac6fc056: Layer already exists 
+076c58d2644f: Layer already exists 
+b2cbae4b8c15: Layer already exists 
+5ac9a5170bf2: Layer already exists 
+a464c54f93a9: Layer already exists 
+v2.0: digest: sha256:08e6a45eb298666f7cac5aeecf53dcf5ce2a3f2f61fb4a08de07e601b214029d size: 1360
+root@ip-10-250-1-114:~/dockerfile-folder# clear
+root@ip-10-250-1-114:~/dockerfile-folder# cd ..
+root@ip-10-250-1-114:~# vi cluster.yaml
+root@ip-10-250-1-114:~# ls
+aws  awscliv2.zip  bin  cluster.yaml  dockerfile-folder  install-docker.sh  kubectl  snap
+root@ip-10-250-1-114:~# eksctl create cluster -f cluster.yaml 
+2024-08-10 06:07:11 [?]  eksctl version 0.188.0
+2024-08-10 06:07:11 [?]  using region ap-northeast-2
+2024-08-10 06:07:11 [?]  using existing VPC (vpc-0ee7b4233f2bd201c) and subnets (private:map[ap-northeast-2a:{subnet-00e4f853fd77cd255 ap-northeast-2a 10.250.2.0/24 0 } ap-northeast-2c:{subnet-04ec81562ea554dcb ap-northeast-2c 10.250.12.0/24 0 }] public:map[])
+2024-08-10 06:07:11 [!]  custom VPC/subnets will be used; if resulting cluster doesn't function as expected, make sure to review the configuration of VPC/subnets
+2024-08-10 06:07:11 [?]  nodegroup "VEC-PRD-NG-worker1" will use "ami-0948808d2514ffd43" [AmazonLinux2/1.30]
+2024-08-10 06:07:11 [?]  nodegroup "VEC-PRD-NG-worker2" will use "ami-0948808d2514ffd43" [AmazonLinux2/1.30]
+2024-08-10 06:07:11 [?]  using Kubernetes version 1.30
+2024-08-10 06:07:11 [?]  creating EKS cluster "powermvp-cluster" in "ap-northeast-2" region with un-managed nodes
+2024-08-10 06:07:11 [?]  2 nodegroups (VEC-PRD-NG-worker1, VEC-PRD-NG-worker2) were included (based on the include/exclude rules)
+2024-08-10 06:07:11 [?]  will create a CloudFormation stack for cluster itself and 2 nodegroup stack(s)
+2024-08-10 06:07:11 [?]  will create a CloudFormation stack for cluster itself and 0 managed nodegroup stack(s)
+2024-08-10 06:07:11 [?]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=ap-northeast-2 --cluster=powermvp-cluster'
+2024-08-10 06:07:11 [?]  Kubernetes API endpoint access will use default of {publicAccess=true, privateAccess=false} for cluster "powermvp-cluster" in "ap-northeast-2"
+2024-08-10 06:07:11 [?]  CloudWatch logging will not be enabled for cluster "powermvp-cluster" in "ap-northeast-2"
+2024-08-10 06:07:11 [?]  you can enable it with 'eksctl utils update-cluster-logging --enable-types={SPECIFY-YOUR-LOG-TYPES-HERE (e.g. all)} --region=ap-northeast-2 --cluster=powermvp-cluster'
+2024-08-10 06:07:11 [?]  default addons vpc-cni, kube-proxy, coredns were not specified, will install them as EKS addons
+2024-08-10 06:07:11 [?]  
+2 sequential tasks: { create cluster control plane "powermvp-cluster", 
+    2 sequential sub-tasks: { 
+        2 sequential sub-tasks: { 
+            1 task: { create addons },
+            wait for control plane to become ready,
+        },
+        2 parallel sub-tasks: { 
+            create nodegroup "VEC-PRD-NG-worker1",
+            create nodegroup "VEC-PRD-NG-worker2",
+        },
+    } 
+}
+2024-08-10 06:07:11 [?]  building cluster stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:07:12 [?]  deploying stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:07:42 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:08:12 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:09:12 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:10:12 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:11:12 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:12:12 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:13:12 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:14:12 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:15:12 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:15:14 [!]  recommended policies were found for "vpc-cni" addon, but since OIDC is disabled on the cluster, eksctl cannot configure the requested permissions; the recommended way to provide IAM permissions for "vpc-cni" addon is via pod identity associations; after addon creation is completed, add all recommended policies to the config file, under `addon.PodIdentityAssociations`, and run `eksctl update addon`
+2024-08-10 06:15:14 [?]  creating addon
+2024-08-10 06:15:14 [?]  successfully created addon
+2024-08-10 06:15:14 [?]  creating addon
+2024-08-10 06:15:15 [?]  successfully created addon
+2024-08-10 06:15:15 [?]  creating addon
+2024-08-10 06:15:15 [?]  successfully created addon
+2024-08-10 06:17:15 [?]  building nodegroup stack "eksctl-powermvp-cluster-nodegroup-VEC-PRD-NG-worker2"
+2024-08-10 06:17:15 [?]  --nodes-min=1 was set automatically for nodegroup VEC-PRD-NG-worker2
+2024-08-10 06:17:15 [?]  --nodes-max=1 was set automatically for nodegroup VEC-PRD-NG-worker2
+2024-08-10 06:17:15 [?]  building nodegroup stack "eksctl-powermvp-cluster-nodegroup-VEC-PRD-NG-worker1"
+2024-08-10 06:17:15 [?]  --nodes-min=1 was set automatically for nodegroup VEC-PRD-NG-worker1
+2024-08-10 06:17:15 [?]  --nodes-max=1 was set automatically for nodegroup VEC-PRD-NG-worker1
+2024-08-10 06:17:16 [!]  subnets contain a mix of both local and availability zones
+2024-08-10 06:17:16 [!]  1 error(s) occurred and cluster hasn't been created properly, you may wish to check CloudFormation console
+2024-08-10 06:17:16 [?]  to cleanup resources, run 'eksctl delete cluster --region=ap-northeast-2 --name=powermvp-cluster'
+2024-08-10 06:17:16 [?]  could not select subnets from subnet IDs (allSubnets=v1alpha5.AZSubnetMapping{"ap-northeast-2a":v1alpha5.AZSubnetSpec{ID:"subnet-00e4f853fd77cd255", AZ:"ap-northeast-2a", CIDR:(*ipnet.IPNet)(0xc00077be00), CIDRIndex:0, OutpostARN:""}, "ap-northeast-2c":v1alpha5.AZSubnetSpec{ID:"subnet-04ec81562ea554dcb", AZ:"ap-northeast-2c", CIDR:(*ipnet.IPNet)(0xc00022c5d0), CIDRIndex:0, OutpostARN:""}} localZones=[]string(nil) subnets=[]string{"subnet-09c2a00cd2c88eb04"}): operation error EC2: DescribeSubnets, https response error StatusCode: 400, RequestID: 51481170-235f-48ac-929d-37bcb7184487, api error InvalidSubnetID.NotFound: The subnet ID 'subnet-09c2a00cd2c88eb04' does not exist
+Error: failed to create cluster "powermvp-cluster"
+root@ip-10-250-1-114:~# 
+root@ip-10-250-1-114:~# 
+root@ip-10-250-1-114:~# eksctl delete cluster -f cluster.yaml 
+2024-08-10 06:18:14 [?]  deleting EKS cluster "powermvp-cluster"
+2024-08-10 06:18:15 [?]  deleted 0 Fargate profile(s)
+2024-08-10 06:18:15 [?]  kubeconfig has been updated
+2024-08-10 06:18:15 [?]  cleaning up AWS load balancers created by Kubernetes objects of Kind Service or Ingress
+2024-08-10 06:18:16 [?]  1 task: { delete cluster control plane "powermvp-cluster" [async] }
+2024-08-10 06:18:16 [?]  will delete stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:18:16 [?]  all cluster resources were deleted
+root@ip-10-250-1-114:~# 
+root@ip-10-250-1-114:~# 
+root@ip-10-250-1-114:~# 
+root@ip-10-250-1-114:~# clear
+root@ip-10-250-1-114:~# vi cluster.yaml 
+root@ip-10-250-1-114:~# 
+root@ip-10-250-1-114:~# 
+root@ip-10-250-1-114:~# cat cluster.yaml 
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: powermvp-cluster
+  region:  ap-northeast-2
+vpc:
+  subnets:
+    private:
+      ap-northeast-2a: { id: subnet-00e4f853fd77cd255 }
+      ap-northeast-2c: { id: subnet-04ec81562ea554dcb }
+
+nodeGroups:
+  - name: VEC-PRD-NG-worker1
+    labels: { role: workers }
+    instanceType: t3.medium
+    desiredCapacity: 1
+    privateNetworking: true
+    subnets:
+      - subnet-00e4f853fd77cd255
+  - name: VEC-PRD-NG-worker2
+    labels: { role: workers }
+    instanceType: t3.medium
+    desiredCapacity: 1
+    privateNetworking: true
+    subnets:
+      - subnet-04ec81562ea554dcb
+    iam:
+      withAddonPolicies:
+        imageBuilder: true
+root@ip-10-250-1-114:~# clear
+root@ip-10-250-1-114:~# eksctl create cluster -f cluster.yaml 
+2024-08-10 06:21:25 [?]  eksctl version 0.188.0
+2024-08-10 06:21:25 [?]  using region ap-northeast-2
+2024-08-10 06:21:26 [?]  using existing VPC (vpc-0ee7b4233f2bd201c) and subnets (private:map[ap-northeast-2a:{subnet-00e4f853fd77cd255 ap-northeast-2a 10.250.2.0/24 0 } ap-northeast-2c:{subnet-04ec81562ea554dcb ap-northeast-2c 10.250.12.0/24 0 }] public:map[])
+2024-08-10 06:21:26 [!]  custom VPC/subnets will be used; if resulting cluster doesn't function as expected, make sure to review the configuration of VPC/subnets
+2024-08-10 06:21:26 [?]  nodegroup "VEC-PRD-NG-worker1" will use "ami-0948808d2514ffd43" [AmazonLinux2/1.30]
+2024-08-10 06:21:26 [?]  nodegroup "VEC-PRD-NG-worker2" will use "ami-0948808d2514ffd43" [AmazonLinux2/1.30]
+2024-08-10 06:21:26 [?]  using Kubernetes version 1.30
+2024-08-10 06:21:26 [?]  creating EKS cluster "powermvp-cluster" in "ap-northeast-2" region with un-managed nodes
+2024-08-10 06:21:26 [?]  2 nodegroups (VEC-PRD-NG-worker1, VEC-PRD-NG-worker2) were included (based on the include/exclude rules)
+2024-08-10 06:21:26 [?]  will create a CloudFormation stack for cluster itself and 2 nodegroup stack(s)
+2024-08-10 06:21:26 [?]  will create a CloudFormation stack for cluster itself and 0 managed nodegroup stack(s)
+2024-08-10 06:21:26 [?]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=ap-northeast-2 --cluster=powermvp-cluster'
+2024-08-10 06:21:26 [?]  Kubernetes API endpoint access will use default of {publicAccess=true, privateAccess=false} for cluster "powermvp-cluster" in "ap-northeast-2"
+2024-08-10 06:21:26 [?]  CloudWatch logging will not be enabled for cluster "powermvp-cluster" in "ap-northeast-2"
+2024-08-10 06:21:26 [?]  you can enable it with 'eksctl utils update-cluster-logging --enable-types={SPECIFY-YOUR-LOG-TYPES-HERE (e.g. all)} --region=ap-northeast-2 --cluster=powermvp-cluster'
+2024-08-10 06:21:26 [?]  default addons kube-proxy, coredns, vpc-cni were not specified, will install them as EKS addons
+2024-08-10 06:21:26 [?]  
+2 sequential tasks: { create cluster control plane "powermvp-cluster", 
+    2 sequential sub-tasks: { 
+        2 sequential sub-tasks: { 
+            1 task: { create addons },
+            wait for control plane to become ready,
+        },
+        2 parallel sub-tasks: { 
+            create nodegroup "VEC-PRD-NG-worker1",
+            create nodegroup "VEC-PRD-NG-worker2",
+        },
+    } 
+}
+2024-08-10 06:21:26 [?]  building cluster stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:21:26 [?]  deploying stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:21:56 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:22:26 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:23:26 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:24:26 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:25:26 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:26:26 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:27:26 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:28:26 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-cluster"
+2024-08-10 06:28:28 [?]  creating addon
+2024-08-10 06:28:28 [?]  successfully created addon
+2024-08-10 06:28:28 [?]  creating addon
+2024-08-10 06:28:28 [?]  successfully created addon
+2024-08-10 06:28:29 [!]  recommended policies were found for "vpc-cni" addon, but since OIDC is disabled on the cluster, eksctl cannot configure the requested permissions; the recommended way to provide IAM permissions for "vpc-cni" addon is via pod identity associations; after addon creation is completed, add all recommended policies to the config file, under `addon.PodIdentityAssociations`, and run `eksctl update addon`
+2024-08-10 06:28:29 [?]  creating addon
+2024-08-10 06:28:29 [?]  successfully created addon
+2024-08-10 06:30:29 [?]  building nodegroup stack "eksctl-powermvp-cluster-nodegroup-VEC-PRD-NG-worker2"
+2024-08-10 06:30:29 [?]  --nodes-min=1 was set automatically for nodegroup VEC-PRD-NG-worker2
+2024-08-10 06:30:29 [?]  --nodes-max=1 was set automatically for nodegroup VEC-PRD-NG-worker2
+2024-08-10 06:30:29 [?]  building nodegroup stack "eksctl-powermvp-cluster-nodegroup-VEC-PRD-NG-worker1"
+2024-08-10 06:30:29 [?]  --nodes-min=1 was set automatically for nodegroup VEC-PRD-NG-worker1
+2024-08-10 06:30:29 [?]  --nodes-max=1 was set automatically for nodegroup VEC-PRD-NG-worker1
+2024-08-10 06:30:29 [!]  subnets contain a mix of both local and availability zones
+2024-08-10 06:30:29 [!]  subnets contain a mix of both local and availability zones
+2024-08-10 06:30:30 [?]  deploying stack "eksctl-powermvp-cluster-nodegroup-VEC-PRD-NG-worker2"
+2024-08-10 06:30:30 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-nodegroup-VEC-PRD-NG-worker2"
+2024-08-10 06:30:30 [?]  deploying stack "eksctl-powermvp-cluster-nodegroup-VEC-PRD-NG-worker1"
+2024-08-10 06:30:30 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-nodegroup-VEC-PRD-NG-worker1"
+2024-08-10 06:31:00 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-nodegroup-VEC-PRD-NG-worker2"
+2024-08-10 06:31:00 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-nodegroup-VEC-PRD-NG-worker1"
+2024-08-10 06:31:37 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-nodegroup-VEC-PRD-NG-worker2"
+2024-08-10 06:31:42 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-nodegroup-VEC-PRD-NG-worker1"
+2024-08-10 06:33:06 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-nodegroup-VEC-PRD-NG-worker1"
+2024-08-10 06:33:13 [?]  waiting for CloudFormation stack "eksctl-powermvp-cluster-nodegroup-VEC-PRD-NG-worker2"
+2024-08-10 06:33:13 [?]  waiting for the control plane to become ready
+2024-08-10 06:33:14 [?]  saved kubeconfig as "/root/.kube/config"
+2024-08-10 06:33:14 [?]  no tasks
+2024-08-10 06:33:14 [?]  all EKS cluster resources for "powermvp-cluster" have been created
+2024-08-10 06:33:14 [?]  nodegroup "VEC-PRD-NG-worker1" has 1 node(s)
+2024-08-10 06:33:14 [?]  node "ip-10-250-2-181.ap-northeast-2.compute.internal" is ready
+2024-08-10 06:33:14 [?]  waiting for at least 1 node(s) to become ready in "VEC-PRD-NG-worker1"
+2024-08-10 06:33:14 [?]  nodegroup "VEC-PRD-NG-worker1" has 1 node(s)
+2024-08-10 06:33:14 [?]  node "ip-10-250-2-181.ap-northeast-2.compute.internal" is ready
+2024-08-10 06:33:14 [?]  nodegroup "VEC-PRD-NG-worker2" has 1 node(s)
+2024-08-10 06:33:14 [?]  node "ip-10-250-12-225.ap-northeast-2.compute.internal" is ready
+2024-08-10 06:33:14 [?]  waiting for at least 1 node(s) to become ready in "VEC-PRD-NG-worker2"
+2024-08-10 06:33:14 [?]  nodegroup "VEC-PRD-NG-worker2" has 1 node(s)
+2024-08-10 06:33:14 [?]  node "ip-10-250-12-225.ap-northeast-2.compute.internal" is ready
+2024-08-10 06:33:14 [?]  created 2 nodegroup(s) in cluster "powermvp-cluster"
+2024-08-10 06:33:14 [?]  created 0 managed nodegroup(s) in cluster "powermvp-cluster"
+2024-08-10 06:33:16 [?]  kubectl command should work with "/root/.kube/config", try 'kubectl get nodes'
+2024-08-10 06:33:16 [?]  EKS cluster "powermvp-cluster" in "ap-northeast-2" region is ready
+root@ip-10-250-1-114:~# 
+root@ip-10-250-1-114:~# 
+root@ip-10-250-1-114:~# 
+root@ip-10-250-1-114:~# 
+root@ip-10-250-1-114:~# kubectl get nodes
+NAME                                               STATUS   ROLES    AGE     VERSION
+ip-10-250-12-225.ap-northeast-2.compute.internal   Ready    <none>   2m53s   v1.30.2-eks-1552ad0
+ip-10-250-2-181.ap-northeast-2.compute.internal    Ready    <none>   2m47s   v1.30.2-eks-1552ad0
+root@ip-10-250-1-114:~# clear
+root@ip-10-250-1-114:~# kubectl get pods -A
+NAMESPACE     NAME                      READY   STATUS    RESTARTS   AGE
+kube-system   aws-node-82lpq            2/2     Running   0          3m37s
+kube-system   aws-node-mbps7            2/2     Running   0          3m43s
+kube-system   coredns-5b9dfbf96-8dvbq   1/1     Running   0          6m45s
+kube-system   coredns-5b9dfbf96-kr5s5   1/1     Running   0          6m45s
+kube-system   kube-proxy-bfccb          1/1     Running   0          3m37s
+kube-system   kube-proxy-nx5fd          1/1     Running   0          3m43s
+root@ip-10-250-1-114:~# vi deploy-webui.yaml
+root@ip-10-250-1-114:~# ls
+aws  awscliv2.zip  bin  cluster.yaml  deploy-webui.yaml  dockerfile-folder  install-docker.sh  kubectl  snap
+root@ip-10-250-1-114:~# kubectl apply -f deploy-webui.yaml 
+deployment.apps/webui created
+root@ip-10-250-1-114:~# kubectl get pods -o wide 
+NAME                     READY   STATUS    RESTARTS   AGE   IP              NODE                                               NOMINATED NODE   READINESS GATES
+webui-5d46bc499b-5ql4q   1/1     Running   0          9s    10.250.2.92     ip-10-250-2-181.ap-northeast-2.compute.internal    <none>           <none>
+webui-5d46bc499b-c5rxm   1/1     Running   0          9s    10.250.12.120   ip-10-250-12-225.ap-northeast-2.compute.internal   <none>           <none>
+webui-5d46bc499b-fsgkw   1/1     Running   0          9s    10.250.2.220    ip-10-250-2-181.ap-northeast-2.compute.internal    <none>           <none>
+webui-5d46bc499b-qf49g   1/1     Running   0          9s    10.250.12.62    ip-10-250-12-225.ap-northeast-2.compute.internal   <none>           <none>
+root@ip-10-250-1-114:~# kubectl get pods -o wide 
+NAME                     READY   STATUS    RESTARTS   AGE   IP              NODE                                               NOMINATED NODE   READINESS GATES
+webui-5d46bc499b-5ql4q   1/1     Running   0          19s   10.250.2.92     ip-10-250-2-181.ap-northeast-2.compute.internal    <none>           <none>
+webui-5d46bc499b-c5rxm   1/1     Running   0          19s   10.250.12.120   ip-10-250-12-225.ap-northeast-2.compute.internal   <none>           <none>
+webui-5d46bc499b-fsgkw   1/1     Running   0          19s   10.250.2.220    ip-10-250-2-181.ap-northeast-2.compute.internal    <none>           <none>
+webui-5d46bc499b-qf49g   1/1     Running   0          19s   10.250.12.62    ip-10-250-12-225.ap-northeast-2.compute.internal   <none>           <none>
+root@ip-10-250-1-114:~# clear
+root@ip-10-250-1-114:~# kubectl get pods -o wide
+NAME                     READY   STATUS    RESTARTS   AGE     IP              NODE                                               NOMINATED NODE   READINESS GATES
+webui-5d46bc499b-5ql4q   1/1     Running   0          3m51s   10.250.2.92     ip-10-250-2-181.ap-northeast-2.compute.internal    <none>           <none>
+webui-5d46bc499b-c5rxm   1/1     Running   0          3m51s   10.250.12.120   ip-10-250-12-225.ap-northeast-2.compute.internal   <none>           <none>
+webui-5d46bc499b-fsgkw   1/1     Running   0          3m51s   10.250.2.220    ip-10-250-2-181.ap-northeast-2.compute.internal    <none>           <none>
+webui-5d46bc499b-qf49g   1/1     Running   0          3m51s   10.250.12.62    ip-10-250-12-225.ap-northeast-2.compute.internal   <none>           <none>
+root@ip-10-250-1-114:~# kubectl delete pods webui-5d46bc499b-5ql4q
+pod "webui-5d46bc499b-5ql4q" deleted
+root@ip-10-250-1-114:~# kubectl delete pods webui-5d46bc499b-5ql4q
+Error from server (NotFound): pods "webui-5d46bc499b-5ql4q" not found
+root@ip-10-250-1-114:~# ^C
+root@ip-10-250-1-114:~# kubectl get deploy,rs,pods,svc
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/webui   4/4     4            4           4m45s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/webui-5d46bc499b   4         4         4       4m45s
+
+NAME                         READY   STATUS    RESTARTS   AGE
+pod/webui-5d46bc499b-c5rxm   1/1     Running   0          4m45s
+pod/webui-5d46bc499b-fsgkw   1/1     Running   0          4m45s
+pod/webui-5d46bc499b-mcrsr   1/1     Running   0          41s
+pod/webui-5d46bc499b-qf49g   1/1     Running   0          4m45s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   172.20.0.1   <none>        443/TCP   24m
+root@ip-10-250-1-114:~# clear
+root@ip-10-250-1-114:~# kubectl get deploy,rs,pods,svc
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/webui   4/4     4            4           8m49s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/webui-5d46bc499b   4         4         4       8m50s
+
+NAME                         READY   STATUS    RESTARTS   AGE
+pod/webui-5d46bc499b-c5rxm   1/1     Running   0          8m50s
+pod/webui-5d46bc499b-fsgkw   1/1     Running   0          8m50s
+pod/webui-5d46bc499b-mcrsr   1/1     Running   0          4m46s
+pod/webui-5d46bc499b-qf49g   1/1     Running   0          8m50s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   172.20.0.1   <none>        443/TCP   28m
+root@ip-10-250-1-114:~# kubectl delete rs webui-5d46bc499b
+replicaset.apps "webui-5d46bc499b" deleted
+root@ip-10-250-1-114:~# kubectl delete rs webui-5d46bc499b
+replicaset.apps "webui-5d46bc499b" deleted
+root@ip-10-250-1-114:~# ^C
+root@ip-10-250-1-114:~# kubectl get deploy,rs,pods,svc
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/webui   4/4     4            4           9m31s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/webui-5d46bc499b   4         4         4       4s
+
+NAME                         READY   STATUS    RESTARTS   AGE
+pod/webui-5d46bc499b-7rz26   1/1     Running   0          4s
+pod/webui-5d46bc499b-9gxtn   1/1     Running   0          4s
+pod/webui-5d46bc499b-klr6x   1/1     Running   0          4s
+pod/webui-5d46bc499b-rdp5x   1/1     Running   0          4s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   172.20.0.1   <none>        443/TCP   29m
+root@ip-10-250-1-114:~# clear
+root@ip-10-250-1-114:~# kubectl get deploy,rs,pods,svc
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/webui   4/4     4            4           10m
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/webui-5d46bc499b   4         4         4       37s
+
+NAME                         READY   STATUS    RESTARTS   AGE
+pod/webui-5d46bc499b-7rz26   1/1     Running   0          37s
+pod/webui-5d46bc499b-9gxtn   1/1     Running   0          37s
+pod/webui-5d46bc499b-klr6x   1/1     Running   0          37s
+pod/webui-5d46bc499b-rdp5x   1/1     Running   0          37s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   172.20.0.1   <none>        443/TCP   29m
+root@ip-10-250-1-114:~# kubectl expose deploy webui --name webui-svc --type=LoadBalancer --port=80
+service/webui-svc exposed
+root@ip-10-250-1-114:~# kubectl get deploy,rs,pods,svc
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/webui   4/4     4            4           11m
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/webui-5d46bc499b   4         4         4       105s
+
+NAME                         READY   STATUS    RESTARTS   AGE
+pod/webui-5d46bc499b-7rz26   1/1     Running   0          105s
+pod/webui-5d46bc499b-9gxtn   1/1     Running   0          105s
+pod/webui-5d46bc499b-klr6x   1/1     Running   0          105s
+pod/webui-5d46bc499b-rdp5x   1/1     Running   0          105s
+
+NAME                 TYPE           CLUSTER-IP     EXTERNAL-IP                                                                  PORT(S)        AGE
+service/kubernetes   ClusterIP      172.20.0.1     <none>                                                                       443/TCP        30m
+service/webui-svc    LoadBalancer   172.20.51.20   a6e74dd088e4d458cbdb8cccf33b23b1-89041353.ap-northeast-2.elb.amazonaws.com   80:30157/TCP   4s
+root@ip-10-250-1-114:~# 
+root@ip-10-250-1-114:~# clear
+root@ip-10-250-1-114:~# aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credential-stores
+
+Login Succeeded
+root@ip-10-250-1-114:~# docker tag eks-nginx:v1.0 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v1.0
+root@ip-10-250-1-114:~# docker push 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v1.0
+The push refers to repository [884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx]
+71e3ac6fc056: Pushed 
+076c58d2644f: Pushed 
+b2cbae4b8c15: Pushed 
+5ac9a5170bf2: Pushed 
+a464c54f93a9: Pushed 
+v1.0: digest: sha256:08e6a45eb298666f7cac5aeecf53dcf5ce2a3f2f61fb4a08de07e601b214029d size: 1360
+root@ip-10-250-1-114:~# clear
+root@ip-10-250-1-114:~# docker images
+REPOSITORY                                                    TAG       IMAGE ID       CREATED       SIZE
+884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx   v1.0      3161ca90551e   2 hours ago   16MB
+884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx   v2.0      3161ca90551e   2 hours ago   16MB
+eks-nginx                                                     v1.0      3161ca90551e   2 hours ago   16MB
+eks-nginx                                                     v2.0      3161ca90551e   2 hours ago   16MB
+root@ip-10-250-1-114:~# dockerv rm -f 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0
+Command 'dockerv' not found, did you mean:
+  command 'docker' from snap docker (24.0.5)
+  command 'dockerd' from deb docker.io (24.0.7-0ubuntu2~22.04.1)
+  command 'docker' from deb docker.io (24.0.7-0ubuntu2~22.04.1)
+  command 'docker' from deb podman-docker (3.4.4+ds1-1ubuntu1.22.04.2)
+See 'snap info <snapname>' for additional versions.
+root@ip-10-250-1-114:~# docker rm -f 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0
+Error response from daemon: No such container: 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0
+root@ip-10-250-1-114:~# docker rmi -f 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0
+Untagged: 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0
+root@ip-10-250-1-114:~# docker build -t eks-nginx:v2.0 .
+[+] Building 0.2s (1/1) FINISHED                                                              docker:default
+ => [internal] load build definition from Dockerfile                                                    0.0s
+ => => transferring dockerfile: 2B                                                                      0.0s
+ERROR: failed to solve: failed to read dockerfile: open Dockerfile: no such file or directory
+root@ip-10-250-1-114:~# docker images
+REPOSITORY                                                    TAG       IMAGE ID       CREATED       SIZE
+eks-nginx                                                     v1.0      3161ca90551e   2 hours ago   16MB
+eks-nginx                                                     v2.0      3161ca90551e   2 hours ago   16MB
+884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx   v1.0      3161ca90551e   2 hours ago   16MB
+root@ip-10-250-1-114:~# 
+root@ip-10-250-1-114:~# 
+root@ip-10-250-1-114:~# docker rmi -f $(docker images -q)
+Error response from daemon: conflict: unable to delete 3161ca90551e (cannot be forced) - image is being used by running container 93c6cf856049
+Error response from daemon: conflict: unable to delete 3161ca90551e (cannot be forced) - image is being used by running container 93c6cf856049
+Error response from daemon: conflict: unable to delete 3161ca90551e (cannot be forced) - image is being used by running container 93c6cf856049
+root@ip-10-250-1-114:~# docker rm -f $(docker ps -a -q)
+93c6cf856049
+root@ip-10-250-1-114:~# docker rmi -f $(docker images -q)
+Untagged: 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v1.0
+Untagged: 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx@sha256:08e6a45eb298666f7cac5aeecf53dcf5ce2a3f2f61fb4a08de07e601b214029d
+Untagged: eks-nginx:v1.0
+Untagged: eks-nginx:v2.0
+Deleted: sha256:3161ca90551e20711c0ad2f4d07fda3ff9619a89d7d286dc4eda2868f2cfef94
+Error response from daemon: No such image: 3161ca90551e:latest
+Error response from daemon: No such image: 3161ca90551e:latest
+root@ip-10-250-1-114:~# docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+root@ip-10-250-1-114:~# docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+root@ip-10-250-1-114:~# docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+root@ip-10-250-1-114:~# clear
+root@ip-10-250-1-114:~# aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credential-stores
+
+Login Succeeded
+root@ip-10-250-1-114:~# cd dockerfile-folder/
+root@ip-10-250-1-114:~/dockerfile-folder# docker build -t eks-nginx:v1.0 .
+[+] Building 1.5s (7/7) FINISHED                                                              docker:default
+ => [internal] load build definition from dockerfile                                                    0.0s
+ => => transferring dockerfile: 216B                                                                    0.0s
+ => WARN: MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)   0.0s
+ => [internal] load metadata for docker.io/library/nginx:1.14-alpine                                    1.4s
+ => [internal] load .dockerignore                                                                       0.0s
+ => => transferring context: 2B                                                                         0.0s
+ => [internal] load build context                                                                       0.0s
+ => => transferring context: 32B                                                                        0.0s
+ => [1/2] FROM docker.io/library/nginx:1.14-alpine@sha256:485b610fefec7ff6c463ced9623314a04ed67e3945b9  0.0s
+ => CACHED [2/2] COPY ./index.html /usr/share/nginx/html/index.html                                     0.0s
+ => exporting to image                                                                                  0.0s
+ => => exporting layers                                                                                 0.0s
+ => => writing image sha256:3161ca90551e20711c0ad2f4d07fda3ff9619a89d7d286dc4eda2868f2cfef94            0.0s
+ => => naming to docker.io/library/eks-nginx:v1.0                                                       0.0s
+
+ 1 warning found (use docker --debug to expand):
+ - MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)
+root@ip-10-250-1-114:~/dockerfile-folder# docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+eks-nginx    v1.0      3161ca90551e   2 hours ago   16MB
+root@ip-10-250-1-114:~/dockerfile-folder# docker tag eks-nginx:v1.0 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v1.0
+root@ip-10-250-1-114:~/dockerfile-folder# docker push 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v1.0
+The push refers to repository [884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx]
+71e3ac6fc056: Pushed 
+076c58d2644f: Pushed 
+b2cbae4b8c15: Pushed 
+5ac9a5170bf2: Pushed 
+a464c54f93a9: Pushed 
+v1.0: digest: sha256:08e6a45eb298666f7cac5aeecf53dcf5ce2a3f2f61fb4a08de07e601b214029d size: 1360
+root@ip-10-250-1-114:~/dockerfile-folder# docker build -t eks-nginx:v2.0 .
+[+] Building 0.7s (7/7) FINISHED                                                              docker:default
+ => [internal] load build definition from dockerfile                                                    0.0s
+ => => transferring dockerfile: 216B                                                                    0.0s
+ => WARN: MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)   0.0s
+ => [internal] load metadata for docker.io/library/nginx:1.14-alpine                                    0.6s
+ => [internal] load .dockerignore                                                                       0.0s
+ => => transferring context: 2B                                                                         0.0s
+ => [internal] load build context                                                                       0.0s
+ => => transferring context: 32B                                                                        0.0s
+ => [1/2] FROM docker.io/library/nginx:1.14-alpine@sha256:485b610fefec7ff6c463ced9623314a04ed67e3945b9  0.0s
+ => CACHED [2/2] COPY ./index.html /usr/share/nginx/html/index.html                                     0.0s
+ => exporting to image                                                                                  0.0s
+ => => exporting layers                                                                                 0.0s
+ => => writing image sha256:3161ca90551e20711c0ad2f4d07fda3ff9619a89d7d286dc4eda2868f2cfef94            0.0s
+ => => naming to docker.io/library/eks-nginx:v2.0                                                       0.0s
+
+ 1 warning found (use docker --debug to expand):
+ - MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)
+root@ip-10-250-1-114:~/dockerfile-folder# docker images
+REPOSITORY                                                    TAG       IMAGE ID       CREATED       SIZE
+884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx   v1.0      3161ca90551e   2 hours ago   16MB
+eks-nginx                                                     v1.0      3161ca90551e   2 hours ago   16MB
+eks-nginx                                                     v2.0      3161ca90551e   2 hours ago   16MB
+root@ip-10-250-1-114:~/dockerfile-folder# docker tag eks-nginx:v2.0 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0
+root@ip-10-250-1-114:~/dockerfile-folder# docker push 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0
+The push refers to repository [884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx]
+71e3ac6fc056: Layer already exists 
+076c58d2644f: Layer already exists 
+b2cbae4b8c15: Layer already exists 
+5ac9a5170bf2: Layer already exists 
+a464c54f93a9: Layer already exists 
+v2.0: digest: sha256:08e6a45eb298666f7cac5aeecf53dcf5ce2a3f2f61fb4a08de07e601b214029d size: 1360
+root@ip-10-250-1-114:~/dockerfile-folder# docker tag eks-nginx:v2.0 88409^C82680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0
+root@ip-10-250-1-114:~/dockerfile-folder# docker images
+REPOSITORY                                                    TAG       IMAGE ID       CREATED       SIZE
+884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx   v1.0      3161ca90551e   2 hours ago   16MB
+884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx   v2.0      3161ca90551e   2 hours ago   16MB
+eks-nginx                                                     v1.0      3161ca90551e   2 hours ago   16MB
+eks-nginx                                                     v2.0      3161ca90551e   2 hours ago   16MB
+root@ip-10-250-1-114:~/dockerfile-folder# docker rmi -f $(docker images -q)
+Untagged: 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v1.0
+Untagged: 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0
+Untagged: 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx@sha256:08e6a45eb298666f7cac5aeecf53dcf5ce2a3f2f61fb4a08de07e601b214029d
+Untagged: eks-nginx:v1.0
+Untagged: eks-nginx:v2.0
+Deleted: sha256:3161ca90551e20711c0ad2f4d07fda3ff9619a89d7d286dc4eda2868f2cfef94
+Error response from daemon: No such image: 3161ca90551e:latest
+Error response from daemon: No such image: 3161ca90551e:latest
+Error response from daemon: No such image: 3161ca90551e:latest
+root@ip-10-250-1-114:~/dockerfile-folder# docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+root@ip-10-250-1-114:~/dockerfile-folder# clear
+root@ip-10-250-1-114:~/dockerfile-folder# docker build -t eks-nginx:v1.0 .
+[+] Building 1.3s (7/7) FINISHED                                                              docker:default
+ => [internal] load build definition from dockerfile                                                    0.0s
+ => => transferring dockerfile: 216B                                                                    0.0s
+ => WARN: MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)   0.0s
+ => [internal] load metadata for docker.io/library/nginx:1.14-alpine                                    1.2s
+ => [internal] load .dockerignore                                                                       0.0s
+ => => transferring context: 2B                                                                         0.0s
+ => [internal] load build context                                                                       0.0s
+ => => transferring context: 32B                                                                        0.0s
+ => [1/2] FROM docker.io/library/nginx:1.14-alpine@sha256:485b610fefec7ff6c463ced9623314a04ed67e3945b9  0.0s
+ => CACHED [2/2] COPY ./index.html /usr/share/nginx/html/index.html                                     0.0s
+ => exporting to image                                                                                  0.0s
+ => => exporting layers                                                                                 0.0s
+ => => writing image sha256:3161ca90551e20711c0ad2f4d07fda3ff9619a89d7d286dc4eda2868f2cfef94            0.0s
+ => => naming to docker.io/library/eks-nginx:v1.0                                                       0.0s
+
+ 1 warning found (use docker --debug to expand):
+ - MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)
+root@ip-10-250-1-114:~/dockerfile-folder# docker tag eks-nginx:v1.0 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v1.0
+root@ip-10-250-1-114:~/dockerfile-folder# docker push 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v1.0
+The push refers to repository [884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx]
+71e3ac6fc056: Pushed 
+076c58d2644f: Pushed 
+b2cbae4b8c15: Pushed 
+5ac9a5170bf2: Pushed 
+a464c54f93a9: Pushed 
+v1.0: digest: sha256:08e6a45eb298666f7cac5aeecf53dcf5ce2a3f2f61fb4a08de07e601b214029d size: 1360
+root@ip-10-250-1-114:~/dockerfile-folder# clear
+root@ip-10-250-1-114:~/dockerfile-folder# docker images
+REPOSITORY                                                    TAG       IMAGE ID       CREATED       SIZE
+884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx   v1.0      3161ca90551e   2 hours ago   16MB
+eks-nginx                                                     v1.0      3161ca90551e   2 hours ago   16MB
+root@ip-10-250-1-114:~/dockerfile-folder# docker build -t eks-nginx:v2.0 .
+[+] Building 0.7s (7/7) FINISHED                                                              docker:default
+ => [internal] load build definition from dockerfile                                                    0.0s
+ => => transferring dockerfile: 216B                                                                    0.0s
+ => WARN: MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)   0.0s
+ => [internal] load metadata for docker.io/library/nginx:1.14-alpine                                    0.6s
+ => [internal] load .dockerignore                                                                       0.0s
+ => => transferring context: 2B                                                                         0.0s
+ => [internal] load build context                                                                       0.0s
+ => => transferring context: 32B                                                                        0.0s
+ => [1/2] FROM docker.io/library/nginx:1.14-alpine@sha256:485b610fefec7ff6c463ced9623314a04ed67e3945b9  0.0s
+ => CACHED [2/2] COPY ./index.html /usr/share/nginx/html/index.html                                     0.0s
+ => exporting to image                                                                                  0.0s
+ => => exporting layers                                                                                 0.0s
+ => => writing image sha256:3161ca90551e20711c0ad2f4d07fda3ff9619a89d7d286dc4eda2868f2cfef94            0.0s
+ => => naming to docker.io/library/eks-nginx:v2.0                                                       0.0s
+
+ 1 warning found (use docker --debug to expand):
+ - MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)
+root@ip-10-250-1-114:~/dockerfile-folder# docker images
+REPOSITORY                                                    TAG       IMAGE ID       CREATED       SIZE
+884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx   v1.0      3161ca90551e   2 hours ago   16MB
+eks-nginx                                                     v1.0      3161ca90551e   2 hours ago   16MB
+eks-nginx                                                     v2.0      3161ca90551e   2 hours ago   16MB
+root@ip-10-250-1-114:~/dockerfile-folder# clear
+root@ip-10-250-1-114:~/dockerfile-folder# docker images
+REPOSITORY                                                    TAG       IMAGE ID       CREATED       SIZE
+884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx   v1.0      3161ca90551e   2 hours ago   16MB
+eks-nginx                                                     v1.0      3161ca90551e   2 hours ago   16MB
+eks-nginx                                                     v2.0      3161ca90551e   2 hours ago   16MB
+root@ip-10-250-1-114:~/dockerfile-folder# docker tag eks-nginx:v2.0 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0
+root@ip-10-250-1-114:~/dockerfile-folder# docker tag eks-nginx:v^C0 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0
+root@ip-10-250-1-114:~/dockerfile-folder# docker push 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0
+The push refers to repository [884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx]
+71e3ac6fc056: Layer already exists 
+076c58d2644f: Layer already exists 
+b2cbae4b8c15: Layer already exists 
+5ac9a5170bf2: Layer already exists 
+a464c54f93a9: Layer already exists 
+v2.0: digest: sha256:08e6a45eb298666f7cac5aeecf53dcf5ce2a3f2f61fb4a08de07e601b214029d size: 1360
+root@ip-10-250-1-114:~/dockerfile-folder# docker images
+REPOSITORY                                                    TAG       IMAGE ID       CREATED       SIZE
+884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx   v1.0      3161ca90551e   2 hours ago   16MB
+884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx   v2.0      3161ca90551e   2 hours ago   16MB
+eks-nginx                                                     v1.0      3161ca90551e   2 hours ago   16MB
+eks-nginx                                                     v2.0      3161ca90551e   2 hours ago   16MB
+root@ip-10-250-1-114:~/dockerfile-folder# docker rmi -f $(docker images -q)
+Untagged: 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v1.0
+Untagged: 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0
+Untagged: 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx@sha256:08e6a45eb298666f7cac5aeecf53dcf5ce2a3f2f61fb4a08de07e601b214029d
+Untagged: eks-nginx:v1.0
+Untagged: eks-nginx:v2.0
+Deleted: sha256:3161ca90551e20711c0ad2f4d07fda3ff9619a89d7d286dc4eda2868f2cfef94
+Error response from daemon: No such image: 3161ca90551e:latest
+Error response from daemon: No such image: 3161ca90551e:latest
+Error response from daemon: No such image: 3161ca90551e:latest
+root@ip-10-250-1-114:~/dockerfile-folder# docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+root@ip-10-250-1-114:~/dockerfile-folder# clear
+root@ip-10-250-1-114:~/dockerfile-folder# docker build -t eks-nginx:v1.0 .
+[+] Building 1.3s (7/7) FINISHED                                                              docker:default
+ => [internal] load build definition from dockerfile                                                    0.0s
+ => => transferring dockerfile: 216B                                                                    0.0s
+ => WARN: MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)   0.0s
+ => [internal] load metadata for docker.io/library/nginx:1.14-alpine                                    1.2s
+ => [internal] load .dockerignore                                                                       0.0s
+ => => transferring context: 2B                                                                         0.0s
+ => [internal] load build context                                                                       0.0s
+ => => transferring context: 32B                                                                        0.0s
+ => [1/2] FROM docker.io/library/nginx:1.14-alpine@sha256:485b610fefec7ff6c463ced9623314a04ed67e3945b9  0.0s
+ => CACHED [2/2] COPY ./index.html /usr/share/nginx/html/index.html                                     0.0s
+ => exporting to image                                                                                  0.0s
+ => => exporting layers                                                                                 0.0s
+ => => writing image sha256:3161ca90551e20711c0ad2f4d07fda3ff9619a89d7d286dc4eda2868f2cfef94            0.0s
+ => => naming to docker.io/library/eks-nginx:v1.0                                                       0.0s
+
+ 1 warning found (use docker --debug to expand):
+ - MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)
+root@ip-10-250-1-114:~/dockerfile-folder# docker tag eks-nginx:v1.0 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v1.0
+root@ip-10-250-1-114:~/dockerfile-folder# docker push 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v1.0
+The push refers to repository [884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx]
+71e3ac6fc056: Pushed 
+076c58d2644f: Pushed 
+b2cbae4b8c15: Pushed 
+5ac9a5170bf2: Pushed 
+a464c54f93a9: Pushed 
+v1.0: digest: sha256:08e6a45eb298666f7cac5aeecf53dcf5ce2a3f2f61fb4a08de07e601b214029d size: 1360
+root@ip-10-250-1-114:~/dockerfile-folder# clear
+root@ip-10-250-1-114:~/dockerfile-folder# ls
+dockerfile  index.html
+root@ip-10-250-1-114:~/dockerfile-folder# vi index.html 
+root@ip-10-250-1-114:~/dockerfile-folder# docker build -t eks-nginx:v2.0 .
+[+] Building 0.8s (7/7) FINISHED                                                              docker:default
+ => [internal] load build definition from dockerfile                                                    0.0s
+ => => transferring dockerfile: 216B                                                                    0.0s
+ => WARN: MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)   0.0s
+ => [internal] load metadata for docker.io/library/nginx:1.14-alpine                                    0.6s
+ => [internal] load .dockerignore                                                                       0.0s
+ => => transferring context: 2B                                                                         0.0s
+ => [internal] load build context                                                                       0.0s
+ => => transferring context: 424B                                                                       0.0s
+ => CACHED [1/2] FROM docker.io/library/nginx:1.14-alpine@sha256:485b610fefec7ff6c463ced9623314a04ed67  0.0s
+ => [2/2] COPY ./index.html /usr/share/nginx/html/index.html                                            0.0s
+ => exporting to image                                                                                  0.1s
+ => => exporting layers                                                                                 0.0s
+ => => writing image sha256:7a01b3679ce8c4594f89d10a917642128607bf08fc849842c22bd7702ffd856e            0.0s
+ => => naming to docker.io/library/eks-nginx:v2.0                                                       0.0s
+
+ 1 warning found (use docker --debug to expand):
+ - MaintainerDeprecated: Maintainer instruction is deprecated in favor of using label (line 2)
+root@ip-10-250-1-114:~/dockerfile-folder# docker images
+REPOSITORY                                                    TAG       IMAGE ID       CREATED         SIZE
+eks-nginx                                                     v2.0      7a01b3679ce8   6 seconds ago   16MB
+eks-nginx                                                     v1.0      3161ca90551e   2 hours ago     16MB
+884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx   v1.0      3161ca90551e   2 hours ago     16MB
+root@ip-10-250-1-114:~/dockerfile-folder# docker tag eks-nginx:v2.0 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0
+root@ip-10-250-1-114:~/dockerfile-folder# docker push 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0
+The push refers to repository [884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx]
+fca3a06d2a46: Pushed 
+076c58d2644f: Layer already exists 
+b2cbae4b8c15: Layer already exists 
+5ac9a5170bf2: Layer already exists 
+a464c54f93a9: Layer already exists 
+v2.0: digest: sha256:69a9e9734ff09394b6405cd29e5f51e0d540f6e0b94756b77df649bc849c8d00 size: 1360
+root@ip-10-250-1-114:~/dockerfile-folder# clear
+root@ip-10-250-1-114:~/dockerfile-folder# vi deploy2-webui.yaml
+root@ip-10-250-1-114:~/dockerfile-folder# kubectl apply -f deploy2-webui.yaml 
+deployment.apps/webui configured
+root@ip-10-250-1-114:~/dockerfile-folder# kubectl get pods -o wide
+NAME                    READY   STATUS    RESTARTS   AGE   IP              NODE                                               NOMINATED NODE   READINESS GATES
+webui-59cc6ccc9-675lj   1/1     Running   0          8s    10.250.12.238   ip-10-250-12-225.ap-northeast-2.compute.internal   <none>           <none>
+webui-59cc6ccc9-gnk66   1/1     Running   0          6s    10.250.2.92     ip-10-250-2-181.ap-northeast-2.compute.internal    <none>           <none>
+webui-59cc6ccc9-j84zq   1/1     Running   0          8s    10.250.2.47     ip-10-250-2-181.ap-northeast-2.compute.internal    <none>           <none>
+webui-59cc6ccc9-s42lq   1/1     Running   0          6s    10.250.12.142   ip-10-250-12-225.ap-northeast-2.compute.internal   <none>           <none>
+root@ip-10-250-1-114:~/dockerfile-folder# docker tag eks-nginx:v2.0 884097182680.dkr.ecr.ap-northeast-2.amazonaws.com/eks-nginx:v2.0^C
+root@ip-10-250-1-114:~/dockerfile-folder# kubectl delete deploy webui
+deployment.apps "webui" deleted
+root@ip-10-250-1-114:~/dockerfile-folder# kubectl apply -f deploy2-webui.yaml 
+deployment.apps/webui created
+root@ip-10-250-1-114:~/dockerfile-folder# kubectl expose deploy webui --name webui2-svc --type=LoadBalancer --port=80
+service/webui2-svc exposed
+root@ip-10-250-1-114:~/dockerfile-folder# kubectl get svc
+NAME         TYPE           CLUSTER-IP       EXTERNAL-IP                                                                   PORT(S)        AGE
+kubernetes   ClusterIP      172.20.0.1       <none>                                                                        443/TCP        82m
+webui-svc    LoadBalancer   172.20.51.20     a6e74dd088e4d458cbdb8cccf33b23b1-89041353.ap-northeast-2.elb.amazonaws.com    80:30157/TCP   51m
+webui2-svc   LoadBalancer   172.20.198.143   afbf0f91f00bc4053b20ee727d97ea69-810971848.ap-northeast-2.elb.amazonaws.com   80:32522/TCP   10s
+root@ip-10-250-1-114:~/dockerfile-folder# kubectl delete svc webui-svc
+service "webui-svc" deleted
+^C
+root@ip-10-250-1-114:~/dockerfile-folder# kubectl delete svc webui-svc --force
+warning: Immediate deletion does not wait for confirmation that the running resource has been terminated. The resource may continue to run on the cluster indefinitely.
+Error from server (NotFound): services "webui-svc" not found
+root@ip-10-250-1-114:~/dockerfile-folder# kubectl get svc
+NAME         TYPE           CLUSTER-IP       EXTERNAL-IP                                                                   PORT(S)        AGE
+kubernetes   ClusterIP      172.20.0.1       <none>                                                                        443/TCP        83m
+webui2-svc   LoadBalancer   172.20.198.143   afbf0f91f00bc4053b20ee727d97ea69-810971848.ap-northeast-2.elb.amazonaws.com   80:32522/TCP   100s
+root@ip-10-250-1-114:~/dockerfile-folder# 
