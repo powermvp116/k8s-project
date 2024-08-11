@@ -1,0 +1,29 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: k8s-cluster
+  region:  ap-northeast-2
+vpc:
+  subnets:
+    private:  # 워커노드가 속할 서브넷 기재
+      ap-northeast-2a: { id: subnet-00e4f853fd77cd255 }   
+      ap-northeast-2c: { id: subnet-04ec81562ea554dcb }
+
+managedNodeGroups:
+  - name: k8s-3tier-node1
+    labels: { role: workers }
+    instanceType: t3.medium
+    desiredCapacity: 1
+    privateNetworking: true
+    subnets:
+      - subnet-00e4f853fd77cd255
+  - name: k8s-3tier-node2
+    labels: { role: workers }
+    instanceType: t3.medium
+    desiredCapacity: 1
+    privateNetworking: true
+    subnets:
+      - subnet-04ec81562ea554dcb
+    iam:
+      withAddonPolicies:
+        imageBuilder: true
