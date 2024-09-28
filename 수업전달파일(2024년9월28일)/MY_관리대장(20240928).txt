@@ -1,0 +1,57 @@
+1. VPC 생성
+    vec-prd-vpc : 10.250.0.0/16  (65,563)
+
+2. Subnet 생성
+   
+    1) AZ : 2A
+     vec-prd-bestion-subnet-2a            : 10.250.3.0/24 - 251      
+     ec2 name: VEC-PRD-VPC-Bastion-PUB-2A : 10.250.3.13
+     
+     vec-prd-nginx-subnet-2a              : 10.250.1.0/24 - 251               
+     ec2 name: VEC-PRD-VPC-NGINX-PUB-2A   : 10.250.1.13
+     
+     vec-prd-tomcat-subnet-2a             : 10.250.2.0/24 - 251     
+     ec2 name: VEC-PRD-VPC-TOMCAT-PRI-2A  : 10.250.2.13
+     
+
+   2) AZ : 2C
+     vec-prd-nginx-subnet-2c              : 10.250.11.0/24 - 251      
+     ec2 name: VEC-PRD-VPC-NGINX-PUB-2C   : 10.250.11.13
+     
+     vec-prd-tomcat-subnet-2c             : 10.250.12.0/24 - 251        
+     ec2 name: VEC-PRD-VPC-TOMCAT-PRI-2C  : 10.250.12.13
+     
+3. Security Group 생성
+
+    vec-prd-sg-bastion (22,80,443)
+    vec-prd-sg-nginx   (22,80,443) 
+    vec-prd-sg-tomcat  (8080) 
+    
+    
+4. Routeing 테이블 생성
+
+    vec-prd-pulic-route
+    vec-prd-private-route01
+    vec-prd-private-route02
+    
+
+5. Internet Gateway 생성  (Pub Sunbet 에 있는 인스턴스가 인터넷을 사용할 수 있도록 해주기 위함)
+    vec-prd-igw
+
+6. NAT GATEWAY  생성      (Private Subnet에 있는 인스턴스가 인터넷을 사용할 수 있도록 해주기 위함)
+    vec-prd-ngw-01   -- 우리 실습환경
+    vec-prd-ngw-02   -- 이중화를 위해 구성하는것을 권고함.
+
+7. KeyPair 이름 : powermvp.pem
+
+8. AWS Linux2 연결사용자계정 : ec2-user 패스워드는 없다. powermvp.pem 연결할거다.
+
+9. 10.250.1.13(Nginx) <========> 10.250.2.13 (Tomcat)
+
+10. Launch Temp       : vec-prd-web-temp
+11. ELB Name          : vec-web-lb
+12. ELB Security Name : vec-prd-sg-elb  (80,443)
+13. ELB TG Name       : vec-prd-tg
+14. AutoScal NAME     : vec-prd-asg
+   
+   

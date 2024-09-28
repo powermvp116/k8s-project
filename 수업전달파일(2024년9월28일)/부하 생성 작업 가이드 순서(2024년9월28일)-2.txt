@@ -1,0 +1,85 @@
+#################################### 부하 생성 작업 가이드 순서(2024년9월28일) ###############################
+
+[실습1]
+#사전작업
+1. S3 사용을 위한 IAM 권한 설정
+2. S3 Console 에서 ldcc-as-demo 버킷 생성
+3. 해당 버킷에 index.html 파일 업로드 진행
+
+#!/bin/bash
+
+yum install httpd -y
+service httpd start
+chkconfig httpd on
+
+aws s3 cp s3://ldcc-as-demo/index.html /var/www/html --region ap-northeast-2
+
+
+
+[실습2]
+#!/bin/bash
+
+INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id) # 자신의 인스턴스 ID 문자값을 변수에 저장
+yum  install httpd -y # 아파치 서버 설치
+echo ""$INSTANCE_ID"" >> /var/www/html/index.html # #INSTANCE_ID 변수값을 html에 이어쓰기
+service httpd start # 아파치 시작
+
+
+
+[실습3] 
+#!/bin/bash
+
+yes | sudo apt update
+yes | sudo apt install apache2
+echo "<h1>Server Details</h1><p><strong>Hostname:</strong> $(hostname)</p><p><strong>IP Address:</strong> $(hostname -I | cut -d' ' -f1)</p>" > /var/www/html/index.html
+sudo systemctl restart apache2
+
+
+[실습4]
+
+1. AWS Console에서 Ubuntu 22.04 인스턴스 생성
+- AWS Management Console에 로그인.
+- EC2 대시보드로 이동하여 새로운 인스턴스를 시작.
+- Ubuntu 22.04를 선택하고 기본인스턴스를 생성.
+
+2. SSH로 Ubuntu 22.04에 접속 후 스크립트 실행
+- SSH를 사용하여 생성한 인스턴스에 접속.
+- 아래 명령어를 입력하여 Apache2와 PHP를 설치하고 서비스를 재시작
+
+#apache, php 설치
+sudo apt update; 
+sudo apt install apache2 php; 
+sudo service apache2 restart; 
+
+3. index.php 파일 생성 및 수정
+
+생성된 Ubuntu에 x-shell 접속하여 아래 명령어 실행
+
+sudo vim /var/www/html/index.php 
+
+<?php
+$time = microtime(true);
+password_hash('Hello',CRYPT_BLOWFISH,array("cost"=>empty($_GET['cost']) ? 14 : (int)$_GET['cost']));
+echo $_SERVER['SERVER_ADDR'].' : '.(microtime(true) - $time);
+?>
+
+위 명령어을 입력후 저장하고 빠져 나온다.
+
+4. 웹 브라우저에서 테스트
+공인 IP를 통해 웹 페이지가 정상적으로 표시되는지 확인
+http://15.56.78.45/index.php
+http://15.56.78.45/index.php?cost=15 : CPU 부하를 늘리기 위해서는 Cost 값을 수정한다. 
+
+5. ELB를 통해 정상적으로 index.php 화면이 뜨는지 확인
+
+6. CPU 상태 확인
+   SSH로 인스턴스에 접속한 상태에서 아래 명령어 입력 : htop
+   
+7. JMeter를 사용하여 부하 생성 작업을 설정하고 실행 : 3명의 사용자, 1초 간격, 연속 실행 설정.
+
+8. 아파치벤치 사용
+[root@ip-10-250-11-103 ~]# ab -n 200000 -c 1000 http://vec-prd-auto-alb-391644819.ap-northeast-2.elb.amazonaws.com/index.php
+
+
+
+
