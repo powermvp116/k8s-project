@@ -1,0 +1,49 @@
+01. VPC 생성
+    vec-prd-vpc : 10.250.0.0/16  (65,563)
+
+02. Subnet 생성
+   
+    1) AZ : 2A
+     VEC-PRD-VPC-BASTION-PUB-2A    (10.250.3.0/24) - 251      VEC-PRD-VPC-Bastion-PUB-SG-2A (22,80,443,ICMP)
+     ec2 name: VEC-PRD-VPC-Bastion-PUB-2A : 10.250.3.240
+     
+     VEC-PRD-VPC-NGINX-PUB-2A      (10.250.1.0/24) - 251      VEC-PRD-VPC-NGINX-PUB-SG-2A   (22,80,443, ICMP : all)          
+     ec2 name: VEC-PRD-VPC-NGINX-PUB-2A   : 10.250.1.240
+     
+     VEC-PRD-VPC-TOMCAT-PRI-2A     (10.250.2.0/24) - 251      VEC-PRD-VPC-TOMCAT-PRI-SG-2A  (80,443,8080) 
+     ec2 name: VEC-PRD-VPC-TOMCAT-PRI-2A  : 10.250.2.240
+     
+
+   2) AZ : 2C
+     VEC-PRD-VPC-NGINX-PUB-2C      (10.250.11.0/24) - 251     VEC-PRD-VPC-NGINX-PUB-SG-2C   (22,80,443,ICMP : all) 
+     ec2 name: VEC-PRD-VPC-NGINX-PUB-2C   : 10.250.11.240
+     
+     VEC-PRD-VPC-TOMCAT-PRI-2C     (10.250.12.0/24) - 251     VEC-PRD-VPC-TOMCAT-PRI-SG-2C  (80,443,8080) 
+     ec2 name: VEC-PRD-VPC-TOMCAT-PRI-2C  : 10.250.12.240
+     
+   
+03. Routeing 테이블 생성
+
+    VEC-PRD-RT-PUB-2A     VEC-PRD-RT-PUB
+    VEC-PRD-RT-PUB-2C
+    VEC-PRD-RT-PRI-2A     VEC-PRD-RT-PRI
+    VEC-PRD-RT-PRI-2C
+
+04. Internet Gateway 생성  (Pub Sunbet 에 있는 인스턴스가 인터넷을 사용할 수 있도록 해주기 위함)
+    VEC-PRD-IGW
+
+05. NAT GATEWAY  생성      (Private Subnet에 있는 인스턴스가 인터넷을 사용할 수 있도록 해주기 위함)
+    VEC-PRD-NGW-2A   -- 우리 실습환경
+    VEC-PRD-NGW-2C   -- 이중화를 위해 구성하는것을 권고함.
+
+06. KeyPair 이름 : powermvp.pem
+
+07. AWS Linux2 연결사용자계정 : ec2-user 패스워드는 없다. powermvp.pem 연결할거다.
+
+08. 10.250.1.13(Nginx) <========> 10.250.2.13 (Tomcat)  통신이 될까? 
+
+09. ELB Name          : VEC-NGINX-ALB
+10. ELB Security Name : VEC-NGINX-ALB-SG  (80,443)
+11. ELB TG Name       : VEC-NGINX-ALB-TG
+   
+   
