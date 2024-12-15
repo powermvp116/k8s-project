@@ -1,0 +1,223 @@
+1. kubectl 명령으로 설치결과 확인
+
+root@master1:~# kubectl get nodes -o wide
+NAME      STATUS   ROLES           AGE    VERSION    INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+master1   Ready    control-plane   137m   v1.28.15   10.100.0.101   <none>        Ubuntu 20.04.6 LTS   5.15.0-79-generic   containerd://1.7.24
+master2   Ready    control-plane   134m   v1.28.15   10.100.0.102   <none>        Ubuntu 20.04.6 LTS   5.15.0-79-generic   containerd://1.7.24
+master3   Ready    control-plane   124m   v1.28.15   10.100.0.103   <none>        Ubuntu 20.04.6 LTS   5.15.0-79-generic   containerd://1.7.24
+worker1   Ready    <none>          123m   v1.28.15   10.100.0.104   <none>        Ubuntu 20.04.6 LTS   5.15.0-79-generic   containerd://1.7.24
+worker2   Ready    <none>          82s    v1.28.15   10.100.0.105   <none>        Ubuntu 20.04.6 LTS   5.15.0-79-generic   containerd://1.7.24
+
+
+root@master1:~# kubectl get pods -A
+NAMESPACE     NAME                                       READY   STATUS    RESTARTS        AGE
+kube-system   calico-kube-controllers-5fc7d6cf67-gzpqg   1/1     Running   1 (19m ago)     123m
+kube-system   calico-node-4hb49                          1/1     Running   1 (19m ago)     123m
+kube-system   calico-node-7nwwf                          1/1     Running   2 (17m ago)     123m
+kube-system   calico-node-gmhkp                          1/1     Running   1 (20m ago)     123m
+kube-system   calico-node-lhr62                          1/1     Running   0               2m19s
+kube-system   calico-node-pvw22                          1/1     Running   1 (20m ago)     123m
+kube-system   coredns-5dd5756b68-7fhz4                   1/1     Running   1 (19m ago)     138m
+kube-system   coredns-5dd5756b68-mx2z5                   1/1     Running   1 (19m ago)     138m
+kube-system   etcd-master1                               1/1     Running   1 (20m ago)     138m
+kube-system   etcd-master2                               1/1     Running   1 (20m ago)     135m
+kube-system   etcd-master3                               1/1     Running   1 (19m ago)     125m
+kube-system   kube-apiserver-master1                     1/1     Running   1 (20m ago)     138m
+kube-system   kube-apiserver-master2                     1/1     Running   1 (20m ago)     135m
+kube-system   kube-apiserver-master3                     1/1     Running   3 (19m ago)     125m
+kube-system   kube-controller-manager-master1            1/1     Running   5 (8m57s ago)   138m
+kube-system   kube-controller-manager-master2            1/1     Running   2 (3m40s ago)   135m
+kube-system   kube-controller-manager-master3            1/1     Running   2 (17m ago)     124m
+kube-system   kube-proxy-56mdm                           1/1     Running   1 (19m ago)     124m
+kube-system   kube-proxy-76kzj                           1/1     Running   1 (20m ago)     135m
+kube-system   kube-proxy-ll6t8                           1/1     Running   1 (20m ago)     138m
+kube-system   kube-proxy-rmvv5                           1/1     Running   1 (19m ago)     125m
+kube-system   kube-proxy-w4sxq                           1/1     Running   0               2m19s
+kube-system   kube-scheduler-master1                     1/1     Running   4 (8m57s ago)   138m
+kube-system   kube-scheduler-master2                     1/1     Running   2 (3m40s ago)   135m
+kube-system   kube-scheduler-master3                     1/1     Running   2 (2m7s ago)    125m
+
+root@master1:~# kubectl get pods --all-namespaces
+NAMESPACE     NAME                                       READY   STATUS    RESTARTS        AGE
+kube-system   calico-kube-controllers-5fc7d6cf67-gzpqg   1/1     Running   1 (20m ago)     124m
+kube-system   calico-node-4hb49                          1/1     Running   1 (20m ago)     124m
+kube-system   calico-node-7nwwf                          1/1     Running   2 (18m ago)     124m
+kube-system   calico-node-gmhkp                          1/1     Running   1 (21m ago)     124m
+kube-system   calico-node-lhr62                          1/1     Running   0               3m20s
+kube-system   calico-node-pvw22                          1/1     Running   1 (21m ago)     124m
+kube-system   coredns-5dd5756b68-7fhz4                   1/1     Running   1 (20m ago)     139m
+kube-system   coredns-5dd5756b68-mx2z5                   1/1     Running   1 (20m ago)     139m
+kube-system   etcd-master1                               1/1     Running   1 (21m ago)     139m
+kube-system   etcd-master2                               1/1     Running   1 (21m ago)     136m
+kube-system   etcd-master3                               1/1     Running   1 (20m ago)     126m
+kube-system   kube-apiserver-master1                     1/1     Running   1 (21m ago)     139m
+kube-system   kube-apiserver-master2                     1/1     Running   1 (21m ago)     136m
+kube-system   kube-apiserver-master3                     1/1     Running   3 (20m ago)     126m
+kube-system   kube-controller-manager-master1            1/1     Running   5 (9m58s ago)   139m
+kube-system   kube-controller-manager-master2            1/1     Running   2 (4m41s ago)   136m
+kube-system   kube-controller-manager-master3            1/1     Running   2 (18m ago)     125m
+kube-system   kube-proxy-56mdm                           1/1     Running   1 (20m ago)     125m
+kube-system   kube-proxy-76kzj                           1/1     Running   1 (21m ago)     136m
+kube-system   kube-proxy-ll6t8                           1/1     Running   1 (21m ago)     139m
+kube-system   kube-proxy-rmvv5                           1/1     Running   1 (20m ago)     126m
+kube-system   kube-proxy-w4sxq                           1/1     Running   0               3m20s
+kube-system   kube-scheduler-master1                     1/1     Running   4 (9m58s ago)   139m
+kube-system   kube-scheduler-master2                     1/1     Running   2 (4m41s ago)   136m
+kube-system   kube-scheduler-master3                     1/1     Running   2 (3m8s ago)    126m
+
+=================================================================================================
+
+2. 간단한 실행 실습
+워커 노드 정보 보기
+kubectl get nodes -o wide
+
+root@master1:~# kubectl get nodes -o wide
+NAME      STATUS   ROLES           AGE     VERSION    INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+master1   Ready    control-plane   140m    v1.28.15   10.100.0.101   <none>        Ubuntu 20.04.6 LTS   5.15.0-79-generic   containerd://1.7.24
+master2   Ready    control-plane   137m    v1.28.15   10.100.0.102   <none>        Ubuntu 20.04.6 LTS   5.15.0-79-generic   containerd://1.7.24
+master3   Ready    control-plane   127m    v1.28.15   10.100.0.103   <none>        Ubuntu 20.04.6 LTS   5.15.0-79-generic   containerd://1.7.24
+worker1   Ready    <none>          126m    v1.28.15   10.100.0.104   <none>        Ubuntu 20.04.6 LTS   5.15.0-79-generic   containerd://1.7.24
+worker2   Ready    <none>          4m14s   v1.28.15   10.100.0.105   <none>        Ubuntu 20.04.6 LTS   5.15.0-79-generic   containerd://1.7.24
+
+kubectl get pods -A
+root@master1:~# kubectl get pods -A
+NAMESPACE     NAME                                       READY   STATUS    RESTARTS        AGE
+kube-system   calico-kube-controllers-5fc7d6cf67-gzpqg   1/1     Running   1 (22m ago)     126m
+kube-system   calico-node-4hb49                          1/1     Running   1 (22m ago)     126m
+kube-system   calico-node-7nwwf                          1/1     Running   2 (20m ago)     126m
+kube-system   calico-node-gmhkp                          1/1     Running   1 (22m ago)     126m
+kube-system   calico-node-lhr62                          1/1     Running   0               4m39s
+kube-system   calico-node-pvw22                          1/1     Running   1 (22m ago)     126m
+kube-system   coredns-5dd5756b68-7fhz4                   1/1     Running   1 (22m ago)     140m
+kube-system   coredns-5dd5756b68-mx2z5                   1/1     Running   1 (22m ago)     140m
+kube-system   etcd-master1                               1/1     Running   1 (22m ago)     140m
+kube-system   etcd-master2                               1/1     Running   1 (22m ago)     137m
+kube-system   etcd-master3                               1/1     Running   1 (22m ago)     127m
+kube-system   kube-apiserver-master1                     1/1     Running   1 (22m ago)     140m
+kube-system   kube-apiserver-master2                     1/1     Running   1 (22m ago)     137m
+kube-system   kube-apiserver-master3                     1/1     Running   3 (22m ago)     128m
+kube-system   kube-controller-manager-master1            1/1     Running   5 (11m ago)     140m
+kube-system   kube-controller-manager-master2            1/1     Running   2 (6m ago)      137m
+kube-system   kube-controller-manager-master3            1/1     Running   2 (19m ago)     126m
+kube-system   kube-proxy-56mdm                           1/1     Running   1 (22m ago)     126m
+kube-system   kube-proxy-76kzj                           1/1     Running   1 (22m ago)     137m
+kube-system   kube-proxy-ll6t8                           1/1     Running   1 (22m ago)     140m
+kube-system   kube-proxy-rmvv5                           1/1     Running   1 (22m ago)     128m
+kube-system   kube-proxy-w4sxq                           1/1     Running   0               4m39s
+kube-system   kube-scheduler-master1                     1/1     Running   4 (11m ago)     140m
+kube-system   kube-scheduler-master2                     1/1     Running   2 (6m ago)      137m
+kube-system   kube-scheduler-master3                     1/1     Running   2 (4m27s ago)   128m
+
+
+세셕복사 
+수평분할 : 모니터링 하면서 생성과정을 보자 (watch kubectl get pods -o wide)
+
+[실습1]
+Pod 배포 TEST. nginx 컨테이너 5개 실행하고 결과 확인
+kubectl create  deployment webserver --image=nginx:1.14 --port=80  --replicas=5
+
+root@master1:~# kubectl get pods -o wide
+NAME                         READY   STATUS    RESTARTS   AGE   IP                NODE      NOMINATED NODE   READINESS GATES
+webserver-5db7fd5969-95cjl   1/1     Running   0          69s   192.168.189.66    worker2   <none>           <none>
+webserver-5db7fd5969-hx4cg   1/1     Running   0          69s   192.168.235.155   worker1   <none>           <none>
+webserver-5db7fd5969-qgspx   1/1     Running   0          69s   192.168.235.156   worker1   <none>           <none>
+webserver-5db7fd5969-s5bns   1/1     Running   0          69s   192.168.189.65    worker2   <none>           <none>
+webserver-5db7fd5969-wrvb2   1/1     Running   0          69s   192.168.189.67    worker2   <none>           <none>
+
+===============================================================================================================
+nginx 웹서버에 클라이언트 접속 가능하도록 서비스를 달아보자
+kubectl expose deployment  webserver --port=80 --type=LoadBalancer
+
+root@master1:~# kubectl get svc -o wide
+NAME         TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE   SELECTOR
+kubernetes   ClusterIP      10.96.0.1      <none>        443/TCP        21m   <none>
+webserver    LoadBalancer   10.98.236.91   <pending>     80:31628/TCP   11s   app=webserver
+
+1분정도 후에 ubuntu fireFox 웹브라우저를 통해 웹서버 연결되는지 확인  (nginx 홈페이지가 떠야 한다.)
+http://10.103.121.183
+
+
+[실습2]==================================================================================
+아래 명령어는 master2에서 실행해 보자.
+
+hub.docker.com 에 올라와 있는 컨테이너 이미지를 deploy 통해 배포를 진행해 보자
+vi deploy-nginx.yaml 
+kubectl apply -f deploy-nginx.yaml
+
+nginx 웹서버에 클라이언트 접속 가능하도록 로드밸런서 서비스를 달아보자
+kubectl expose deployment webui --port=80 --type=LoadBalancer
+==================================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webui
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: webui
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        app: webui
+    spec:
+      containers:
+      - name: nginx-container
+        image: powermvp/marvel-collection
+      tolerations:
+      - key: "role"
+        operator: "Equal"
+        value: "web"
+        effect: "NoSchedule"
+======================================================================================
+root@master2:~# kubectl get pods -o wide |grep webui
+webui-7b9446b6cc-8v472       1/1     Running   0          44s     192.168.235.157   worker1   <none>           <none>
+webui-7b9446b6cc-t8gb8       1/1     Running   0          44s     192.168.189.68    worker2   <none>           <none>
+webui-7b9446b6cc-tzqjm       1/1     Running   0          44s     192.168.189.69    worker2   <none>           <none>
+webui-7b9446b6cc-z9t95       1/1     Running   0          44s     192.168.235.158   worker1   <none>           <none>
+
+root@k8s-master:~#  kubectl get deployments.apps 
+NAME        READY   UP-TO-DATE   AVAILABLE   AGE
+webserver   5/5     5            5           8m55s
+webui       4/4     4            4           66s
+
+root@ip-10-250-1-234:~/dockerfile-folder# kubectl expose deployment webui --port=80 --type=LoadBalancer
+service/webui exposed
+
+rroot@master2:~# kubectl get svc -o wide
+NAME         TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE     SELECTOR
+kubernetes   ClusterIP      10.96.0.1      <none>        443/TCP        24m     <none>
+webserver    LoadBalancer   10.98.236.91   <pending>     80:31628/TCP   3m26s   app=webserver
+webui        LoadBalancer   10.111.21.4    <pending>     80:31267/TCP   108s    app=webui
+
+1분정도 후에 ubuntu fireFox 웹브라우저를 통해 웹서버 연결되는지 확인  (marvel-collection 홈페이지가 떠야 한다.)
+http://10.111.21.4
+
+
+(최종 테스트) 마지막으로 master1을 꺼보자 정상적으로 쿠버네틱스 클러스터가 작동하는지 확인해 보자.
+
+root@master1:~# kubectl get nodes -o wide
+NAME      STATUS     ROLES           AGE   VERSION    INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+master1   Ready      control-plane   32m   v1.28.15   10.100.0.101   <none>        Ubuntu 20.04.6 LTS   5.15.0-79-generic   containerd://1.7.24
+master2   Ready      control-plane   29m   v1.28.15   10.100.0.102   <none>        Ubuntu 20.04.6 LTS   5.15.0-79-generic   containerd://1.7.24
+master3   NotReady   control-plane   19m   v1.28.15   10.100.0.103   <none>        Ubuntu 20.04.6 LTS   5.15.0-79-generic   containerd://1.7.24
+worker1   Ready      <none>          18m   v1.28.15   10.100.0.104   <none>        Ubuntu 20.04.6 LTS   5.15.0-79-generic   containerd://1.7.24
+
+
+
+한대의 마스터노드가 꺼져도 정상 작동하는것을 볼 수 있을 것이다.
+root@master1:~# kubectl run nginx --image=nginx:1.14 
+pod/nginx created
+root@master1:~# kubectl get pods -A
+NAMESPACE     NAME                                       READY   STATUS    RESTARTS      AGE
+default       nginx                                      1/1     Running   0             5s
+default       webserver-5db7fd5969-7mj5l                 1/1     Running   0             9m24s
+default       webserver-5db7fd5969-gfk2g                 1/1     Running   0             9m24s
+default       webserver-5db7fd5969-jpw7x                 1/1     Running   0             9m25s
+default       webserver-5db7fd5969-n48nq                 1/1     Running   0             9m25s
+default       webserver-5db7fd5969-wpk9v                 1/1     Running   0             9m25s
+default       webui-7b9446b6cc-cbv8p                     1/1     Running   0             5m46s
+default       webui-7b9446b6cc-hcns7                     1/1     Running   0             5m46s
+default       webui-7b9446b6cc-kvbrs                     1/1     Running   0             5m46s
+default       webui-7b9446b6cc-zlj2g                     1/1     Running   0             5m47s
