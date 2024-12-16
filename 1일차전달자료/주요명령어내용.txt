@@ -1,0 +1,338 @@
+0.Windows Server 다운로드하기
+① 검색 사이트에서 “나무위키 Windows Server 2022 다운로드” 검색
+  - 아래로 내려가서 “여기서”를 클릭
+
+=================================================================
+1. 정품인증 명령어
+
+Windows Server 2022 KMS site:microsoft.com
+
+slmgr /ipk VDYBN-27WPP-V4HQT-9VMD4-VMK7
+slmgr /skms kms8.msguides.com
+slmgr /ato 
+slmgr /xpr
+-----------------------------------------------------------------
+Windows 11 Pro Education
+Windows 10 Pro Education	W269N-WFGWX-YVC9B-4J6C9-T83GX
+
+slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX
+slmgr /skms kms8.msguides.com
+slmgr /ato 
+slmgr /xpr
+=================================================================
+2. 로밍프로핑 및 홈 폴더경로 실습 
+프로필 경로 : \\win-master\AD_Profile\%username%\
+홈 폴더경로 : \\win-master\AD_HomeFolder\%username%
+=================================================================
+3. 비정식복원 및 정식복원 , Transfer / Seize 명령어
+
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+새로운 기능 및 개선 사항에 대 한 최신 PowerShell을 설치 하세요! https://aka.ms/PSWindows
+
+PS C:\Users\Administrator> whoami /all
+
+사용자 정보
+----------------
+
+사용자 이름              SID
+======================== ==========================================
+studykorea\administrator S-1-5-21-78025740-451456800-3622429979-500
+
+
+그룹 정보
+-----------------
+
+그룹 이름                                         유형           SID                                        특성        
+================================================= ============== ========================================== ==============================================================
+Everyone                                          잘 알려진 그룹 S-1-1-0                                    필수 그룹,  기본값으로 사용 가능, 사용 가능한 그룹
+BUILTIN\Administrators                            별칭           S-1-5-32-544                               필수 그룹,  기본값으로 사용 가능, 사용 가능한 그룹, 그룹 소유자
+BUILTIN\Users                                     별칭           S-1-5-32-545                               필수 그룹,  기본값으로 사용 가능, 사용 가능한 그룹
+BUILTIN\Pre-Windows 2000 Compatible Access        별칭           S-1-5-32-554                               필수 그룹,  기본값으로 사용 가능, 사용 가능한 그룹
+NT AUTHORITY\INTERACTIVE                          잘 알려진 그룹 S-1-5-4                                    필수 그룹,  기본값으로 사용 가능, 사용 가능한 그룹
+CONSOLE LOGON                                     잘 알려진 그룹 S-1-2-1                                    필수 그룹,  기본값으로 사용 가능, 사용 가능한 그룹
+NT AUTHORITY\Authenticated Users                  잘 알려진 그룹 S-1-5-11                                   필수 그룹,  기본값으로 사용 가능, 사용 가능한 그룹
+NT AUTHORITY\This Organization                    잘 알려진 그룹 S-1-5-15                                   필수 그룹,  기본값으로 사용 가능, 사용 가능한 그룹
+LOCAL                                             잘 알려진 그룹 S-1-2-0                                    필수 그룹,  기본값으로 사용 가능, 사용 가능한 그룹
+STUDYKOREA\Domain Admins                          그룹           S-1-5-21-78025740-451456800-3622429979-512 필수 그룹,  기본값으로 사용 가능, 사용 가능한 그룹
+STUDYKOREA\Group Policy Creator Owners            그룹           S-1-5-21-78025740-451456800-3622429979-520 필수 그룹,  기본값으로 사용 가능, 사용 가능한 그룹
+STUDYKOREA\Enterprise Admins                      그룹           S-1-5-21-78025740-451456800-3622429979-519 필수 그룹,  기본값으로 사용 가능, 사용 가능한 그룹
+STUDYKOREA\Schema Admins                          그룹           S-1-5-21-78025740-451456800-3622429979-518 필수 그룹,  기본값으로 사용 가능, 사용 가능한 그룹
+인증 기관 보장 ID                                 잘 알려진 그룹 S-1-18-1                                   필수 그룹,  기본값으로 사용 가능, 사용 가능한 그룹
+STUDYKOREA\Denied RODC Password Replication Group 별칭           S-1-5-21-78025740-451456800-3622429979-572 필수 그룹,  기본값으로 사용 가능, 사용 가능한 그룹, 로컬 그룹
+Mandatory Label\High Mandatory Level              레이블         S-1-16-12288                                           
+
+
+사용 권한 정보
+----------------------
+
+사용 권한 이름                            설명                                                     상태
+========================================= ======================================================== ==========
+SeIncreaseQuotaPrivilege                  프로세스에 대한 메모리 할당량 조정                       사용 안 함
+SeMachineAccountPrivilege                 도메인에 워크스테이션 추가                               사용 안 함
+SeSecurityPrivilege                       감사 및 보안 로그 관리                                   사용 안 함
+SeTakeOwnershipPrivilege                  파일 또는 기타 개체의 소유권 가져오기                    사용 안 함
+SeLoadDriverPrivilege                     장치 드라이버 로드 및 언로드                             사용 안 함
+SeSystemProfilePrivilege                  프로필 시스템 성능                                       사용 안 함
+SeSystemtimePrivilege                     시스템 시간 변경                                         사용 안 함
+SeProfileSingleProcessPrivilege           프로필 단일 프로세스                                     사용 안 함
+SeIncreaseBasePriorityPrivilege           예약 우선 순위 증가                                      사용 안 함
+SeCreatePagefilePrivilege                 페이지 파일 만들기                                       사용 안 함
+SeBackupPrivilege                         파일 및 디렉터리 백업                                    사용 안 함
+SeRestorePrivilege                        파일 및 디렉터리 복원                                    사용 안 함
+SeShutdownPrivilege                       시스템 종료                                              사용 안 함
+SeDebugPrivilege                          프로그램 디버깅                                          사용
+SeSystemEnvironmentPrivilege              펌웨어 환경 값 수정                                      사용 안 함
+SeChangeNotifyPrivilege                   트래버스 검사 무시                                       사용
+SeRemoteShutdownPrivilege                 원격 시스템에서 강제 종료                                사용 안 함
+SeUndockPrivilege                         도킹 스테이션에서 컴퓨터 제거                            사용 안 함
+SeEnableDelegationPrivilege               위임 시 컴퓨터 및 사용자 계정을 신뢰할 수 있도록 설정    사용 안 함
+SeManageVolumePrivilege                   볼륨 유지 관리 작업 수행                                 사용 안 함
+SeImpersonatePrivilege                    인증 후 클라이언트 가장                                  사용
+SeCreateGlobalPrivilege                   전역 개체 만들기                                         사용
+SeIncreaseWorkingSetPrivilege             프로세스 작업 집합 향상                                  사용 안 함
+SeTimeZonePrivilege                       시간대 변경                                              사용 안 함
+SeCreateSymbolicLinkPrivilege             심볼 링크 만들기                                         사용 안 함
+SeDelegateSessionUserImpersonatePrivilege 동일한 세션의 다른 사용자에 대한 가장 토큰을 가져옵니다. 사용 안 함
+
+
+사용자 클레임 정보
+-----------------------
+
+알 수 없는 사용자 클레임입니다.
+
+이 장치에서 동적 액세스 제어에 대한 Kerberos 지원을 사용하지 않도록 설정했습니다.
+PS C:\Users\Administrator> netdom query fsmo
+스키마 마스터               WIN-MASTER.studykorea.kr
+도메인 명명 마스터           WIN-MASTER.studykorea.kr
+PDC                      WIN-MASTER.studykorea.kr
+RID 풀 관리자              WIN-MASTER.studykorea.kr
+인프라 마스터               WIN-MASTER.studykorea.kr
+명령을 완료했습니다.
+
+===================================================================================================
+PS C:\Users\Administrator> ntdsutil
+C:\Windows\system32\ntdsutil.exe: ?
+
+ ?                             - 이 도움말 정보를 표시합니다.
+ Activate Instance %s          - "NTDS" 또는 특정 AD LDS 인스턴스를 활성 인스턴스로
+                                 설정합니다.
+ Authoritative restore         - DIT 데이터베이스를 정식 복원합니다.
+ Change Service Account %s1 %s2 - AD DS/LDS 서비스 계정을 사용자 이름
+                                 %s1 및 암호 %s2(으)로 변경합니다.
+                                 암호를 비워 둘 경우 "NULL"을 사용하고 콘솔
+                                 에서 암호를 입력할 때는 *를 사용하십시오.
+ Configurable Settings         - 구성 가능한 설정 관리
+ DS Behavior                   - AD DS/LDS 동작 보기 및 수정
+ Files                         - AD DS/LDS 데이터베이스 파일을 관리합니다.
+ Group Membership Evaluation   - 지정된 사용자 또는 그룹에 대한 토큰의 SID
+                                 평가
+ Help                          - 이 도움말 정보를 표시합니다.
+ IFM                           - IFM 미디어 만들기
+ LDAP policies                 - LDAP 프로토콜 정책을 관리합니다.
+ LDAP Port %d                  - AD LDS 인스턴스에 대한 LDAP 포트를 구성합니다.
+ List Instances                - 이 시스템에 설치된 모든 AD LDS 인스턴스를
+                                 나열합니다.
+ Local Roles                   - 로컬 RODC 역할 관리
+ Metadata cleanup              - 제거된 서버의 개체를 정리합니다.
+ Partition management          - 디렉터리 파티션을 관리합니다.
+ Popups off                    - 팝업 사용 안 함
+ Popups on                     - 팝업 사용
+ Quit                          - 유틸리티를 끝냅니다.
+ Roles                         - NTDS 역할 소유자의 토큰을 관리합니다.
+ Security account management   - 보안 계정 데이터베이스 관리 - 중복된
+                                 SID 정리
+ Semantic database analysis    - Semantic Checker
+ Set DSRM Password             - 디렉터리 서비스 복원 모드의
+                                 관리자 계정 암호 다시 설정
+
+ Snapshot                      - 스냅숏 관리
+ SSL Port %d                   - AD LDS 인스턴스에 대한 SSL 포트를 구성합니다.
+
+=============================================================================================
+C:\Windows\system32\ntdsutil.exe: roles
+fsmo maintenance: ?
+
+ ?                             - 이 도움말 정보를 표시합니다.
+ Connections                   - 특정 AD DC/LDS 인스턴스에 연결합니다.
+ Help                          - 이 도움말 정보를 표시합니다.
+ Quit                          - 이전 메뉴로 되돌아갑니다.
+ Seize infrastructure master   - 연결된 서버의 구조 역할을 덮어씁니다.
+ Seize naming master           - 연결된 서버의 명명 마스터 역할을 덮어씁니다.
+ Seize PDC                     - 연결된 서버의 PDC 역할을 덮어씁니다.
+ Seize RID master              - 연결된 서버의 RID 역할을 덮어씁니다.
+ Seize schema master           - 연결된 서버의 스키마 역할을 덮어씁니다.
+ Select operation target       - 사이트, 서버, 도메인, 역할 및 명명
+                                 컨텍스트를 선택합니다.
+ Transfer infrastructure master - 연결된 서버를 인프라 마스터로 만듭니다.
+ Transfer naming master        - 연결된 서버를 명명 마스터로 만듭니다.
+ Transfer PDC                  - 연결된 서버를 PDC로 만듭니다.
+ Transfer RID master           - 연결된 서버를 RID 마스터로 만듭니다.
+ Transfer schema master        - 연결된 서버를 스키마 마스터로 만듭니다.
+
+fsmo maintenance: connections
+server connections: ?
+
+ ?                             - 이 도움말 정보를 표시합니다.
+ Clear creds                   - 이전 연결의 자격 증명을 지웁니다.
+ Connect to domain %s          - DNS 도메인 이름에 연결합니다.
+ Connect to server %s          - 서버, DNS 이름[:포트 번호]에 연결합니다.
+ Help                          - 이 도움말 정보를 표시합니다.
+ Info                          - 연결 정보를 표시합니다.
+ Quit                          - 이전 메뉴로 되돌아갑니다.
+ Set creds %s1 %s2 %s3         - 도메인 %s1, 사용자 %s2 및 암호 %s3을(를) 사용하여 연결 자격을 설정하십시오.
+                                NULL 암호에는 "NULL"을 사용하고, 콘솔에서
+                                암호를 입력할 때는 *를 사용하십시오.
+=================================================================================================
+server connections: connect to server win-readonly
+win-readonly에 바인딩 중...
+로컬에서 로그온된 사용자의 자격 증명을 사용하여 win-readonly에 연결되었습니다.
+server connections: ?
+
+ ?                             - 이 도움말 정보를 표시합니다.
+ Clear creds                   - 이전 연결의 자격 증명을 지웁니다.
+ Connect to domain %s          - DNS 도메인 이름에 연결합니다.
+ Connect to server %s          - 서버, DNS 이름[:포트 번호]에 연결합니다.
+ Help                          - 이 도움말 정보를 표시합니다.
+ Info                          - 연결 정보를 표시합니다.
+ Quit                          - 이전 메뉴로 되돌아갑니다.
+ Set creds %s1 %s2 %s3         - 도메인 %s1, 사용자 %s2 및 암호 %s3을(를) 사용하여 연결 자격을 설정하십시오.
+                                NULL 암호에는 "NULL"을 사용하고, 콘솔에서
+                                암호를 입력할 때는 *를 사용하십시오.
+
+server connections: connect to server win-readonly
+win-readonly의 연결 끊는 중...
+win-readonly에 바인딩 중...
+로컬에서 로그온된 사용자의 자격 증명을 사용하여 win-readonly에 연결되었습니다.
+server connections: ?
+
+ ?                             - 이 도움말 정보를 표시합니다.
+ Clear creds                   - 이전 연결의 자격 증명을 지웁니다.
+ Connect to domain %s          - DNS 도메인 이름에 연결합니다.
+ Connect to server %s          - 서버, DNS 이름[:포트 번호]에 연결합니다.
+ Help                          - 이 도움말 정보를 표시합니다.
+ Info                          - 연결 정보를 표시합니다.
+ Quit                          - 이전 메뉴로 되돌아갑니다.
+ Set creds %s1 %s2 %s3         - 도메인 %s1, 사용자 %s2 및 암호 %s3을(를) 사용하여 연결 자격을 설정하십시오.
+                                NULL 암호에는 "NULL"을 사용하고, 콘솔에서
+                                암호를 입력할 때는 *를 사용하십시오.
+
+server connections: quit
+fsmo maintenance: ?
+
+ ?                             - 이 도움말 정보를 표시합니다.
+ Connections                   - 특정 AD DC/LDS 인스턴스에 연결합니다.
+ Help                          - 이 도움말 정보를 표시합니다.
+ Quit                          - 이전 메뉴로 되돌아갑니다.
+ Seize infrastructure master   - 연결된 서버의 구조 역할을 덮어씁니다.
+ Seize naming master           - 연결된 서버의 명명 마스터 역할을 덮어씁니다.
+ Seize PDC                     - 연결된 서버의 PDC 역할을 덮어씁니다.
+ Seize RID master              - 연결된 서버의 RID 역할을 덮어씁니다.
+ Seize schema master           - 연결된 서버의 스키마 역할을 덮어씁니다.
+ Select operation target       - 사이트, 서버, 도메인, 역할 및 명명
+                                 컨텍스트를 선택합니다.
+ Transfer infrastructure master - 연결된 서버를 인프라 마스터로 만듭니다.
+ Transfer naming master        - 연결된 서버를 명명 마스터로 만듭니다.
+ Transfer PDC                  - 연결된 서버를 PDC로 만듭니다.
+ Transfer RID master           - 연결된 서버를 RID 마스터로 만듭니다.
+ Transfer schema master        - 연결된 서버를 스키마 마스터로 만듭니다.
+===================================================================================================================
+fsmo maintenance:  Transfer infrastructure master
+"win-readonly" 서버에서 5 역할이 검색되었습니다.
+스키마 - CN=NTDS Settings,CN=WIN-MASTER,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+명명 마스터 - CN=NTDS Settings,CN=WIN-MASTER,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+PDC - CN=NTDS Settings,CN=WIN-MASTER,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+RID - CN=NTDS Settings,CN=WIN-MASTER,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+구조 - CN=NTDS Settings,CN=WIN-READONLY,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+======================================================================================================================
+fsmo maintenance:  Transfer naming master
+"win-readonly" 서버에서 5 역할이 검색되었습니다.
+스키마 - CN=NTDS Settings,CN=WIN-MASTER,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+명명 마스터 - CN=NTDS Settings,CN=WIN-READONLY,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+PDC - CN=NTDS Settings,CN=WIN-MASTER,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+RID - CN=NTDS Settings,CN=WIN-MASTER,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+구조 - CN=NTDS Settings,CN=WIN-READONLY,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+======================================================================================================================
+fsmo maintenance: Transfer PDC
+"win-readonly" 서버에서 5 역할이 검색되었습니다.
+스키마 - CN=NTDS Settings,CN=WIN-MASTER,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+명명 마스터 - CN=NTDS Settings,CN=WIN-READONLY,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+PDC - CN=NTDS Settings,CN=WIN-READONLY,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+RID - CN=NTDS Settings,CN=WIN-MASTER,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+구조 - CN=NTDS Settings,CN=WIN-READONLY,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+======================================================================================================================
+fsmo maintenance: Transfer RID master
+"win-readonly" 서버에서 5 역할이 검색되었습니다.
+스키마 - CN=NTDS Settings,CN=WIN-MASTER,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+명명 마스터 - CN=NTDS Settings,CN=WIN-READONLY,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+PDC - CN=NTDS Settings,CN=WIN-READONLY,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+RID - CN=NTDS Settings,CN=WIN-READONLY,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+구조 - CN=NTDS Settings,CN=WIN-READONLY,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+======================================================================================================================
+fsmo maintenance: Transfer schema master
+"win-readonly" 서버에서 5 역할이 검색되었습니다.
+스키마 - CN=NTDS Settings,CN=WIN-READONLY,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+명명 마스터 - CN=NTDS Settings,CN=WIN-READONLY,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+PDC - CN=NTDS Settings,CN=WIN-READONLY,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+RID - CN=NTDS Settings,CN=WIN-READONLY,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+구조 - CN=NTDS Settings,CN=WIN-READONLY,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=Configuration,DC=studykorea,DC=kr
+======================================================================================================================
+fsmo maintenance: quit
+C:\Windows\system32\ntdsutil.exe: quit
+PS C:\Users\Administrator>
+PS C:\Users\Administrator>
+
+PS C:\Users\Administrator> netdom query fsmo
+스키마 마스터               WIN-ReadOnly.studykorea.kr
+도메인 명명 마스터           WIN-ReadOnly.studykorea.kr
+PDC                      WIN-ReadOnly.studykorea.kr
+RID 풀 관리자              WIN-ReadOnly.studykorea.kr
+인프라 마스터               WIN-ReadOnly.studykorea.kr
+명령을 완료했습니다.
+==================================================================================
+비정식복원절차  (도메인 컨트롤러가 1대 있는 경우 사용)
+
+1. 시스템상태를 백업받는다.
+2. 특정한 OU (총무부)를 삭제한다.
+3. 시스템상태를 복원한다
+4. 리부팅한다.
+
+정식복원절차   (도메인 컨트롤러가 2대이상 있는 경우 사용)
+
+0. 시스템상태를 복원한다. 리부팅하지 않는다.
+1. ntdsutil 입력
+2. activate  instance  ntds     
+3. authoritative restore
+4. restore subtree ou=test,ou=서울본사,dc=studykorea,dc=kr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
