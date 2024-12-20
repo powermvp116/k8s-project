@@ -1,0 +1,39 @@
+powershell 명령어 
+
+PS C:\Users\powermvp> Get-Command -Module NetSecurity
+
+PS C:\Users\powermvp> Set-NetFirewallProfile -all -enabled true
+PS C:\Users\powermvp> Set-NetFirewallProfile -all -enabled false
+PS C:\Users\powermvp> Get-NetFirewallProfile -all
+PS C:\Users\powermvp> Get-NetFirewallrule -DisplayName 'FTP 서버 패시브 모드'
+
+- 조회 필터 
+Get-NetFirewallRule|Select-Object DisplayName, Enabled, Direction, Action -First 10
+
+
+
+
+- Microsoft Edge” 웹 브라우저 프로그램의 아웃바운드 연결 차단
+New-NetFirewallRule -Program “C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe” –Action Block –Profile @(’Domain’, ‘Public’, ‘Private’) –DisplayName “Edge 아웃바운드 차단” -Description “Block Edge browser” -Direction Outbound
+
+- 80, 443 포트 차단
+New-NetFirewallRule -Protocol TCP -LocalPort @(’80’, ‘443’) -Profile @(’Domain’, ‘Public’, ‘Private’) -Direction Inbound -Action Block -DisplayName ‘80, 443 포트 차단’ -Description “Block 80, 443 Port”
+
+- ping 요청을 내부 IP인 192.168.10.131 ~ 170번까지만 허락하는 룰
+New-NetFirewallRule –Protocol ICMPv4 –IcmpType 8 –RemoteAddress '192.168.10.131-192.168.10.170' -Profile @('Domain', 'Public', 'Private') –Direction Inbound -Action Allow -DisplayName '내부 ping 응답 허용'
+
+- 80번과 443포트에 추가 8080 허용하는 룰
+
+Set-NetFirewallRule –DisplayName ‘80, 443 포트 차단’ –LocalPort @(’80’, ‘443’, ‘8080’)
+
+- 80번과 443포트 차단 기능을 비활성
+Disable-NetFirewallRule –DisplayName '80, 443 포트 차단’
+
+- 다시 활성화하려면, Disable을 Enable로 바꿈
+Enable-NetFirewallRule –DisplayName '80, 443 포트 차단’
+
+- 80번과 443포트 차단 기능을 삭제
+Remove-NetFirewallRule –DisplayName '80, 443 포트 차단’
+
+
+
